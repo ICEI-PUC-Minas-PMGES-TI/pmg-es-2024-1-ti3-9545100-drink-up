@@ -1,18 +1,20 @@
-# [Drink Up!]
+# Drink Up!
 
 [Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
 
 ## Alunos integrantes da equipe
 
-* [Nome completo do aluno 1]
-* [Nome completo do aluno 2]
-* [Nome completo do aluno 3]
-* [Nome completo do aluno 4]
+* Henrique Lobo Leite Neves
+* Ian Matsuhara Ferraz
+* João Victor Temponi Daltro de Castro
+* Lúcio Alves Almeida Neto
+* Luís Henrique Fantini Almeida
+* Sophia Mendes Rabelo
 
 ## Professores responsáveis
 
-* [Nome completo do professor 1]
-* [Nome completo do professor 2]
+* Eveline Alonso Veloso
+* Michelle Hanne Soares de Andrade
 
 ## Instruções de utilização
 
