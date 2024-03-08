@@ -1,6 +1,6 @@
 # Drink Up!
 
-[Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
+Este projeto possui como objetivo desenvolver um sistema de gestão integrado, combinando o controle de estoque com uma plataforma de comércio eletrônico para a Drink Up
 
 ## Alunos integrantes da equipe
 
