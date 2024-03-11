@@ -1,3 +1,5 @@
+/*INICIANDO A CRIAÇÃO DAS TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA*/
+
 -- Criando a tabela tb_telefone, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_telefone (
     id INT AUTO_INCREMENT PRIMARY KEY,
