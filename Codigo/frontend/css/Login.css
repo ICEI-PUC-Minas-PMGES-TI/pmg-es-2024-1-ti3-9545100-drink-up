@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Bauhaus 93';
+    src: url('file:///C:/Users/rabel/Downloads/bauhs93/bauhaus93.ttf') format('truetype');
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    font-family: 'Bauhaus 93', sans-serif;
+}
+
+.navbar {
+    background-color: #F2C029; 
+}
+
+.container {
+    display: flex;
+    width: 70%;
+    height: 70vh;
+    padding: 7rem;
+    
+}
+.form{
+    width: 50%; 
+    height: 50vh; 
+    background-color: #F2C029; 
+    margin: 0 10px; 
+    box-shadow: 5px 5px 10px rgba(0,0,0, .212);
+    border-radius: 15px;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.title{
+    font-size: 3rem;
+}
+h6{
+    font-size: 1.5rem;
+}
+.input-group{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-box{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
+    width: 80%;
+}
+.input-box input{
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    border:none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c;
+    width: 100%
+}
+.entrar-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.entrar-button button {
+    width: 80%;
+    border: none;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #BF9411;
+}
+.register{
+    width: 50%; 
+    height: 50vh; 
+    background-color: #F2C029; 
+    margin: 0 10px; 
+    box-shadow: 5px 5px 10px rgba(0,0,0, .212);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.text-elements {
+    text-align: center
+}
+
+.register-button {
+    margin-top: 1rem;
+}
+.register-button button{
+    border: none;
+    width: 300px;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #BF9411;
+}
+.register-button a{
+    font-size: 1.5rem;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color:#F2C029;
+}
