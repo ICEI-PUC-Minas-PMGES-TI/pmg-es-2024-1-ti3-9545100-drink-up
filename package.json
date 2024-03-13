@@ -1,0 +1,19 @@
+{
+  "name": "pmg-es-2024-1-ti3-9545100-drink-up-master",
+  "version": "1.0.0",
+  "description": "Este projeto possui como objetivo desenvolver um sistema de gestão integrado, combinando o controle de estoque com uma plataforma de comércio eletrônico para a Drink Up",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Codigo/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.1"
+  }
+}
