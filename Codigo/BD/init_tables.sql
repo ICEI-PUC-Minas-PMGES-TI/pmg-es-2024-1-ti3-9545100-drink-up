@@ -1,3 +1,15 @@
+/*============= EXECUTE O ARQUIVO OU TODOS OS COMANDOS MANUALMENTE EM ORDEM SEQUENCIAL ====================*/
+
+/*CRIAÇÃO DE UM USUÁRIO MASTER COM PRIVILÉGIOS*/
+CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
+GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
+
+/*CRIAÇÃO DA BASE DE DADOS*/
+CREATE DATABASE drink_up;
+
+/*ACESSO À BASE DE DADOS*/
+USE drink_up;
+
 /*INICIANDO A CRIAÇÃO DAS TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA*/
 
 -- Criando a tabela tb_telefone, verificando se a tabela já existe previamente
