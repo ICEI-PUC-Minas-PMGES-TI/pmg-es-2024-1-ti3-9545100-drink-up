@@ -1,31 +1,36 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const app = express();
 app.use(express.json());
+const cors = require('cors');
+app.use(cors());
 
-const db = mysql.createConnection({
-  host: '',
-  user: '',
-  database: '',
-  password: '',
+const db = mysql.createConnection({ // seguindo esquema estabelecido no BD
+    host: 'localhost',
+    user: 'drinkup_master',
+    database: 'drink_up',
+    password: 'drinkup',
 });
 
-app.post('/create-product', async (req, res) => {
-  const { nome, descricao, valor, id_imagem, id_categoria } = req.body;
-  try {
-      
-    const query = `INSERT INTO tb_produto (nome, descricao, valor, id_imagem, id_categoria) VALUES (?, ?, ?, ?, ?)`;
-    const queryParams = [nome, descricao, valor, id_imagem, id_categoria];
-    const [rows] = await db.query(query, queryParams);
-    const [product] = await db.query('SELECT * FROM tb_produto WHERE id = ?', [rows.insertId]);
-    res.status(201).json(product[0]);
-      
-  } catch (error) {
-    console.error('Error creating product:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+app.post('/create-product', (req, res) => {
+    const { nome, descricao, valor, estoque, id_categoria } = req.body; 
+    const query = `INSERT INTO tb_produto (nome, descricao, valor, id_categoria) VALUES (?, ?, ?, ?)`;
+    const queryParams = [nome, descricao, valor, id_categoria]; 
+    db.query(query, queryParams, (error, results) => {
+        if (error) {
+            console.error('Error creating product:', error);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        // retorna objeto criado
+        db.query('SELECT * FROM tb_produto WHERE id = ?', [results.insertId], (error, results) => {
+            if (error) {
+                console.error('Error fetching product:', error);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+            res.status(201).json(results[0]);
+        });
+    });
 });
 
-app.listen(3000, () => console.log('rodando'));
+app.listen(3000, () => console.log('Server running on port 3000'));
