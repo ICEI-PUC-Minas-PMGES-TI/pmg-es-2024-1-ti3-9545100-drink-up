@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS tb_fornecedor (
 );
 
 
--- Criando a tabela tb_produto, verificando se a tabela já existe previamente
+-- Criando a tabela tb_produto, verificando se a tabela já existe
 CREATE TABLE IF NOT EXISTS tb_produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL UNIQUE,
