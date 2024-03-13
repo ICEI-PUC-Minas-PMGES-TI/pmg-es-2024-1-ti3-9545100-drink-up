@@ -8,9 +8,9 @@ const port = 3000;
 // configuração do banco de dados MySQL
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'init_tables'
+  user: 'drinkup_master',
+  password: 'drinkup',
+  database: 'drink_up'
 });
 
 // conectar no banco de dados
