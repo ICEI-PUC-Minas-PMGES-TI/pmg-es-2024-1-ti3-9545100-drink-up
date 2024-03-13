@@ -1,5 +1,6 @@
 /*============= EXECUTE O ARQUIVO OU TODOS OS COMANDOS MANUALMENTE EM ORDEM SEQUENCIAL ====================*/
 
+
 /*CRIAÇÃO DE UM USUÁRIO MASTER COM PRIVILÉGIOS*/
 CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
 GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
@@ -113,3 +114,6 @@ CREATE TABLE IF NOT EXISTS tb_produto (
     FOREIGN KEY (id_imagem) REFERENCES tb_imagem(id),
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria(id)
 );
+
+
+--Inserts
