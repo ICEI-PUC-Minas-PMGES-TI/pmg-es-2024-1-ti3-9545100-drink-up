@@ -58,6 +58,7 @@ app.post('/api/usuarios', (req, res) => {
       throw err;
     }
     console.log('Usuário cadastrado com sucesso');
+
     res.status(200).send({ message: 'Usuário cadastrado com sucesso', user: result});
   });
 });

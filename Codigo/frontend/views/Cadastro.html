@@ -20,13 +20,13 @@
         </div>
         
         <div class="form-fields">
-            <form action="#">
+            <form action="#" method="post" id="formCadastro">
                 <div class="form-header">
                     <div class="title">
                         <h1>CRIE SUA CONTA</h1>
                     </div>
                     <div class="login-button">
-                        <button type="button"><a href="/Login/Login.html"></a>Entrar</button>
+                        <button type="button"><a href="./Login.html"></a>Entrar</button>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
 
                     <div class="input-box">
                         <label for="CPF">CPF</label>
-                        <input type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                        <input id= "cpf"type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
                             title="Digite o CPF no formato nnn.nnn.nnn-nn" required>
                     </div>
 
@@ -102,7 +102,7 @@
                 </fieldset>
 
                 <div class="cadastrar-button">
-                    <button><a href="#"></a>Cadastrar</button>
+                    <button id="bntCadastrar" type="button">Cadastrar</button>
                 </div>
             </form>
         </div>
