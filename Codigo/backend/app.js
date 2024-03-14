@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('./connection.js').database
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -74,6 +75,7 @@ app.post('/api/login', (req, res) => {
       res.status(500).send({ error: 'Erro ao autenticar usuário no banco de dados' });
       throw err;
     }
+
     // Verifica se encontrou um usuário
     if (result.length > 0) {
       res.status(200).send({ message: 'Login bem-sucedido', user: result[0] });
