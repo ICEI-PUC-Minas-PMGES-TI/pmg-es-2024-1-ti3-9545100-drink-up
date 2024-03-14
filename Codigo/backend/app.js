@@ -63,7 +63,6 @@ app.post('/api/usuarios', (req, res) => {
   });
 });
 
-// autenticar o login
 app.post('/api/login', (req, res) => {
   const { email, senha } = req.body;
 
@@ -86,7 +85,29 @@ app.post('/api/login', (req, res) => {
   });
 });
 
-// iniciar o servidor
+app.post('/api/create-product', (req, res) => {
+
+  const { nome, descricao, qntd_estoque, valor, id_imagem, id_categoria } = req.body;
+
+  const query = 'INSERT INTO tb_produto (nome, descricao, qntd_estoque, valor, id_imagem, id_categoria) VALUES (?, ?, ?, ?, ?, ?)';
+  const queryParams = [nome, descricao, qntd_estoque, valor, id_imagem, id_categoria];
+
+  mysql.query(query, queryParams, (error, results) => {
+      if (error) {
+          console.error('Error creating product:', error);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      mysql.query('SELECT * FROM tb_produto WHERE id = ?', [results.insertId], (error, results) => {
+          if (error) {
+              console.error('Error fetching product:', error);
+              return res.status(500).json({ error: 'Internal server error' });
+          }
+          res.status(201).json(results[0]);
+      });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
