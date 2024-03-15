@@ -1,45 +1,52 @@
 const express = require('express');
 const cors = require('cors');
-const Database = require('./Database.js');
+const { Sequelize } = require('sequelize'); // Importe o Sequelize
+const { sequelize } = require('./backend/models/index'); // Atualize o caminho conforme necessário
+const Produto = require('./backend/models/Produto')(sequelize, Sequelize.DataTypes); // importa produto
 
+const app = express();
+const port = 3000;
 
-const app = express(); // cria express
-const port = 3000; // configura porta
-
-
-const database = new Database(); // cria instancia do bd
-
-app.use(cors()); 
-app.use(express.json()); 
+app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello, World! Your server is up and running.');
-}); // confirmação
-
+  res.send('Servidor está rodando!');
+});
 
 app.post('/create-product', async (req, res) => {
-  const { nome, categoria, descricao, estoque, preco } = req.body;
-
   try {
-      console.log("Received product data:", req.body);
+    // Extrair os dados da solicitação
+    const { nome, descricao, valor, id_categoria } = req.body;
 
-      res.status(201).send({ message: "Product created successfully" });
+    if (!nome || !descricao || !valor || !id_categoria) {
+      return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+    
+    // cria produto no banco de dados usando o Sequelize
+    const novoProduto = await Produto.create({
+      nome,
+      descricao,
+      valor,
+      id_categoria
+    });
+
+    // novo produto criado
+    res.status(201).json(novoProduto);
   } catch (error) {
-      console.error('Error creating product:', error);
-      res.status(500).send({ error: "Failed to create product" });
+    console.error('Erro ao criar o produto:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
 
-async function startServer() { // incializa server
+const startApp = async () => {
   try {
-    await database.connect();
-    console.log('Database connection established successfully.'); // conexão com bd bem sucedida
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}.`); informa da porta
-    });
+    await sequelize.sync();
+    console.log('Conexão com o banco de dados e sincronização realizadas com sucesso.');
+    app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
   } catch (error) {
-    console.error('Failed to connect to the database:', error); // erro
+    console.error('Não foi possível iniciar a aplicação:', error);
   }
-}
+};
 
-startServer();
+startApp();
