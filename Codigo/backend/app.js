@@ -85,6 +85,8 @@ app.post('/api/login', (req, res) => {
   });
 });
 
+// cria produto
+
 app.post('/api/create-product', (req, res) => {
 
   const { nome, descricao, qntd_estoque, valor, id_imagem, id_categoria } = req.body;
@@ -106,7 +108,13 @@ app.post('/api/create-product', (req, res) => {
           res.status(201).json(results[0]);
       });
   });
-});
+}); // fim cria produto
+
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
