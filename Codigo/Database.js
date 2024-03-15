@@ -15,10 +15,12 @@ class Database {
     try {
       await this.sequelize.authenticate();
       console.log('Conexão com o banco de dados estabelecida com sucesso.');
+      await this.sequelize.sync();
+      console.log('Modelos sincronizados com sucesso.');
     } catch (error) {
       console.error('Erro ao conectar com o banco de dados:', error);
     }
   }
 }
 
-module.exports = Database;
+module.exports = new Database();
