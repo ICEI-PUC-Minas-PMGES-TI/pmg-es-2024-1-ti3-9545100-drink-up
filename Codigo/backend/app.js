@@ -111,6 +111,25 @@ app.post('/api/create-product', (req, res) => {
 }); // fim cria produto
 
 
+// Perfil, busca usuário por email
+app.post('/api/usuarios/buscar', (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).send({ error: 'O e-mail é obrigatório para a busca' });
+  }
+  mysql.query("SELECT * FROM tb_cliente WHERE email = ?", [email], (err, results) => {
+    if (err) {
+      return res.status(500).send({ error: 'Erro ao buscar usuário no banco de dados' });
+    }
+    if (results.length < 1) {
+      return res.status(404).send({ message: "Usuário não encontrado!" });
+    }
+    return res.status(200).send({ message: "Usuário encontrado!", user: results[0] });
+  });
+});
+
+
+
 
 
 
