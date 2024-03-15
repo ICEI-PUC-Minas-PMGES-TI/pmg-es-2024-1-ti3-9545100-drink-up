@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       unique: true,
     },
     data_nascimento: DataTypes.DATEONLY,
-    // As chaves estrangeiras serão configuradas abaixo, nas associações
+    ////// Atenção ---> quem modelar essa páigina, configure as chanves de acordo com a necessidade do cóigo ///
   }, {
     sequelize,
     modelName: 'Cliente',
