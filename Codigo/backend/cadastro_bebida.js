@@ -1,36 +1,31 @@
 const express = require('express');
-const mysql = require('mysql');
+const cors = require('cors');
+const { sequelize, Produto } = require('./backend/models/index');
 
 const app = express();
 app.use(express.json());
-const cors = require('cors');
 app.use(cors());
-
-const db = mysql.createConnection({ // seguindo esquema estabelecido no BD
-    host: 'localhost',
-    user: 'drinkup_master',
-    database: 'drink_up',
-    password: 'drinkup',
+app.post('/create-product', async (req, res) => {
+    try {
+        const { nome, descricao, valor, id_categoria } = req.body;
+        const produto = await Produto.create({ nome, descricao, valor, id_categoria });
+        const novoProduto = await Produto.findByPk(produto.id);
+        res.status(201).json(novoProduto);
+    } catch (error) {
+        console.error('Error creating product:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
+const startServer = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Conexão com o banco de dados estabelecida com sucesso.');
+        await sequelize.sync();
+        console.log('Modelos sincronizados com sucesso.');
+        app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+    } catch (error) {
+        console.error('Não foi possível iniciar o servidor:', error);
+    }
+};
 
-app.post('/create-product', (req, res) => {
-    const { nome, descricao, valor, estoque, id_categoria } = req.body; 
-    const query = `INSERT INTO tb_produto (nome, descricao, valor, id_categoria) VALUES (?, ?, ?, ?)`;
-    const queryParams = [nome, descricao, valor, id_categoria]; 
-    db.query(query, queryParams, (error, results) => {
-        if (error) {
-            console.error('Error creating product:', error);
-            return res.status(500).json({ error: 'Internal server error' });
-        }
-        // retorna objeto criado
-        db.query('SELECT * FROM tb_produto WHERE id = ?', [results.insertId], (error, results) => {
-            if (error) {
-                console.error('Error fetching product:', error);
-                return res.status(500).json({ error: 'Internal server error' });
-            }
-            res.status(201).json(results[0]);
-        });
-    });
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
+startServer();
