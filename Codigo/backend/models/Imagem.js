@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   Imagem.init({
     caminho: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false // --->>> dependendo do estágio do sistema Allow null, podendo ignorar imagem.
     }
   }, {
     sequelize,
