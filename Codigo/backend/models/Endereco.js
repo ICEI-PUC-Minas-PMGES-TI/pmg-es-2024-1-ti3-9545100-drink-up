@@ -1,5 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
-const Database = require('../Database');
+const Database = require('./Database');
+
+const sequelize = new Database(); // Cria uma nova instância de Database
+
 
 class Endereco extends Model {}
 
@@ -31,7 +34,7 @@ Endereco.init(
     }
   },
   {
-    sequelize: Database.sequelize,
+    sequelize: sequelize.getInstance(),
     modelName: 'Endereco',
     tableName: 'tb_endereco',
     timestamps: false

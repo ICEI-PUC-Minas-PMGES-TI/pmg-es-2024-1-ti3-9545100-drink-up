@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Cadastro de Bebida</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="../css/Perfil.css">
+</head>
+
+<body>
+
+   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #E2B420;">
+      <div class="container">
+         <a class="navbar-brand" href="#"><img width="100px" src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
+      </div>
+   </nav>
+
+   <header class="container mt-5 mb-3">
+      <div class="row">
+         <div class="col">
+            <h2 class="text-center">Perfil</h2>
+         </div>
+      </div>
+   </header>
+
+
+   <main>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-3">
+               <div class="form-container">
+                  <form>
+
+                     <div class="mb-3" id="imgperfil">
+                        <img src="imgs/imagemperfil.png" alt="Imagem de Perfil">
+                     </div>
+                     <div class="mb-3">
+                        <label for="usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="usuario">
+                     </div>
+                     <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" rows="2"></textarea>
+                     </div>
+               </div>
+            </div>
+            <div class="col-md-9">
+               <div class="form-container dados">
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="mb-3">
+                           <label for="nome" class="form-label">Nome</label>
+                           <input type="text" class="form-control" id="nome">
+                        </div>
+                        <div class="mb-3">
+                           <label for="cpf" class="form-label">CPF</label>
+                           <input type="number" class="form-control" id="cpf">
+                        </div>
+                        <div class="mb-3">
+                           <label for="cidade" class="form-label">Cidade</label>
+                           <input type="text" class="form-control" id="cidade">
+                        </div>
+                        <div class="mb-3">
+                           <label for="bairro" class="form-label">Bairro</label>
+                           <input type="text" class="form-control" id="bairro">
+                        </div>
+                        <div class="mb-3">
+                           <label for="cep" class="form-label">CEP</label>
+                           <input type="number" class="form-control" id="cep">
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="mb-3">
+                           <label for="datanasc" class="form-label">Data de Nascimento</label>
+                           <input type="date" class="form-control" id="datanasc">
+                        </div>
+                        <div class="mb-3">
+                           <label for="email" class="form-label">E-mail</label>
+                           <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="mb-3">
+                           <label for="rua" class="form-label">Rua</label>
+                           <input type="text" class="form-control" id="rua">
+                        </div>
+                        <div class="mb-3">
+                           <label for="complemento" class="form-label">Complemento</label>
+                           <input type="text" class="form-control" id="complemento">
+                        </div>
+                        <div class="mb-3">
+                           <label for="telefone" class="form-label">Telefone</label>
+                           <input type="tel" class="form-control" id="telefone">
+                        </div>
+                     </div>
+                     <div class="button">
+                        <button type="submit" class="btn btn-primary" id="btnsalvar">Salvar</button>
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </form>
+      </div>
+
+
+   </main>
+   <script src="../js/perfil.js">
+   </script>
+</body>
+
+
+</html>

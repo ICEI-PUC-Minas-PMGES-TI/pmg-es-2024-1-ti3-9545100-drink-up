@@ -1,8 +1,22 @@
-const { Cliente } = require('../../models/models');
+const  Cliente   = require('../models/Cliente');
+const  Endereco  = require('../models/Endereco');
+const  Usuario   = require('../models/Usuario');
 
-async function criarCliente(nome, cpf, dataNascimento, idUsuario, idTelefone, idEndereco) {
+
+async function criarCliente(nome, cpf, dataNascimento, telefone, endereco, usuario) {
   try {
-    const cliente = await Cliente.create({ nome, cpf, data_nascimento: dataNascimento, id_usuario: idUsuario, id_telefone: idTelefone, id_endereco: idEndereco });
+    const enderecoCriado = await Endereco.create(endereco);
+    const usuarioCriado = await Usuario.create(usuario);
+
+    const cliente = await Cliente.create({
+      nome,
+      cpf,
+      data_nascimento: dataNascimento,
+      telefone,
+      id_endereco: enderecoCriado.id,
+      id_usuario: usuarioCriado.id
+    });
+
     return cliente;
   } catch (error) {
     console.error('Erro ao criar cliente:', error);

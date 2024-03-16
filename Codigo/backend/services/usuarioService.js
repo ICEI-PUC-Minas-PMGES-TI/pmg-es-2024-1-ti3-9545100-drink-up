@@ -1,4 +1,4 @@
-const { Usuario } = require('../../models/models');
+const Usuario = require('../models/Usuario');
 
 async function criarUsuario(nome, email, senha) {
   try {

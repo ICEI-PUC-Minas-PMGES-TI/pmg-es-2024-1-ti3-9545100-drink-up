@@ -1,8 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
-const Database = require('../Database');
+const Database = require('./Database');
 const Usuario = require('./Usuario');
-const Telefone = require('./Telefone');
 const Endereco = require('./Endereco');
+
+const sequelize = new Database(); // Cria uma nova instância de Database
+
 
 class Cliente extends Model {}
 
@@ -29,13 +31,10 @@ Cliente.init(
         key: 'id'
       }
     },
-    id_telefone: {
-      type: DataTypes.INTEGER,
+    telefone: {
+      type: DataTypes.STRING(14),
       allowNull: false,
-      references: {
-        model: Telefone,
-        key: 'id'
-      }
+      unique: false
     },
     id_endereco: {
       type: DataTypes.INTEGER,
@@ -47,7 +46,7 @@ Cliente.init(
     }
   },
   {
-    sequelize: Database.sequelize,
+    sequelize: sequelize.getInstance(),
     modelName: 'Cliente',
     tableName: 'tb_cliente',
     timestamps: false
