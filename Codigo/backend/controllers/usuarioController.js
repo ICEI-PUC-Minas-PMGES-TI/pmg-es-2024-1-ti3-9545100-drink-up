@@ -2,9 +2,9 @@ const usuarioService = require('../services/usuarioService');
 
 const usuarioController = {
   async criarUsuario(req, res) {
-    const { nome, email, senha } = req.body;
+    const { email, senha } = req.body;
     try {
-      const usuario = await usuarioService.criarUsuario(nome, email, senha);
+      const usuario = await usuarioService.criarUsuario(email, senha);
       res.status(201).json(usuario);
     } catch (error) {
       console.error('Erro ao criar usuário:', error);
@@ -52,9 +52,9 @@ const usuarioController = {
 
   async atualizarUsuario(req, res) {
     const { id } = req.params;
-    const { nome, senha, status } = req.body;
+    const { senha, status } = req.body;
     try {
-      const usuario = await usuarioService.atualizarUsuario(id, nome, senha, status);
+      const usuario = await usuarioService.atualizarUsuario(id, senha, status);
       res.json(usuario);
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error);
