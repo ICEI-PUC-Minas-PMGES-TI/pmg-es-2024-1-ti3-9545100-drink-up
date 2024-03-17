@@ -48,9 +48,9 @@ const clienteController = {
 
   async atualizarCliente(req, res) {
     const id = req.params.id;
-    const { nome, cpf, dataNascimento, idTelefone, idEndereco } = req.body;
+    const { nome, cpf, dataNascimento, telefone, endereco } = req.body;
     try {
-      const cliente = await clienteService.atualizarCliente(id, nome, cpf, dataNascimento, idTelefone, idEndereco);
+      const cliente = await clienteService.atualizarCliente(id, nome, cpf, dataNascimento, telefone, endereco);
       res.json(cliente);
     } catch (error) {
       console.error('Erro ao atualizar cliente:', error);
