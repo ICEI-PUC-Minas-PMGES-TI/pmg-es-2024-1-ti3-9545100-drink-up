@@ -1,8 +1,8 @@
 const Usuario = require('../models/Usuario');
 
-async function criarUsuario(nome, email, senha) {
+async function criarUsuario(email, senha) {
   try {
-    const usuario = await Usuario.create({ nome, email, senha });
+    const usuario = await Usuario.create({ email, senha });
     return usuario;
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
@@ -43,17 +43,14 @@ async function buscarUsuarioPorId(id) {
 }
   
 
-async function atualizarUsuario(id, nome, senha, status) {
+async function atualizarUsuario(id, senha, status) {
     try {
       const usuario = await Usuario.findByPk(id);
       if (!usuario) {
         throw new Error('Usuário não encontrado');
       }
-  
       // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
-      if (nome) {
-        usuario.nome = nome;
-      }
+
       if (senha) {
         usuario.senha = senha;
       }
