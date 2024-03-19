@@ -1,6 +1,12 @@
 const Usuario = require('../models/Usuario');
 
 async function criarUsuario(email, senha) {
+  
+  const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!regexEmail.test(email)) {
+    throw new Error('Email inválido');
+  }
   try {
     const usuario = await Usuario.create({ email, senha });
     return usuario;
@@ -20,7 +26,6 @@ async function listarTodosUsuarios() {
   }
 }
 
-
 async function buscarUsuarioPorEmail(email) {
     try {
       const usuario = await Usuario.findOne({ where: { email } });
@@ -30,7 +35,6 @@ async function buscarUsuarioPorEmail(email) {
       throw new Error('Erro ao buscar usuário por email');
     }
 }
-
 
 async function buscarUsuarioPorId(id) {
     try {
@@ -42,7 +46,6 @@ async function buscarUsuarioPorId(id) {
     }
 }
   
-
 async function atualizarUsuario(id, senha, status) {
     try {
       const usuario = await Usuario.findByPk(id);
@@ -66,7 +69,6 @@ async function atualizarUsuario(id, senha, status) {
     }
   }
   
-
 async function excluirUsuario(id) {
   try {
     const usuario = await Usuario.findByPk(id);

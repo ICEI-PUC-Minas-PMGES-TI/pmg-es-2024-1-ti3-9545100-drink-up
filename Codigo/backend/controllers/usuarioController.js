@@ -8,7 +8,7 @@ const usuarioController = {
       res.status(201).json(usuario);
     } catch (error) {
       console.error('Erro ao criar usuário:', error);
-      res.status(500).json({ error: 'Erro ao criar usuário' });
+      res.status(500).json({ error: 'Erro ao criar usuário ' + error});
     }
   },
 
@@ -18,7 +18,7 @@ const usuarioController = {
       res.json(usuarios);
     } catch (error) {
       console.error('Erro ao listar usuários:', error);
-      res.status(500).json({ error: 'Erro ao listar usuários' });
+      res.status(500).json({ error: 'Erro ao listar usuários ' + error});
     }
   },
 
@@ -32,7 +32,7 @@ const usuarioController = {
       res.json(usuario);
     } catch (error) {
       console.error('Erro ao buscar usuário por email:', error);
-      res.status(500).json({ error: 'Erro ao buscar usuário por email' });
+      res.status(500).json({ error: 'Erro ao buscar usuário por email ' + error});
     }
   },
 
@@ -46,7 +46,7 @@ const usuarioController = {
       res.json(usuario);
     } catch (error) {
       console.error('Erro ao buscar usuário por ID:', error);
-      res.status(500).json({ error: 'Erro ao buscar usuário por ID' });
+      res.status(500).json({ error: 'Erro ao buscar usuário por ID ' + error});
     }
   },
 
@@ -58,7 +58,7 @@ const usuarioController = {
       res.json(usuario);
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error);
-      res.status(500).json({ error: 'Erro ao atualizar usuário' });
+      res.status(500).json({ error: 'Erro ao atualizar usuário ' + error});
     }
   },
 
@@ -69,7 +69,7 @@ const usuarioController = {
       res.status(204).end();
     } catch (error) {
       console.error('Erro ao excluir usuário:', error);
-      res.status(500).json({ error: 'Erro ao excluir usuário' });
+      res.status(500).json({ error: 'Erro ao excluir usuário ' + error});
     }
   }
 };
