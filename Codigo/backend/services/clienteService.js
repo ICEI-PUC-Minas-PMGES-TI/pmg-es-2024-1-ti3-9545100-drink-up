@@ -55,7 +55,7 @@ async function listarTodosClientes() {
     }
 }
 
-async function atualizarCliente(id, nome, cpf, dataNascimento, telefone, endereco) {
+async function atualizarCliente(id, nome, dataNascimento, telefone, endereco_param) {
   try {
     const cliente = await Cliente.findByPk(id);
     if (!cliente) {
@@ -66,9 +66,6 @@ async function atualizarCliente(id, nome, cpf, dataNascimento, telefone, enderec
     if (nome) {
       cliente.nome = nome      
     }
-    if (cpf) {
-      cliente.cpf = cpf;
-    }
     if (dataNascimento) {
       cliente.data_nascimento = dataNascimento;
     }
@@ -76,33 +73,18 @@ async function atualizarCliente(id, nome, cpf, dataNascimento, telefone, enderec
       cliente.telefone = telefone;
     }
 
-    const enderecoOk = await Endereco.findByPk(cliente.id_endereco);
+    const endereco = await Endereco.findByPk(cliente.id_endereco);
 
-    if (enderecoOk) {
-      if (endereco.logradouro) {
-        enderecoOk.logradouro = endereco.logradouro;
+    if (endereco) {
+      // Atualiza somente os campos de endereço preenchidos por parâmetro
+      for (const key in endereco_param) {
+        if (Object.hasOwnProperty.call(endereco_param, key)) {
+          endereco[key] = endereco_param[key];
+        }
       }
-      if (endereco.numero) {
-        enderecoOk.numero = endereco.numero;
-      }
-      if (endereco.complemento) {
-        enderecoOk.complemento = endereco.complemento;
-      }
-      if (endereco.bairro) {
-        enderecoOk.bairro = endereco.bairro;
-      }
-      if (endereco.cidade) {
-        enderecoOk.cidade = endereco.cidade;
-      }
-      if (endereco.cep) {
-        enderecoOk.cep = endereco.cep;
-      }
-      if (endereco.uf) {
-        enderecoOk.uf = endereco.uf;
-      }
-      await enderecoOk.save();
+      await endereco.save();
     }
-    
+
     await cliente.save();
     return cliente;
   } catch (error) {
