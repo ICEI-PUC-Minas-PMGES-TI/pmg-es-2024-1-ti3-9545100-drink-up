@@ -7,6 +7,10 @@ class Imagem extends Model {}
 
 Imagem.init(
   {
+    nome: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
     caminho: {
       type: DataTypes.STRING(255),
       allowNull: false
