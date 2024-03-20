@@ -8,17 +8,18 @@ async function criarCliente(nome, cpf, dataNascimento, telefone, endereco, usuar
   let transaction;
   let usuarioCriado;
   try {
-
-    // Inicia uma transação
+    //Inicia uma transação passível de rollback
     const db = new Database();
     const sequelize = db.getInstance();
     transaction = await sequelize.transaction();
     
-    // Cria o endereço dentro da transação
-    const enderecoCriado = await Endereco.create(endereco, { transaction });
-    // Cria o usuário dentro da transação
-    usuarioCriado = await Usuario.criarUsuario(usuario.email, usuario.senha, { transaction });
     
+    //Cria o endereço dentro da transação
+    const enderecoCriado = await Endereco.create(endereco, { transaction });
+
+    // Cria o usuário dentro da transação
+    usuarioCriado = await Usuario.criarUsuario(usuario.email, usuario.senha, "cliente", { transaction });
+
     // Cria o cliente usando os IDs do usuário e endereço criados
     const cliente = await Cliente.create({
       nome,
@@ -29,18 +30,22 @@ async function criarCliente(nome, cpf, dataNascimento, telefone, endereco, usuar
       id_usuario: usuarioCriado.id
     }, { transaction });
 
-    // Se tudo ocorreu bem para endereço, usuário e cliente, faz o commit da transação
+    // Se tudo ocorreu bem, faz o commit da transação
     await transaction.commit();
-    return cliente;
 
+    return cliente;
   } catch (error) {
     // Em caso de erro, faz o rollback da transação
     if (transaction) await transaction.rollback();
-    usuarioCriado = await Usuario.excluirUsuario(usuarioCriado.id);
+
+    // Se houver erro no cliente, destrua o usuário criado
+    if (usuarioCriado) await Usuario.excluirUsuario(usuarioCriado.id);
+
     console.error('Erro ao criar cliente:', error);
     throw new Error('Erro ao criar cliente');
   }
 }
+
 
 async function buscarClientePorCpf(cpf) {
     try {

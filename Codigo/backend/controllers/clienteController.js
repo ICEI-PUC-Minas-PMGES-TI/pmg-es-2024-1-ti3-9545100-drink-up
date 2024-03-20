@@ -1,6 +1,9 @@
 const clienteService = require('../services/clienteService');
+const Database = require("../models/Database");
+
 
 const clienteController = {
+
   async criarCliente(req, res) {
     try {
       const { nome, cpf, dataNascimento, telefone, endereco, usuario } = req.body;
@@ -13,7 +16,7 @@ const clienteController = {
       res.status(500).json({ message: 'Erro ao criar cliente' });
     }
   },
-
+  
   async buscarClientePorCpf(req, res) {
     const cpf = req.params.cpf;
     try {
