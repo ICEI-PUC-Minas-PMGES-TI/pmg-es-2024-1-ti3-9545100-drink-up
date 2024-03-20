@@ -24,6 +24,10 @@ Usuario.init(
     data_criacao: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
+    },
+    perfil: {
+      type: DataTypes.ENUM('admin', 'cliente'),
+      allowNull: false
     }
   },
   {

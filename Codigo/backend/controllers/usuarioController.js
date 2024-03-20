@@ -1,10 +1,11 @@
 const usuarioService = require('../services/usuarioService');
 
 const usuarioController = {
+  
   async criarUsuario(req, res) {
-    const { email, senha } = req.body;
+    const { email, senha, perfil } = req.body;
     try {
-      const usuario = await usuarioService.criarUsuario(email, senha);
+      const usuario = await usuarioService.criarUsuario(email, senha, perfil);
       res.status(201).json(usuario);
     } catch (error) {
       console.error('Erro ao criar usuário:', error);
