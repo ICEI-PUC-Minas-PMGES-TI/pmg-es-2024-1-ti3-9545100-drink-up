@@ -1,7 +1,4 @@
-@font-face {
-    font-family: 'Bauhaus 93';
-    src: url('file:///C:/Users/rabel/Downloads/bauhs93/bauhaus93.ttf') format('truetype');
-}
+
 *{
     padding: 0;
     margin: 0;
@@ -11,7 +8,7 @@
 body{
     width: 100%;
     height: 100vh;
-    font-family: 'Bauhaus 93', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .navbar {
@@ -44,9 +41,14 @@ body{
 }
 .title{
     font-size: 3rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 1000; 
+    font-style: italic; 
 }
 h6{
     font-size: 1.5rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500; 
 }
 .input-group{
     display: flex;
@@ -71,6 +73,7 @@ h6{
     border-radius: 10px;
     box-shadow: 1px 1px 6px #0000001c;
     width: 100%
+    font-family: 'Nunito Sans', sans-serif; 
 }
 
 .entrar-button {
@@ -86,6 +89,7 @@ h6{
     border-radius: 5px;
     cursor: pointer;
     background-color: #BF9411;
+    font-family: 'Nunito Sans', sans-serif;
 }
 .register{
     width: 50%; 
@@ -102,6 +106,7 @@ h6{
 }
 .text-elements {
     text-align: center
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .register-button {
@@ -114,9 +119,11 @@ h6{
     border-radius: 5px;
     cursor: pointer;
     background-color: #BF9411;
+    font-family: 'Nunito Sans', sans-serif;
 }
 .register-button a{
     font-size: 1.5rem;
+    font-family: 'Nunito Sans', sans-serif; 
 }
 footer {
     position: absolute;
