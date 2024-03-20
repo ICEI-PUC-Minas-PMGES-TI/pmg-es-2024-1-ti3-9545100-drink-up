@@ -1,3 +1,4 @@
+-- Active: 1710028842404@@127.0.0.1@3306@drink_up
 /*============= EXECUTE O ARQUIVO OU TODOS OS COMANDOS MANUALMENTE EM ORDEM SEQUENCIAL ====================*/
 
 
@@ -6,19 +7,13 @@ CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
 GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
 
 /*CRIAÇÃO DA BASE DE DADOS*/
+-- DROP DATABASE drink_up;
 CREATE DATABASE drink_up;
 
 /*ACESSO À BASE DE DADOS*/
 USE drink_up;
 
 /*INICIANDO A CRIAÇÃO DAS TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA*/
-
--- Criando a tabela tb_telefone, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_telefone (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    telefone VARCHAR(20) NOT NULL,
-    telefone_adicional VARCHAR(20)
-);
 
 
 -- Criando a tabela tb_endereco, verificando se a tabela já existe previamente
@@ -43,18 +38,18 @@ CREATE TABLE IF NOT EXISTS tb_categoria (
 -- Criando a tabela tb_imagem, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_imagem (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL UNIQUE,
     caminho VARCHAR(255) NOT NULL
 );
 
 -- Segue também opção para tb_imagem utilizando um campo blob
 /*
-CREATE TABLE IF NOT EXISTS tb_imagem (
+CREATE TABLE IF NOT EXISTS tb_imagem_blob (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     imagem BLOB NOT NULL
 );
 */
-
 
 /* INICIANDO A CRIAÇÃO DAS TABELAS COM CHAVE ESTRANGEIRA, DE ACORDO COM A ORDEM DE DEPENDÊNCIA*/
 
@@ -71,7 +66,8 @@ CREATE TABLE IF NOT EXISTS tb_usuario (
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     status ENUM('1', '2', '3') DEFAULT '1',
-    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    perfil ENUM('admin', 'cliente') NOT NULL
 );
 
 
@@ -81,23 +77,10 @@ CREATE TABLE IF NOT EXISTS tb_cliente (
     nome VARCHAR(255) NOT NULL,
     cpf VARCHAR(14) NOT NULL UNIQUE,
     data_nascimento DATE NOT NULL,
+    telefone VARCHAR(255) NOT NULL,
     id_usuario INT,
-    id_telefone INT,
     id_endereco INT,
     FOREIGN KEY (id_usuario) REFERENCES tb_usuario(id),
-    FOREIGN KEY (id_telefone) REFERENCES tb_telefone(id),
-    FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id)
-);
-
-
--- Criando a tabela tb_fornecedor, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_fornecedor (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    identificador VARCHAR(20) NOT NULL,
-    id_telefone INT,
-    id_endereco INT,
-    FOREIGN KEY (id_telefone) REFERENCES tb_telefone(id),
     FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id)
 );
 
@@ -114,6 +97,3 @@ CREATE TABLE IF NOT EXISTS tb_produto (
     FOREIGN KEY (id_imagem) REFERENCES tb_imagem(id),
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria(id)
 );
-
-
---Inserts
