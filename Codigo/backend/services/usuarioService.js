@@ -3,7 +3,7 @@ const Usuario = require('../models/Usuario');
 async function criarUsuario(email, senha, perfil) {
   //Regex para validar email
   const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+  //Testando o email na validação regex
   if (!regexEmail.test(email)) {
     throw new Error('Email inválido');
   }
