@@ -72,7 +72,7 @@ h6{
     border:none;
     border-radius: 10px;
     box-shadow: 1px 1px 6px #0000001c;
-    width: 100%
+    width: 100%;
     font-family: 'Nunito Sans', sans-serif; 
 }
 
@@ -105,7 +105,7 @@ h6{
     
 }
 .text-elements {
-    text-align: center
+    text-align: center;
     font-family: 'Nunito Sans', sans-serif;
 }
 
