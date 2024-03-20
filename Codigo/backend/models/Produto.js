@@ -1,7 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
-const Database = require('./Database');
 const Imagem = require('./Imagem');
 const Categoria = require('./Categoria');
+const Database = require('./Database');
+
+const sequelize = new Database(); // Cria uma nova instância de Database
+
 
 class Produto extends Model {}
 
@@ -42,7 +45,7 @@ Produto.init(
     }
   },
   {
-    sequelize: Database.sequelize,
+    sequelize: sequelize.getInstance(),
     modelName: 'Produto',
     tableName: 'tb_produto',
     timestamps: false

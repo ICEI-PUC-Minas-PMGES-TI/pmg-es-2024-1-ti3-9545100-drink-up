@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const Database = require('./Database');
 
+const sequelize = new Database(); // Cria uma nova instância de Database
+
 class Imagem extends Model {}
 
 Imagem.init(
@@ -11,7 +13,7 @@ Imagem.init(
     }
   },
   {
-    sequelize: Database.sequelize,
+    sequelize: sequelize.getInstance(),
     modelName: 'Imagem',
     tableName: 'tb_imagem',
     timestamps: false
