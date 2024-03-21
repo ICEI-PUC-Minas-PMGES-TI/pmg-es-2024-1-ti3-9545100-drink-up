@@ -1,10 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
+const Database = require('./Database');
 const Imagem = require('./Imagem');
 const Categoria = require('./Categoria');
-const Database = require('./Database');
 
 const sequelize = new Database(); // Cria uma nova instância de Database
-
 
 class Produto extends Model {}
 
@@ -23,13 +22,17 @@ Produto.init(
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false
     },
+    tam_garrafa: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
     data_criacao: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
     id_imagem: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: Imagem,
         key: 'id'
@@ -37,7 +40,7 @@ Produto.init(
     },
     id_categoria: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: Categoria,
         key: 'id'

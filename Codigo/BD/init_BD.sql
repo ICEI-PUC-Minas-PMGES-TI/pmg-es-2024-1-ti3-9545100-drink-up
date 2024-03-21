@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS tb_produto (
     nome VARCHAR(255) NOT NULL UNIQUE,
     descricao TEXT,
     valor DECIMAL(10, 2) NOT NULL,
+    tam_garrafa VARCHAR(255) NOT NULL, 
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_imagem INT,
     id_categoria INT,
