@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const Database = require('./Database');
 
+const sequelize = new Database();
+
 class Categoria extends Model {}
 
 Categoria.init(
@@ -11,7 +13,7 @@ Categoria.init(
     }
   },
   {
-    sequelize: Database.sequelize,
+    sequelize: sequelize.getInstance(),
     modelName: 'Categoria',
     tableName: 'tb_categoria',
     timestamps: false

@@ -88,13 +88,16 @@ CREATE TABLE IF NOT EXISTS tb_cliente (
 -- Criando a tabela tb_produto, verificando se a tabela já existe
 CREATE TABLE IF NOT EXISTS tb_produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL UNIQUE,
+    nome VARCHAR(244) NOT NULL UNIQUE,
     descricao TEXT,
     valor DECIMAL(10, 2) NOT NULL,
-    tam_garrafa VARCHAR(255) NOT NULL, 
+    tam_garrafa VARCHAR(244) NOT NULL, 
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_imagem INT,
     id_categoria INT,
+    
     FOREIGN KEY (id_imagem) REFERENCES tb_imagem(id),
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria(id)
 );
+
+

@@ -8,7 +8,7 @@ class Endereco extends Model {}
 
 Endereco.init(
   {
-    logradouro: {
+    rua: {
       type: DataTypes.STRING(255),
       allowNull: false
     },

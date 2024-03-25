@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const bairro = document.getElementById('bairro').value;
         const cidade = document.getElementById('cidade').value;
         const cep = document.getElementById('cep').value;
+        const uf = document.getElementById('uf').value;
         const telefone = document.getElementById('telefone').value;
         const senha = document.getElementById('senha').value;
         const confirmar_senha = document.getElementById('confirmasenha').value;
@@ -124,7 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     complemento: complemento,
                     bairro: bairro,
                     cidade: cidade,
-                    cep: cep
+                    cep: cep,
+                    uf : uf
                 },
                 telefone: telefone
             })
