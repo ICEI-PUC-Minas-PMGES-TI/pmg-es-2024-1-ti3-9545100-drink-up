@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #fff;
+}
+
+.navbar {
+    background-color: #F2C029;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.navbar .navbar-brand img {
+    width: 300px; 
+    height: auto; 
+    display: block; 
+}
+
+.button-NovoProduto {
+    border: 2px solid #000;
+    border-radius: 20px; 
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 700;
+    background-color: #F2C029; 
+}
+
+.campo-busca {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-right: 10px;
+}
+
+.input {
+    padding: 5px 10px;
+    margin-right: 10px; 
+    font-size: 16px; 
+    border: 1px solid #000; 
+}
+
+.button-busca {
+    padding: 5px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #F2C029; 
+    color: #000; 
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabela th, .tabela td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabela th {
+    background-color: #F2C029;
+    color: #000;
+}
+
+.editar {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    background-color: orange;
+}
+
+.salvar {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    background-color: green;
+}
+
+.remover {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    background-color: red;
+}
+
+.popup {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 9999; /* Certifique-se de que o popup esteja na frente de outros elementos */
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#fecharPopup {
+    margin-top: 10px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/ListagemDeBebidas.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+</head>
+<body>
+    <div class="navbar">
+        <a class="navbar-brand" href="#"><img src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
+
+            <button class="button-NovoProduto">Novo produto</button>
+        <button class="button-usuario">
+            <span class="material-symbols-outlined">person</span>
+        </button>
+    </div>
+    <header class="titulo">
+        <h1>LISTAGEM DE BEBIDAS</h1>
+    </header>
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Tam. Garrafa</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+                <th>Editar</th>            
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Produto 1</td>
+                <td>Categoria A</td>
+                <td>1L</td>
+                <td>R$20</td>
+                <td>AAA</td>
+                <td><button class="editar">✏️</button></td>                
+                <td><button class="remover">🗑️</button></td>
+            </tr>
+        </tbody>
+    </table>
+<!-- Adicione o popup abaixo do restante do conteúdo HTML -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <!-- Conteúdo do seu popup aqui -->
+        <p>Este é o conteúdo do seu popup.</p>
+        <button id="fecharPopup">Fechar</button>
+    </div>
+</div>   
+    <script src="../js/ListagemDeBebidas.js"></script>
+</body>
+</html>
