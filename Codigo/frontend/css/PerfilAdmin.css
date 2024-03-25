@@ -1,71 +1,78 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap");
 
 body {
-    font-family: "Nunito Sans", sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  font-family: "Nunito Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .header {
-    background-color: #ffdd00;
-    padding: 24px 20px;
-    display: flex; /* Ativa flexbox no header */
-    justify-content: space-between; /* Separa os itens para cada extremidade */
-    align-items: center; /* Centraliza verticalmente */
+  background-color: #F2C029;
+  padding: 24px 20px;
+  display: flex; /* Ativa flexbox no header */
+  justify-content: space-between; /* Separa os itens para cada extremidade */
+  align-items: center; /* Centraliza verticalmente */
 }
 
 .header img {
-    height: 40px;
+  height: 40px;
 }
 
 .user-icon {
-    height: 30px; /* Ajuste para o ícone do usuário */
+  height: 30px; /* Ajuste para o ícone do usuário */
 }
 
 .container {
-    display: flex;
-    flex: 1;
+  display: flex;
+  flex: 1;
 }
 
 .sidebar {
-    background-color: #f4f4f4;
-    color: #111;
-    padding: 20px;
-    width: 200px;
+  background-color: #f4f4f4;
+  color: #111;
+  padding: 20px;
+  width: 200px;
 }
 
 .content {
-    flex: 1;
-    padding: 20px;
+  flex: 1;
+  padding: 20px;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 input[type="password"] {
-    width: 40%;
-    padding: 8px;
-    margin-top: 8px;
+  width: 40%;
+  padding: 8px;
+  margin-top: 8px;
 }
 
 button {
-    padding: 10px 20px;
-    cursor: pointer;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sidebar button {
+  border: none;
+  height: 40px; 
+}
+
+.sidebar button:hover {
+  background-color: #ddd;
+  transition: 0.2s ease-in-out;
 }
 
 .cancel-btn {
-    background-color: #fff;
-    border: 1px solid #666;
+  background-color: #fff;
 }
 
 .save-btn {
-    background-color: #ffdd00;
-    border: none;
-    margin-left: 10px;
+  background-color: #F2C029;
 }

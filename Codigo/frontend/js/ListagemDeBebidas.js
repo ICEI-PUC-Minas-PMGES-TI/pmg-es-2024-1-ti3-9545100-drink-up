@@ -7,7 +7,7 @@ const popup = document.getElementById('popup');
 // Adiciona evento de clique ao botão "Editar"
 botaoEditar.addEventListener('click', function() {
     // Exibe o popup
-    popup.style.display = 'block';
+    popup.style.display = 'flex';
 });
 
 // Seleciona o botão "Fechar" dentro do popup
