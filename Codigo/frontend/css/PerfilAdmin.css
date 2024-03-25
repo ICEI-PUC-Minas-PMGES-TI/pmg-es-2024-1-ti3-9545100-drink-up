@@ -52,11 +52,16 @@ input[type="password"] {
   width: 40%;
   padding: 8px;
   margin-top: 8px;
+  border-radius: 4px;
+  border: 1px solid #3f3f3f;
 }
 
 button {
   padding: 10px 20px;
   cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
 }
 
 .sidebar button {
@@ -70,7 +75,8 @@ button {
 }
 
 .cancel-btn {
-  background-color: #fff;
+  background-color: #3f3f3f;
+  color: #ddd;
 }
 
 .save-btn {

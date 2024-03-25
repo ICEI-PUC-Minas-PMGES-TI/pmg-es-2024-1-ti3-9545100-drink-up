@@ -9,24 +9,27 @@ body {
     background-color: #fff;
 }
 
-.navbar {
-    background-color: #f2c029;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
+.header {
+    background-color: #F2C029;
+    padding: 24px 20px;
+    display: flex; /* Ativa flexbox no header */
+    justify-content: space-between; /* Separa os itens para cada extremidade */
+    align-items: center; /* Centraliza verticalmente */
 }
 
-.navbar .navbar-brand img {
-    width: 300px;
-    height: auto;
-    display: block;
+.header img {
+    height: 40px;
 }
+
+.user-icon {
+    height: 30px; /* Ajuste para o ícone do usuário */
+}
+
+
 
 .button-NovoProduto {
-    border: 2px solid #000;
-    border-radius: 20px;
+    border: 1px solid #000;
+    border-radius: 4px;
     padding: 10px 20px;
     cursor: pointer;
     font-weight: 700;

@@ -18,12 +18,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 nome: nome,
                 categoria: categoria,
                 descricao: descricao,
-                qntd_estoque : qntd_estoque,
+                qntd_estoque: qntd_estoque,
                 valor: preco,
                 imagem: imagem
-            } ) } )
-                .then(response => response.json())
-                .then(data => { console.log(data) })
-                .catch(error => { console.log(error); });
-        });
+            })
+        })
+            .then(response => response.json())
+            .then(data => { console.log(data) })
+            .catch(error => { console.log(error); });
     });
+});

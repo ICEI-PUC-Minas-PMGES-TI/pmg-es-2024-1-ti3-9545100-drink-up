@@ -1,59 +1,108 @@
-.form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Nunito Sans', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap");
 
-}
-
-
-.btn-dark, .btn-primary, .button {
-    background-color: #333;
-    border-color: #333;
-    font-family: 'Nunito Sans', sans-serif; 
-    font-weight: 500; 
-}
-  
-.btn-dark:hover {
-    background-color: #555;
-    border-color: #555;
-}
-  
-.btn-primary {
-    background-color: #E2B420;
-    border-color: #E2B420;
-}
-  
-.btn-primary:hover {
-    background-color: #D7A11E;
-    border-color: #D7A11E;
-}
-  
-main{
-    background-color: white;
-    padding: 30px 50px;
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-.titulo {
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 1000; 
-    font-style: italic;
-}
-
-.texto-pequeno {
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 500; 
-}
-
-.button{
+body {
+    font-family: "Nunito Sans", sans-serif;
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: end;
-    margin-top: 30px;
+    flex-direction: column;
+    height: 100vh;
 }
 
-#btncancelar{
+.header {
+    background-color: #F2C029;
+    padding: 24px 20px;
+    display: flex; /* Ativa flexbox no header */
+    justify-content: space-between; /* Separa os itens para cada extremidade */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.header img {
+    height: 40px;
+}
+
+.user-icon {
+    height: 30px; /* Ajuste para o ícone do usuário */
+}
+
+main{
+    padding: 30px 50px;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+
+.row {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.input-group {
+    flex: 1;
     margin-right: 10px;
+    margin-bottom: 10px;  
 }
 
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"],
+.input-group select,
+.input-group textarea,
+.input-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3f3f3f;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-group input[type="file"]{
+    padding: 6px;   /* deixa o tamanho igual a dos outros do escolher arquivo */
+}
+
+
+.button {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.button button {
+    margin-left: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#btncadastrar {
+    background-color: #F2C029;
+    color: #000;
+}
+
+textarea {
+    resize: vertical;
+}

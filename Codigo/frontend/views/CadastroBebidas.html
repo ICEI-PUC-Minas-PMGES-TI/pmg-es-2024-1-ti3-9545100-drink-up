@@ -5,77 +5,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Bebida</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="../css/CadastroBebidas.css">
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #E2B420;">
-    <div class="container">
-      <a class="navbar-brand" href="#"><img width="100px" src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
-    </div>
-  </nav>
-
-  <header class="container mt-5 mb-3">
-    <div class="row">
-      <div class="col">
-        <h2 class="text-center">Preencha os detalhes da bebida</h2>
-      </div>
-    </div>
+  <header class="header">
+    <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+    <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
+      <span class="material-symbols-outlined">person</span>
+    </button>
   </header>
 
   <main>
     <div class="container">
+      <div class="title">
+        <h3>CADASTRO DE BEBIDAS</h3>
+      </div>
       <div class="row">
-        <div class="form-container">
-          <div class="col-md-12">
-            <form action="#" method="post" id="formCadastroBebida">
-              <div class="mb-3">
-                <label for="nome" class="form-label">Nome da Bebida</label>
-                <input type="text" class="form-control" id="nome" placeholder="Digite o nome da bebida" required>
-              </div>
-              <div class="mb-3">
-                <label for="categoria" class="form-label">Categoria</label>
-                <select class="form-control" id="categoria" required>
-                  <option value="1">Categoria 1</option>
-                  <option value="2">Categoria 2</option>
-                  <option value="2">Categoria 3</option>
-                  <option value="2">Categoria 4</option>
-                  <option value="2">Categoria 5</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="descricao" class="form-label">Descrição</label>
-                <textarea class="form-control" id="descricao" rows="2"
-                  placeholder="Digite uma breve descrição da bebida" required></textarea>
-              </div>
-
-              <div class="mb-3">
-                <label for="estoque" class="form-label">Quantidade em Estoque</label>
-                <input type="number" class="form-control" id="estoque" placeholder="Digite a quantidade em estoque"
-                  required>
-              </div>
-              <div class="mb-3">
-                <label for="preco" class="form-label">Preço</label>
-                <input type="number" class="form-control" id="preco" placeholder="Digite o preço da bebida" required>
-              </div>
-              <div class="mb-3">
-                <label for="imagem" class="form-label">Adicionar Imagem</label>
-                <input type="file" class="form-control" id="imagem">
-              </div>
-          </div>
-
-          <div class="button">
-            <button type="button" class="btn btn-dark" id="btncancelar">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="btnenviar">Enviar</button>
-          </div>
-
+        <div class="input-group">
+          <label for="nome">Nome da Bebida</label>
+          <input type="text" class="form-control" id="nome" placeholder="Digite o nome da bebida" required>
+        </div>
+        <div class="input-group">
+          <label for="estoque">Tamanho da garrafa</label>
+          <input type="text" class="form-control" id="garrafa" placeholder="Digite o tamanho da garrafa" required>
+        </div>
+        <div class="input-group">
+          <label for="preco" class="form-label">Preço</label>
+          <input type="number" class="form-control" id="preco" placeholder="Digite o preço da bebida" required>
         </div>
       </div>
+      <div class="row">
+        <div class="input-group">
+          <label for="categoria">Categoria</label>
+          <select class="form-control" id="categoria" required>
+            <option value="1">Categoria 1</option>
+            <option value="2">Categoria 2</option>
+            <option value="3">Categoria 3</option>
+            <option value="4">Categoria 4</option>
+            <option value="5" class="addcategoria">Adicionar Categoria</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="imagem" class="form-label">Adicionar Imagem</label>
+          <input type="file" class="form-control" id="imagem">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group" id="descrição">
+          <label for="descricao">Descrição</label>
+          <textarea class="form-control" id="descricao" placeholder="Digite uma breve descrição da bebida"
+            required></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="button">
+      <button type="button" class="btn" id="btncadastrar">CADASTRAR</button>
     </div>
   </main>
   <script src="../js/CadastroBebida.js"></script>
 </body>
-
 </html>
