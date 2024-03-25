@@ -61,7 +61,7 @@ button {
 
 .sidebar button {
   border: none;
-  height: 40px; /* Defina a altura dos botões */
+  height: 40px; 
 }
 
 .sidebar button:hover {
