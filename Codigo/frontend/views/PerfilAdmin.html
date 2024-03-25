@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Alterar Senha - DrinkUp</title>
+        <link rel="stylesheet" href="../css/PerfilAdmin.css" />
+    </head>
+    <body>
+        <header class="header">
+            <img
+                src="../assets/img/DrinkUp_Logo_Preta_PNG.png"
+                alt="DrinkUp Logo"
+            />
+            <i class="fa-sharp fa-regular fa-user"></i>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <p>MINHA CONTA</p>
+                <p>ESTOQUE</p>
+                <p>CADASTRO DE BEBIDA</p>
+                <p>LISTA DE BEBIDAS CADASTRADAS</p>
+            </aside>
+
+            <main class="content">
+                <h3>ALTERAR MINHA SENHA</h3>
+                <div class="form-group">
+                    <label for="current-password">Senha Atual</label>
+                    <input type="password" id="current-password" />
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Senha Nova</label>
+                    <input type="password" id="new-password" />
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirme a senha nova</label>
+                    <input type="password" id="confirm-password" />
+                </div>
+                <div>
+                    <button class="cancel-btn" onclick="cancel()">
+                        CANCELAR
+                    </button>
+                    <button class="save-btn" onclick="save()">SALVAR</button>
+                </div>
+            </main>
+        </div>
+
+        <!-- Icons -->
+        <script
+            src="https://kit.fontawesome.com/559e095fe9.js"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
