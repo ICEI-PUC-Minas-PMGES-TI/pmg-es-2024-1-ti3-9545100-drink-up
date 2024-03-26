@@ -1,20 +1,42 @@
-// Seleciona o botão "Editar"
-const botaoEditar = document.querySelector('.editar');
+// Função para editar a linha selecionada
+function editarLinha(botaoEditar) {
+    var linha = botaoEditar.parentNode.parentNode;
+    var campos = linha.getElementsByTagName("td");
+    var form = document.getElementById("formBebida");
 
-// Seleciona o popup
-const popup = document.getElementById('popup');
+    // Preencher os campos do formulário com os valores da linha selecionada
+    form.nomeBebida.value = campos[0].textContent;
+    form.categoria.value = campos[1].textContent;
+    form.tamanhoGarrafa.value = campos[2].textContent;
+    form.preco.value = campos[3].textContent;
 
-// Adiciona evento de clique ao botão "Editar"
-botaoEditar.addEventListener('click', function() {
-    // Exibe o popup
-    popup.style.display = 'flex';
-});
+    // Exibir o popup de edição
+    document.getElementById("popup").style.display = "block";
+}
 
-// Seleciona o botão "Fechar" dentro do popup
-const botaoFecharPopup = document.getElementById('fecharPopup');
+// Função para remover a linha selecionada
+function removerLinha(botaoRemover) {
+    var linha = botaoRemover.parentNode.parentNode;
+    linha.parentNode.removeChild(linha);
+}
 
-// Adiciona evento de clique ao botão "Fechar"
-botaoFecharPopup.addEventListener('click', function() {
-    // Oculta o popup
-    popup.style.display = 'none';
-});
+// Função para fechar o popup de edição
+document.getElementById("fecharPopup").onclick = function() {
+    document.getElementById("popup").style.display = "none";
+};
+
+// Adiciona manipuladores de evento para botões de edição
+var botoesEditar = document.getElementsByClassName("editar");
+for (var i = 0; i < botoesEditar.length; i++) {
+    botoesEditar[i].addEventListener("click", function() {
+        editarLinha(this);
+    });
+}
+
+// Adiciona manipuladores de evento para botões de exclusão
+var botoesExcluir = document.getElementsByClassName("remover");
+for (var i = 0; i < botoesExcluir.length; i++) {
+    botoesExcluir[i].addEventListener("click", function() {
+        removerLinha(this);
+    });
+}
