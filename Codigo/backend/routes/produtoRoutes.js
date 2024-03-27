@@ -1,7 +1,8 @@
 const express = require('express');
-const produtoController = require('../controllers/produtoController');
+const ProdutoController  = require('../controllers/produtoController');
 
 const router = express.Router();
+const produtoController = new ProdutoController();
 
 router.post('/produtos', produtoController.criarProduto);
 router.get('/produtos/nome/:nome', produtoController.buscarProdutoPorNome);

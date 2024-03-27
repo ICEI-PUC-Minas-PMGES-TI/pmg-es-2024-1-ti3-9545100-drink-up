@@ -12,7 +12,7 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCate
     transaction = await sequelize.transaction();
 
     // Verifica se a imagem e a categoria existem antes de criar o produto
-    await verificarExistenciaImagem(idImagem);
+    //await verificarExistenciaImagem(idImagem); quando resolver o bo das imagens
     await verificarExistenciaCategoria(idCategoria);
 
     const produto = await Produto.create({
@@ -21,7 +21,7 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCate
       valor,
       tam_garrafa: tamGarrafa,
       id_imagem: idImagem,
-      id_categoria: idCategoria
+      id_categoria: parseInt(idCategoria)
     }, { transaction });
 
     await transaction.commit();

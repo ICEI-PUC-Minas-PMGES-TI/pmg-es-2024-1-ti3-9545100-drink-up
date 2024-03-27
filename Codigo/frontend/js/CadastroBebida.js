@@ -1,14 +1,14 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btnenviar').addEventListener('click', function (event) {
+    document.getElementById('btncadastrar').addEventListener('click', function (event) {
         event.preventDefault();
 
         const nome = document.getElementById('nome').value;
-        const categoria = document.getElementById('categoria').value;
+        const categoria = document.getElementById('selectCategoria').value;
         const descricao = document.getElementById('descricao').value;
-        const qntd_estoque = document.getElementById('estoque').value;
-        const preco = document.getElementById('preco').value;
+        const tamGarrafa = document.getElementById('tamGarrafa').value;
+        const valor = document.getElementById('valor').value;
         const imagem = document.getElementById('imagem').value;
 
         fetch('http://localhost:3000/produtos', { 
@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify({
                 nome: nome,
-                categoria: categoria,
+                idCategoria: categoria,
                 descricao: descricao,
-                qntd_estoque : qntd_estoque,
-                preco: preco,
+                tamGarrafa : tamGarrafa,
+                valor: valor,   
                 imagem: imagem
             })
         })

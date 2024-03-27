@@ -1,19 +1,19 @@
 const Database = require("../models/Database");
 const produtoService = require('../services/produtoService');
 
-const produtoController = {
+class ProdutoController {
+
   async criarProduto(req, res) {
     try {
       const { nome, descricao, valor, tamGarrafa, idImagem, idCategoria } = req.body;
-
       const produto = await produtoService.criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCategoria);
 
       res.status(201).json(produto);
     } catch (error) {
       console.error('Erro ao criar produto:', error);
-      res.status(500).json({ message: 'Erro ao criar produto' });
+      res.status(500).json({ message: 'Erro ao criar produto'});
     }
-  },
+  }
 
   async buscarProdutoPorNome(req, res) {
     const nome = req.params.nome;
@@ -24,7 +24,7 @@ const produtoController = {
       console.error('Erro ao buscar produto por nome:', error);
       res.status(500).json({ message: 'Erro ao buscar produto por nome' });
     }
-  },
+  }
 
   async buscarProdutoPorId(req, res) {
     const id = req.params.id;
@@ -35,7 +35,7 @@ const produtoController = {
       console.error('Erro ao buscar produto por ID:', error);
       res.status(500).json({ message: 'Erro ao buscar produto por ID' });
     }
-  },
+  }
 
   async listarTodosProdutos(req, res) {
     try {
@@ -45,7 +45,7 @@ const produtoController = {
       console.error('Erro ao listar produtos:', error);
       res.status(500).json({ message: 'Erro ao listar produtos' });
     }
-  },
+  }
 
   async atualizarProduto(req, res) {
     const id = req.params.id;
@@ -57,7 +57,7 @@ const produtoController = {
       console.error('Erro ao atualizar produto:', error);
       res.status(500).json({ message: 'Erro ao atualizar produto' });
     }
-  },
+  }
 
   async excluirProduto(req, res) {
     const id = req.params.id;
@@ -69,6 +69,7 @@ const produtoController = {
       res.status(500).json({ message: 'Erro ao excluir produto' });
     }
   }
+  
 };
 
-module.exports = produtoController;
+module.exports = ProdutoController;
