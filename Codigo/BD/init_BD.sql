@@ -19,7 +19,7 @@ USE drink_up;
 -- Criando a tabela tb_endereco, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_endereco (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    logradouro VARCHAR(255) NOT NULL,
+    rua VARCHAR(255) NOT NULL,
     numero INT NOT NULL,
     bairro VARCHAR(255) NOT NULL,
     complemento VARCHAR(255),
@@ -33,13 +33,14 @@ CREATE TABLE IF NOT EXISTS tb_categoria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     descricao VARCHAR(255) NOT NULL
 );
+desc tb_categoria;
 
 
 -- Criando a tabela tb_imagem, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_imagem (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL UNIQUE,
-    caminho VARCHAR(255) NOT NULL
+    nome VARCHAR(244) NOT NULL UNIQUE,
+    caminho VARCHAR(244) NOT NULL
 );
 
 -- Segue também opção para tb_imagem utilizando um campo blob
@@ -63,8 +64,8 @@ A coluna status possui três opções de valores:
 */
 CREATE TABLE IF NOT EXISTS tb_usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL,
+    email VARCHAR(244) NOT NULL UNIQUE,
+    senha VARCHAR(244) NOT NULL,
     status ENUM('1', '2', '3') DEFAULT '1',
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     perfil ENUM('admin', 'cliente') NOT NULL
@@ -74,10 +75,10 @@ CREATE TABLE IF NOT EXISTS tb_usuario (
 -- Criando a tabela tb_cliente, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_cliente (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
+    nome VARCHAR(244) NOT NULL,
     cpf VARCHAR(14) NOT NULL UNIQUE,
     data_nascimento DATE NOT NULL,
-    telefone VARCHAR(255) NOT NULL,
+    telefone VARCHAR(244) NOT NULL,
     id_usuario INT,
     id_endereco INT,
     FOREIGN KEY (id_usuario) REFERENCES tb_usuario(id),
@@ -100,4 +101,18 @@ CREATE TABLE IF NOT EXISTS tb_produto (
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria(id)
 );
 
+SELECT * FROM tb_categoria;
+SELECT * FROM tb_cliente;
+INSERT INTO tb_categoria (descricao)
+VALUES ('cerveja');
+INSERT INTO tb_usuario (email, senha, status, perfil) 
+VALUES ('pedro@email.com', '123', '2', 'cliente');
 
+INSERT INTO tb_endereco (logradouro, numero, bairro, complemento, uf, cep) 
+VALUES ('Rua Exemplo', 122, 'Bairro Exemplo', 'Complemento Exemplo', 'MG', '01237667');
+
+INSERT INTO tb_cliente (nome, cpf, data_nascimento, telefone, id_usuario, id_endereco) 
+VALUES ('Pedro', '123.423.789-10', '1990-01-01', '(11) 1564-5678', 2, 2);
+
+INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, id_imagem, id_categoria)
+VALUES ('Nome do Produto', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 1, 2);
