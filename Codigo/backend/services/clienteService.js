@@ -13,7 +13,6 @@ async function criarCliente(nome, cpf, dataNascimento, telefone, endereco, usuar
     const sequelize = db.getInstance();
     transaction = await sequelize.transaction();
     
-    
     //Cria o endereço dentro da transação
     const enderecoCriado = await Endereco.create(endereco, { transaction });
 

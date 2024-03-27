@@ -10,11 +10,12 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light">
-        <a class="navbar-brand" href="#">
-            <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" width="70" height="60" class="d-inline-block align-top" alt="">
-        </a>
-    </nav>
+    <header class="navbar">
+        <img
+            src="../assets/img/DrinkUp_Logo_Preta_PNG.png"
+            alt="DrinkUp Logo"
+        />
+    </header>
 
     <div class="container">
         <div class="form">
@@ -31,6 +32,7 @@
                     <div class="input-box">
                         <label for="senha">Senha</label>
                         <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
+                        <p class="esquecisenha"><a>Esqueci a senha</a></p>
                     </div>
                 </div>
                 <div class="entrar-button">
@@ -48,7 +50,7 @@
 
             <div class="register-button">
                 <a href="./Cadastro.html">
-                    <button type="button">Cadastrar</button>
+                    <button id="btnCadastrar" type="button">Cadastrar</button>
                 </a>
             </div>
 
