@@ -98,5 +98,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // Insere os elementos no contêiner
         container.appendChild(input);
         container.appendChild(btnSave);
+        
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Referência ao seu elemento select
+            const selectCategoria = document.getElementById('selectCategoria');
+            
+            // Adiciona a opção desabilitada como a primeira opção
+            const placeholderOption = document.createElement('option');
+            placeholderOption.text = 'SELECIONE UMA CATEGORIA';
+            placeholderOption.disabled = true;
+            placeholderOption.selected = true; // Para que a opção apareça selecionada por padrão
+            selectCategoria.add(placeholderOption, selectCategoria.options[0]);
+    
+            // Inicializa a biblioteca multi-select-tag
+            new MultiSelectTag('selectCategoria');
+        });
     });
 });
