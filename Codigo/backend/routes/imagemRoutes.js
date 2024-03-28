@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const clienteController = require('../controllers/imagemController');
+const imagemController = require('../controllers/imagemController'); // Corrigido o nome do controller
 
 const router = express.Router();
 
@@ -11,10 +11,11 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
       cb(null, file.originalname); // O nome original do arquivo será mantido
     }
-  });
-  const upload = multer({ storage });
-  
-  router.post('imagem/upload', upload.single('imagem'), ImagemController.uploadImagem);
-  router.get('imagem/:id', ImagemController.buscarImagem);
-  
-  module.exports = router;
+});
+
+const upload = multer({ storage });
+
+router.post('/imagem/upload', upload.single('imagem'), imagemController.uploadImagem); // Corrigido o nome do controller
+router.get('/imagem/:id', imagemController.buscarImagem); // Corrigido o nome do controller
+
+module.exports = router;

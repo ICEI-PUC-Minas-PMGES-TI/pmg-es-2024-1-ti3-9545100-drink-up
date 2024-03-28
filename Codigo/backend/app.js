@@ -5,7 +5,8 @@ const cors = require('cors');
 const express = require('express');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const clienteRoutes = require('./routes/clienteRoutes');
-const produtoRoutes = require('./routes/produtoRoutes')
+const produtoRoutes = require('./routes/produtoRoutes');
+const categoriaRoutes = require('./routes/categoriaRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +18,7 @@ app.use(cors())
 app.use(usuarioRoutes);
 app.use(clienteRoutes);
 app.use(produtoRoutes);
+app.use(categoriaRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);

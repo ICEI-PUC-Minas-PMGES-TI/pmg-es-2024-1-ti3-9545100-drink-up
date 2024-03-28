@@ -1,7 +1,7 @@
 const Database = require("../models/Database");
 const Produto = require("../models/Produto");
 const Imagem = require("../models/Imagem");
-const Categoria = require("../models/Categoria");
+const categoriaService = require('./categoriaService');
 
 async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCategoria) {
   let transaction;
@@ -19,9 +19,9 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCate
       nome,
       descricao,
       valor,
-      tam_garrafa: tamGarrafa,
-      id_imagem: idImagem,
-      id_categoria: parseInt(idCategoria)
+      tamgarrafa: tamGarrafa,
+      idimagem: idImagem,
+      idcategoria: parseInt(idCategoria)
     }, { transaction });
 
     await transaction.commit();
@@ -74,6 +74,12 @@ async function buscarProdutoPorId(id) {
 async function listarTodosProdutos() {
   try {
     const produtos = await Produto.findAll();
+
+    for (const product of produtos) {
+      product.id_categoria = await categoriaService.buscarCategoriaPorId(parseInt(product.id_categoria));
+      console.log(product);
+    }
+
     return produtos;
   } catch (error) {
     console.error('Erro ao listar produtos:', error);

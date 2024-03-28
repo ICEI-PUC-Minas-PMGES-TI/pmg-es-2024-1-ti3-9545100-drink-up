@@ -1,118 +1,218 @@
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("btncadastrar")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
 
+      const nome = document.getElementById("nome").value;
+      const categoria = document.getElementById("selectCategoria").value;
+      const descricao = document.getElementById("descricao").value;
+      const tamGarrafa = document.getElementById("tamGarrafa").value;
+      const valor = document.getElementById("valor").value;
+      const imagem = document.getElementById("imagem").value;
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btncadastrar').addEventListener('click', function (event) {
-        event.preventDefault();
-
-        const nome = document.getElementById('nome').value;
-        const categoria = document.getElementById('selectCategoria').value;
-        const descricao = document.getElementById('descricao').value;
-        const tamGarrafa = document.getElementById('tamGarrafa').value;
-        const valor = document.getElementById('valor').value;
-        const imagem = document.getElementById('imagem').value;
-
-        fetch('http://localhost:3000/produtos', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                nome: nome,
-                idCategoria: categoria,
-                descricao: descricao,
-                tamGarrafa : tamGarrafa,
-                valor: valor,   
-                imagem: imagem
-            })
+      fetch("http://localhost:3000/produtos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: nome,
+          idCategoria: categoria,
+          descricao: descricao,
+          tamGarrafa: tamGarrafa,
+          valor: valor,
+          imagem: imagem,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          window.location.href = "ListagemDeBebidas.html";
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); 
-
-            window.location.href = 'ListagemDeBebidas.html';
-        })
-        .catch(error => {
-            console.error('Erro ao cadastrar bebida:', error);
+        .catch((error) => {
+          console.error("Erro ao cadastrar bebida:", error);
         });
     });
 
+  // Pega o modal de categoria
+  var modal = document.getElementById("modalCategoria");
 
-    var modal = document.getElementById("modalCategoria");
+  // Pega o select da categoria
+  var selectCategoria = document.getElementById("selectCategoria");
 
-    // Pega o select da categoria
-    var selectCategoria = document.getElementById("selectCategoria");
+  // Pega o botão de fechar o modal
+  var span = document.querySelector(".close");
 
-    // Pega o elemento <span> que fecha o modal
-    var span = document.querySelector(".close");
+  // Evento change para o select da categoria
+  selectCategoria.addEventListener("change", function () {
+    if (selectCategoria.value === "adicionar") {
+      // Abre o modal para adicionar uma nova categoria
+      modal.style.display = "block";
+    }
+  });
 
-    // Evento change para o select da categoria
-    selectCategoria.addEventListener("change", function () {
-        if (selectCategoria.value === "adicionar") {
-            // Abre o modal para adicionar uma nova categoria
-            modal.style.display = "block";
-        }
+  // Evento de clique para fechar o modal
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // Evento para fechar o modal clicando fora dele
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  //////////////////// pop up
+
+  // Evento de clique para o botão de adicionar nova categoria
+  var btnNovo = document.getElementById("btnNovo");
+  btnNovo.addEventListener("click", function () {
+    var container = document.getElementById("novoCampoCategoria");
+
+    // Limpa o contêiner para evitar múltiplos campos
+    container.innerHTML = "";
+
+    // Cria o campo de input
+    var input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Nome da nova categoria";
+    input.classList.add("form-control");
+
+    // Cria o botão de salvar
+    var btnSave = document.createElement("button");
+    btnSave.innerText = "Salvar";
+    btnSave.classList.add("btn", "btn-primary");
+
+    // Evento de clique para o botão Salvar
+    btnSave.addEventListener("click", function () {
+      var nomeCategoria = input.value;
+      fetch("http://localhost:3000/categorias", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ descricao: nomeCategoria }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          const novaOpcao = document.createElement("option");
+          novaOpcao.value = data.id;
+          novaOpcao.innerText = data.descricao;
+          selectCategoria.appendChild(novaOpcao);
+          modal.style.display = "none";
+
+          loadCategoriaTable();
+        })
+        .catch((error) => {
+          console.error("Erro ao adicionar categoria:", error);
+        });
     });
 
-    // Quando o usuário clica em <span> (x), fecha o modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
+    container.appendChild(input);
+    container.appendChild(btnSave);
+  });
 
-    // Quando o usuário clica fora do modal, fecha-o
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
+  function loadCategoriaInputSelect() {
+    const inputSelect = document.getElementById("selectCategoria");
 
-    // Pega o botão que adiciona novo campo
-    var btnNovo = document.getElementById("btnNovo");
+    fetch("http://localhost:3000/categorias", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+       for(categoria of data) {
+        inputSelect.innerHTML += `
+                <option value="${categoria.id}">${categoria.descricao}</option>
+            `;
+       }
+      })
+      .catch((error) => {
+        console.error("Erro ao listar categorias:", error);
+      });
+  }
 
-    // Evento de clique para o botão Novo
-    btnNovo.addEventListener('click', function () {
-        var container = document.getElementById("novoCampoCategoria");
-        
-        // Limpa o contêiner para evitar múltiplos campos
-        container.innerHTML = '';
+  loadCategoriaInputSelect();
 
-        // Cria o campo de input
-        var input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "Nome da nova categoria";
-        input.classList.add("form-control");
-
-        // Cria o botão de salvar
-        var btnSave = document.createElement("button");
-        btnSave.innerText = "Salvar";
-        btnSave.classList.add("btn", "btn-primary");
-
-        // Evento de clique para o botão Salvar
-        btnSave.addEventListener('click', function () {
-            // Aqui você coloca a lógica para salvar a nova categoria
-            // Por exemplo, você pode enviar o valor de input para o seu servidor
-            var nomeCategoria = input.value;
-            console.log("Salvar categoria:", nomeCategoria);
-            // Aqui você pode adicionar uma chamada fetch para salvar a categoria via API
+  // Função para carregar a tabela de categorias
+  function loadCategoriaTable() {
+    fetch("http://localhost:3000/categorias", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const tableBody = document.getElementById("tabela-body");
+        tableBody.innerHTML = "";
+        data.forEach((categoria) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>#${categoria.id}</td>
+                    <td>${categoria.descricao}</td>
+                    <td><button class="editar" data-id="${categoria.id}">✏️</button></td>
+                    <td><button class="remover" data-id="${categoria.id}">🗑️</button></td>
+                `;
+          row.querySelector(".editar").addEventListener("click", function () {
+            editarCategoria(categoria.id);
+          });
+          row.querySelector(".remover").addEventListener("click", function () {
+            removerCategoria(categoria.id);
+          });
+          tableBody.appendChild(row);
         });
+      })
+      .catch((error) => {
+        console.error("Erro ao listar categorias:", error);
+      });
+  }
 
-        // Insere os elementos no contêiner
-        container.appendChild(input);
-        container.appendChild(btnSave);
-        
+  // Função para editar categoria
+  function editarCategoria(id) {
+    var novoNome = prompt("Digite o novo nome da categoria:");
+    if (novoNome === null || novoNome === "") {
+      alert("Nome da categoria não pode ser vazio!");
+      return;
+    }
+    fetch(`http://localhost:3000/categorias/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ descricao: novoNome }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert("Categoria editada com sucesso!");
+        loadCategoriaTable();
+      })
+      .catch((error) => {
+        console.error("Erro ao editar categoria:", error);
+      });
+  }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // Referência ao seu elemento select
-            const selectCategoria = document.getElementById('selectCategoria');
-            
-            // Adiciona a opção desabilitada como a primeira opção
-            const placeholderOption = document.createElement('option');
-            placeholderOption.text = 'SELECIONE UMA CATEGORIA';
-            placeholderOption.disabled = true;
-            placeholderOption.selected = true; // Para que a opção apareça selecionada por padrão
-            selectCategoria.add(placeholderOption, selectCategoria.options[0]);
-    
-            // Inicializa a biblioteca multi-select-tag
-            new MultiSelectTag('selectCategoria');
+  // Função para remover categoria
+  function removerCategoria(id) {
+    if (confirm("Tem certeza que deseja remover esta categoria?")) {
+      fetch(`http://localhost:3000/categorias/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert("Categoria removida com sucesso!");
+          loadCategoriaTable();
+        })
+        .catch((error) => {
+          console.error("Erro ao remover categoria:", error);
         });
-    });
+    }
+  }
+
+  loadCategoriaTable();
 });
