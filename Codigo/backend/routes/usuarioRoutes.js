@@ -1,9 +1,15 @@
 const express = require('express');
 const usuarioController = require('../controllers/usuarioController');
+const autenticacao = require('../middlewares/autenticacao')
 
 const router = express.Router();
 
+//Rotas sem autenticacao
+router.post('/login', usuarioController.login);
 router.post('/usuarios', usuarioController.criarUsuario);
+
+//Rotas autenticadas
+//router.use(autenticacao); -> Autenticação desabilitada
 router.get('/usuarios', usuarioController.listarTodosUsuarios);
 router.get('/usuarios/:id', usuarioController.buscarUsuarioPorId);
 router.get('/usuarios/email/:email', usuarioController.buscarUsuarioPorEmail);

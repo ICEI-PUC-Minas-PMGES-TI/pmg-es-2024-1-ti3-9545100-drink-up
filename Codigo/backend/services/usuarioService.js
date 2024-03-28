@@ -1,4 +1,6 @@
 const Usuario = require('../models/Usuario');
+const jwt = require('jsonwebtoken');
+
 
 async function criarUsuario(email, senha, perfil) {
   //Regex para validar email
@@ -14,6 +16,22 @@ async function criarUsuario(email, senha, perfil) {
     console.error('Erro ao criar usuário:', error);
     throw new Error('Erro ao criar usuário');
   }
+}
+
+async function login(email, senha) {
+  const usuario = await Usuario.findOne({ where: { email } });
+
+  if (!usuario) {
+    throw new Error('Usuário não encontrado');
+  }
+
+  if (usuario.senha !== senha) {
+    throw new Error('Senha incorreta');
+  }
+
+  const token = jwt.sign({ id: usuario.id, email: usuario.email }, 'drinkupTIS3');
+
+  return token;
 }
 
 async function listarTodosUsuarios() {
@@ -90,5 +108,6 @@ module.exports = {
   buscarUsuarioPorEmail,
   buscarUsuarioPorId,
   atualizarUsuario,
-  excluirUsuario
+  excluirUsuario,
+  login
 };

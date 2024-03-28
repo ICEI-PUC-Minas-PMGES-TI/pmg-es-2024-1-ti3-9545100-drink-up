@@ -13,6 +13,19 @@ const usuarioController = {
     }
   },
 
+  async login(req, res) {
+    
+    const { email, senha } = req.body;
+
+    try {
+      const token = await usuarioService.login(email, senha);
+      return res.json({ token });
+    } catch (error) {
+      console.error('Erro ao realizar login:', error);
+      return res.status(500).json({ error: 'Erro ao realizar login' });
+    }
+  },
+
   async listarTodosUsuarios(req, res) {
     try {
       const usuarios = await usuarioService.listarTodosUsuarios();
