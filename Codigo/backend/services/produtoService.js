@@ -4,6 +4,8 @@ const Imagem = require("../models/Imagem");
 const categoriaService = require('./categoriaService');
 
 async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCategoria) {
+
+  console.log({nome, descricao, valor, tamGarrafa, idImagem, idCategoria});
   let transaction;
   
   try {
@@ -19,9 +21,9 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCate
       nome,
       descricao,
       valor,
-      tamgarrafa: tamGarrafa,
-      idimagem: idImagem,
-      idcategoria: parseInt(idCategoria)
+      tam_garrafa: tamGarrafa,
+      id_imagem: null, //idImagem,
+      id_categoria: parseInt(idCategoria)
     }, { transaction });
 
     await transaction.commit();
@@ -44,7 +46,8 @@ async function verificarExistenciaImagem(idImagem) {
 
 async function verificarExistenciaCategoria(idCategoria) {
   if (idCategoria) {
-    const categoria = await Categoria.findByPk(idCategoria);
+    const categoria = await categoriaService.buscarCategoriaPorId(idCategoria);
+    return categoria;
     if (!categoria) {
       throw new Error('Categoria não encontrada');
     }
@@ -77,7 +80,6 @@ async function listarTodosProdutos() {
 
     for (const product of produtos) {
       product.id_categoria = await categoriaService.buscarCategoriaPorId(parseInt(product.id_categoria));
-      console.log(product);
     }
 
     return produtos;
@@ -88,6 +90,7 @@ async function listarTodosProdutos() {
 }
 
 async function atualizarProduto(id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria) {
+  console.log({id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria})
   try {
     const produto = await Produto.findByPk(id);
     if (!produto) {

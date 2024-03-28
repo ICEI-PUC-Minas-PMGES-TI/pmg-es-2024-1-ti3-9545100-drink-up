@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nome: nome,
-          idCategoria: categoria,
-          descricao: descricao,
-          tamGarrafa: tamGarrafa,
-          valor: valor,
-          imagem: imagem,
+          "nome": nome,
+          "id_categoria": categoria,
+          "descricao": descricao,
+          "tam_garrafa": tamGarrafa,
+          "valor": valor,
+          "id_imagem": imagem,
         }),
       })
         .then((response) => response.json())

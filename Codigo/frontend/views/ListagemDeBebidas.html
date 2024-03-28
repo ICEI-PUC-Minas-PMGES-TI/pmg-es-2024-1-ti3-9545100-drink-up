@@ -15,7 +15,7 @@
   </head>
   <body>
     <header class="header">
-      <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo"/>
       <button
         class="button-NovoProduto"
         onclick="location.href='CadastroBebidas.html'"
@@ -55,8 +55,12 @@
     <!-- Popup -->
     <div id="popup" class="popup">
       <div class="popup-content">
-        <form id="formBebida">
+        <form id="formBebida" action="#">
           <div class="form-row">
+            <div class="form-input">
+              <label for="id_produto">ID:</label>
+              <input type="text" id="id_produto" name="id_produto" required />
+            </div>
             <div class="form-input">
               <label for="nomeBebida">Nome da bebida:</label>
               <input type="text" id="nomeBebida" name="nomeBebida" required />
