@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td>${bebida.tam_garrafa}</td>
                         <td>R$${bebida.valor}</td>
                         <td>${bebida.imagem}</td>
-                        <td><button class="editar">✏️</button></td>
-                        <td><button class="remover">🗑️</button></td>
+                        <td><button class="editar" id=${bebida.id}>✏️</button></td>
+                        <td><button class="remover" id=${bebida.id}>🗑️</button></td>
                     `;
           tabela.appendChild(tr);
         });
@@ -45,20 +45,36 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   carregarBebidas();
+  loadCategoriaInputSelect();
+  saveProduto();
 });
 
+
 // Função para editar a linha selecionada
-function editarLinha(botaoEditar) {
-  var linha = botaoEditar.parentNode.parentNode;
-  var campos = linha.getElementsByTagName("td");
-  var form = document.getElementById("formBebida");
+ function editarLinha(botaoEditar) {
 
+  const idProduto = botaoEditar.id;
+
+  fetch(`http://localhost:3000/produtos/${idProduto}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById('id_produto').value = data.id,
+      document.getElementById('nomeBebida').value = data.nome;
+      document.getElementById('categoria').value = data.id_categoria;
+      document.getElementById('tamanhoGarrafa').value = data.tam_garrafa;
+      document.getElementById('preco').value = data.valor;
+      document.getElementById('descricao').value = data.descricao;
+    })
+    .catch((error) => {
+      console.error("Erro ao excluir o produto:", error);
+    });
+    
   //Preencher os campos do formulário com os valores da linha selecionada
-  form.nomeBebida.value = campos[0].textContent;
-  form.categoria.value = campos[1].textContent;
-  form.tamanhoGarrafa.value = campos[2].textContent;
-  form.preco.value = campos[3].textContent;
-
   document.getElementById("popup").style.display = "block";
 }
 
@@ -89,39 +105,41 @@ document.getElementById("fecharPopup").onclick = function () {
 };
 
 // Função para salvar as alterações no produto
-// document.getElementById("salvarBebidas").onclick = function () {
-//   var form = document.getElementById("formBebida");
-//   var idProduto = form.getAttribute("data-id");
+function saveProduto() {
 
-//   // Criar um objeto FormData para enviar os dados, incluindo a imagem
-//   var formData = new FormData();
-//   formData.append("nome", form.nomeBebida.value);
-//   formData.append("categoria", form.categoria.value);
-//   formData.append("tamGarrafa", form.tamanhoGarrafa.value);
-//   formData.append("valor", form.preco.value);
-//   formData.append("imagem", form.imagem.files[0]); // Primeiro arquivo do input de imagem
+  document.getElementById("salvarBebida").addEventListener('click', (event) => {
 
-//   // Enviar solicitação de atualização para o backend
-//   fetch(`http://localhost:3000/produtos/${idProduto}`, {
-//     method: "PUT",
-//     body: formData, // Usar FormData em vez de JSON.stringify
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         // Se a atualização for bem-sucedida, fechar o pop-up de edição
-//         document.getElementById("popup").style.display = "none";
+    event.preventDefault();
 
-//         // Recarregar a tabela para refletir as alterações feitas
-//         carregarBebidas();
-//       } else {
-//         // Se ocorrer um erro na atualização, mostrar mensagem de erro
-//         console.error("Erro ao atualizar o produto");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Erro ao atualizar o produto:", error);
-//     });
-// };
+    const formData = {
+       "id": document.getElementById('id_produto').value,
+       "nome": document.getElementById('nomeBebida').value,
+       "descricao": document.getElementById('descricao').value,
+       "valor": document.getElementById('preco').value,
+       "tam_garrafa": document.getElementById('tamanhoGarrafa').value,
+       "id_imagem": document.getElementById('imagem').value,
+       "id_categoria": document.getElementById('categoria').value,
+     }
+
+     fetch('http://localhost:3000/produtos', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+    .then((response) => {
+      if (response.ok) {
+        document.getElementById('popup').style.display = 'none';
+        window.location.reload();
+      }
+    })
+    .catch((error) => {
+      console.error('Erro ao atualizar o produto:', error);
+    });
+  });
+}
+
 
 function loadCategoriaInputSelect() {
   const inputSelect = document.getElementById("categoria");
@@ -145,4 +163,4 @@ function loadCategoriaInputSelect() {
     });
 }
 
-loadCategoriaInputSelect();
+

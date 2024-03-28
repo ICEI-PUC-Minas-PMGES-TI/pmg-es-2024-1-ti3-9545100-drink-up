@@ -5,8 +5,9 @@ class ProdutoController {
 
   async criarProduto(req, res) {
     try {
-      const { nome, descricao, valor, tamGarrafa, idImagem, idCategoria } = req.body;
-      const produto = await produtoService.criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCategoria);
+      console.log(req.body)
+      const { nome, descricao, valor, tam_garrafa, id_imagem, id_categoria } = req.body;
+      const produto = await produtoService.criarProduto(nome, descricao, valor, tam_garrafa, id_imagem, parseInt(id_categoria));
 
       res.status(201).json(produto);
     } catch (error) {
@@ -48,10 +49,13 @@ class ProdutoController {
   }
 
   async atualizarProduto(req, res) {
-    const id = req.params.id;
-    const { nome, descricao, valor, tamGarrafa, idImagem, idCategoria } = req.body;
+
+    console.log(req.body);
+
+    const { id, nome, descricao, valor, tam_garrafa, id_imagem, id_categoria } = req.body;
+
     try {
-      const produto = await produtoService.atualizarProduto(id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria);
+      const produto = await produtoService.atualizarProduto(id, nome, descricao, valor, id_imagem, id_imagem, id_categoria);
       res.json(produto);
     } catch (error) {
       console.error('Erro ao atualizar produto:', error);
