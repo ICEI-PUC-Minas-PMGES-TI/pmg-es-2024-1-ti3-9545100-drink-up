@@ -10,10 +10,28 @@ const estoqueController = {
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
+    },
+
+    async listarEstoqueCompleto(req, res) {
+        try {
+            const estoque = await estoqueService.listarEstoqueCompleto();
+            res.status(200).json(estoque);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    },
+
+    async listarEstoquePorProduto(req, res) {
+        try {
+            const { nome } = req.params;
+            const estoque = await estoqueService.listarEstoquePorProduto(nome);
+            res.status(200).json(estoque);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
     }
 
 }
 
-module.exports = {
-    estoqueController
-};
+module.exports = estoqueController;
+
