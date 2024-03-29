@@ -1,20 +1,18 @@
 -- Active: 1710028842404@@127.0.0.1@3306@drink_up
 /*============= EXECUTE O ARQUIVO OU TODOS OS COMANDOS MANUALMENTE EM ORDEM SEQUENCIAL ====================*/
 
-
-/*CRIAÇÃO DE UM USUÁRIO MASTER COM PRIVILÉGIOS*/
-CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
-GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
-
 /*CRIAÇÃO DA BASE DE DADOS*/
--- DROP DATABASE drink_up;
+DROP DATABASE drink_up;
 CREATE DATABASE drink_up;
 
 /*ACESSO À BASE DE DADOS*/
 USE drink_up;
 
-/*INICIANDO A CRIAÇÃO DAS TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA*/
+/*CRIAÇÃO DE UM USUÁRIO MASTER COM PRIVILÉGIOS*/
+CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
+GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
 
+/*INICIANDO A CRIAÇÃO DAS TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA*/
 
 -- Criando a tabela tb_endereco, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_endereco (
@@ -27,14 +25,12 @@ CREATE TABLE IF NOT EXISTS tb_endereco (
     cep VARCHAR(8) NOT NULL
 );
 
-
 -- Criando a tabela tb_categoria, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_categoria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     descricao VARCHAR(255) NOT NULL
 );
 desc tb_categoria;
-
 
 -- Criando a tabela tb_imagem, verificando se a tabela já existe previamente
 CREATE TABLE IF NOT EXISTS tb_imagem (
@@ -94,6 +90,7 @@ CREATE TABLE IF NOT EXISTS tb_produto (
     valor DECIMAL(10, 2) NOT NULL,
     tam_garrafa VARCHAR(244) NOT NULL, 
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    estoque_atual INT,
     id_imagem INT,
     id_categoria INT,
     
@@ -101,18 +98,35 @@ CREATE TABLE IF NOT EXISTS tb_produto (
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria(id)
 );
 
+-- Criando a tabela tb_estoque, verificando se a tabela já existe previamente
+CREATE TABLE IF NOT EXISTS tb_estoque (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data_movimento DATETIME DEFAULT CURRENT_TIMESTAMP,
+    quantidade INT NOT NULL,
+    tipo ENUM('entrada', 'saida') NOT NULL,
+    observacao TEXT, 
+    id_produto INT,
+    
+    FOREIGN KEY (id_produto) REFERENCES tb_produto(id)
+);
+
+
+
+/*SELECTS*/
+
 SELECT * FROM tb_categoria;
+SELECT * FROM tb_imagem;
+SELECT * FROM tb_endereco;
 SELECT * FROM tb_cliente;
-INSERT INTO tb_categoria (descricao)
-VALUES ('cerveja');
-INSERT INTO tb_usuario (email, senha, status, perfil) 
-VALUES ('pedro@email.com', '123', '2', 'cliente');
+SELECT * FROM tb_produto;
+SELECT * FROM tb_usuario;
+SELECT * FROM tb_estoque;
 
-INSERT INTO tb_endereco (logradouro, numero, bairro, complemento, uf, cep) 
-VALUES ('Rua Exemplo', 122, 'Bairro Exemplo', 'Complemento Exemplo', 'MG', '01237667');
 
-INSERT INTO tb_cliente (nome, cpf, data_nascimento, telefone, id_usuario, id_endereco) 
-VALUES ('Pedro', '123.423.789-10', '1990-01-01', '(11) 1564-5678', 2, 2);
 
-INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, id_imagem, id_categoria)
-VALUES ('Nome do Produto', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 1, 2);
+/*INSERTS*/
+INSERT INTO tb_categoria (descricao) VALUES ('cerveja');
+INSERT INTO tb_usuario (email, senha, status, perfil) VALUES ('pedro@email.com', '123', '2', 'cliente');
+INSERT INTO tb_endereco (logradouro, numero, bairro, complemento, uf, cep) VALUES ('Rua Exemplo', 122, 'Bairro Exemplo', 'Complemento Exemplo', 'MG', '01237667');
+INSERT INTO tb_cliente (nome, cpf, data_nascimento, telefone, id_usuario, id_endereco) VALUES ('Pedro', '123.423.789-10', '1990-01-01', '(11) 1564-5678', 2, 2);
+INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, id_imagem, id_categoria) VALUES ('Nome do Produto', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 1, 2);
