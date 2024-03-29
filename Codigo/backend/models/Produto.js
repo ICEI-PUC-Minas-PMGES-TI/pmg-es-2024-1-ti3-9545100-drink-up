@@ -30,6 +30,10 @@ Produto.init(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
+    estoque_atual: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     id_imagem: {
       type: DataTypes.INTEGER,
       allowNull: true,
