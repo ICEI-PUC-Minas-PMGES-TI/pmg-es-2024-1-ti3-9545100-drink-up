@@ -3,9 +3,9 @@ const Produto = require("../models/Produto");
 const Imagem = require("../models/Imagem");
 const categoriaService = require('./categoriaService');
 
-async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCategoria) {
+async function criarProduto(nome, descricao, valor, tamGarrafa, estoque_atual, idImagem, idCategoria) {
 
-  console.log({nome, descricao, valor, tamGarrafa, idImagem, idCategoria});
+  console.log({nome, descricao, valor, tamGarrafa, estoque_atual, idImagem, idCategoria});
   let transaction;
   
   try {
@@ -22,6 +22,7 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, idImagem, idCate
       descricao,
       valor,
       tam_garrafa: tamGarrafa,
+      estoque_atual,
       id_imagem: null, //idImagem,
       id_categoria: parseInt(idCategoria)
     }, { transaction });

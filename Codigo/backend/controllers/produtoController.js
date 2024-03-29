@@ -6,8 +6,8 @@ class ProdutoController {
   async criarProduto(req, res) {
     try {
       console.log(req.body)
-      const { nome, descricao, valor, tam_garrafa, id_imagem, id_categoria } = req.body;
-      const produto = await produtoService.criarProduto(nome, descricao, valor, tam_garrafa, id_imagem, parseInt(id_categoria));
+      const { nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria } = req.body;
+      const produto = await produtoService.criarProduto(nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, parseInt(id_categoria));
 
       res.status(201).json(produto);
     } catch (error) {
