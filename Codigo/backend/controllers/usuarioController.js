@@ -19,7 +19,7 @@ const usuarioController = {
 
     try {
       const token = await usuarioService.login(email, senha);
-      return res.json({ token });
+      return res.json({auth: true, token });
     } catch (error) {
       console.error('Erro ao realizar login:', error);
       return res.status(500).json({ error: 'Erro ao realizar login' });

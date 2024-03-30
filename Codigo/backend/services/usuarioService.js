@@ -1,5 +1,6 @@
 const Usuario = require('../models/Usuario');
 const jwt = require('jsonwebtoken');
+const SECRET = 'drinkupTIS3';
 
 
 async function criarUsuario(email, senha, perfil) {
@@ -10,7 +11,7 @@ async function criarUsuario(email, senha, perfil) {
     throw new Error('Email inválido');
   }
   try {
-    const usuario = await Usuario.create({ email, senha, perfil});
+    const usuario = await Usuario.create({ email, senha, perfil });
     return usuario;
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
@@ -29,7 +30,7 @@ async function login(email, senha) {
     throw new Error('Senha incorreta');
   }
 
-  const token = jwt.sign({ id: usuario.id, email: usuario.email }, 'drinkupTIS3');
+  const token = jwt.sign({ id:usuario.id, perfil:usuario.perfil, status:usuario.status }, SECRET);
 
   return token;
 }
@@ -45,48 +46,48 @@ async function listarTodosUsuarios() {
 }
 
 async function buscarUsuarioPorEmail(email) {
-    try {
-      const usuario = await Usuario.findOne({ where: { email } });
-      return usuario;
-    } catch (error) {
-      console.error('Erro ao buscar usuário por email:', error);
-      throw new Error('Erro ao buscar usuário por email');
-    }
+  try {
+    const usuario = await Usuario.findOne({ where: { email } });
+    return usuario;
+  } catch (error) {
+    console.error('Erro ao buscar usuário por email:', error);
+    throw new Error('Erro ao buscar usuário por email');
+  }
 }
 
 async function buscarUsuarioPorId(id) {
-    try {
-      const usuario = await Usuario.findByPk(id);
-      return usuario;
-    } catch (error) {
-      console.error('Erro ao buscar usuário por ID:', error);
-      throw new Error('Erro ao buscar usuário por ID');
-    }
-}
-  
-async function atualizarUsuario(id, senha, status) {
-    try {
-      const usuario = await Usuario.findByPk(id);
-      if (!usuario) {
-        throw new Error('Usuário não encontrado');
-      }
-      // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
-
-      if (senha) {
-        usuario.senha = senha;
-      }
-      if (status) {
-        usuario.status = status;
-      }
-  
-      await usuario.save();
-      return usuario;
-    } catch (error) {
-      console.error('Erro ao atualizar usuário:', error);
-      throw new Error('Erro ao atualizar usuário');
-    }
+  try {
+    const usuario = await Usuario.findByPk(id);
+    return usuario;
+  } catch (error) {
+    console.error('Erro ao buscar usuário por ID:', error);
+    throw new Error('Erro ao buscar usuário por ID');
   }
-  
+}
+
+async function atualizarUsuario(id, senha, status) {
+  try {
+    const usuario = await Usuario.findByPk(id);
+    if (!usuario) {
+      throw new Error('Usuário não encontrado');
+    }
+    // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
+
+    if (senha) {
+      usuario.senha = senha;
+    }
+    if (status) {
+      usuario.status = status;
+    }
+
+    await usuario.save();
+    return usuario;
+  } catch (error) {
+    console.error('Erro ao atualizar usuário:', error);
+    throw new Error('Erro ao atualizar usuário');
+  }
+}
+
 async function excluirUsuario(id) {
   try {
     const usuario = await Usuario.findByPk(id);

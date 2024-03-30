@@ -9,7 +9,7 @@ router.post('/login', usuarioController.login);
 router.post('/usuarios', usuarioController.criarUsuario);
 
 //Rotas autenticadas
-//router.use(autenticacao); -> Autenticação desabilitada
+router.use(autenticacao);
 router.get('/usuarios', usuarioController.listarTodosUsuarios);
 router.get('/usuarios/:id', usuarioController.buscarUsuarioPorId);
 router.get('/usuarios/email/:email', usuarioController.buscarUsuarioPorEmail);
