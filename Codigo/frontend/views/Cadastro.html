@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="../css/Cadastro_old.css">
-
     <title>Cadastro</title>
 </head>
-
 <body>
     <div class="container">
-        
         <div class="form-image">
             <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" class="logo" />
         </div>
-        
         <div class="form-fields">
             <form action="#" method="post" id="formCadastro">
                 <div class="form-header">
@@ -25,50 +19,41 @@
                         <h1>CRIE SUA CONTA</h1>
                     </div>
                 </div>
-
-                <fieldset class="input-group">
+                <fieldset class="input-group"> // talvez interessante mudar no futuro para div
                     <div class="input-box">
                         <label for="firstname">Nome Completo</label>
                         <input id="firstname" type="text" name="firstname" placeholder="Digite seu nome Completo"
                             required>
                     </div>
-
                     <div class="input-box">
                         <label for="birthdate">Data de Nascimento</label>
                         <input id="birthdate" type="date" name="birthdate" placeholder="DD/MM/YYYY" required>
                     </div>
-
                     <div class="input-box">
                         <label for="CPF">CPF</label>
                         <input id= "cpf"type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
                             title="Digite o CPF no formato nnn.nnn.nnn-nn" required>
                     </div>
-
                     <div class="input-box">
                         <label for="email">E-mail</label>
                         <input id="email" type="email" name="email" placeholder="aaaaa@aaaa.com" required>
                     </div>
-
                     <div class="input-box">
                         <label for="rua">Rua</label>
                         <input id="rua" type="text" name="rua" placeholder="Rua das Flores" required>
                     </div>
-
                     <div class="input-box">
                         <label for="numero">Número</label>
                         <input id="numero" type="text" name="numero" placeholder="ex: 2000" required>
                     </div>
-
                     <div class="input-box">
                         <label for="complemento">Complemento</label>
                         <input id="complemento" type="text" name="complemento" placeholder="ex: apt 101, bloco 2">
                     </div>
-
                     <div class="input-box">
                         <label for="uf">UF</label>
                         <input id="uf" type="text" name="uf" placeholder="MINAS GERAIS" required>
                     </div>
-
                     <div class="input-box">
                         <label for="cidade">Cidade</label>
                         <input id="cidade" type="text" name="cidade" placeholder="Ex: São Paulo" required>
@@ -77,30 +62,24 @@
                         <label for="bairro">Bairro</label>
                         <input id="bairro" type="text" name="bairro" placeholder="Ex: Pedro II" required>
                     </div>
-
                     <div class="input-box">
                         <label for="cep">CEP</label>
                         <input id="cep" type="text" name="cep" placeholder="XXXXXXXX" required>
                     </div>
-
                     <div class="input-box">
                         <label for="telefone">Telefone</label>
                         <input id="telefone" type="tel" name="telefone" placeholder="(DD) 99999-9999" required>
                     </div>
-
                     <div class="input-box">
                         <label for="senha">Senha</label>
                         <input id="senha" type="password" name="senha" placeholder="Senha" required>
                     </div>
-
                     <div class="input-box">
                         <label for="confirmasenha">Confirma Senha</label>
                         <input id="confirmasenha" type="password" name="confirmasenha" placeholder="Confirme sua senha"
                             required>
                     </div>
-
                 </fieldset>
-
                 <div class="cadastrar-button">
                     <button id="bntCadastrar" type="button">Cadastrar</button>
                 </div>
