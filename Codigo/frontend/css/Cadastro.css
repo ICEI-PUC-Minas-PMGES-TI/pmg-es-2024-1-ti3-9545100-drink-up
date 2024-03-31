@@ -79,13 +79,33 @@ body, html {
     align-items: center;
 }
 
+// responsa
 
 @media (max-width: 768px) {
     .input-group {
         flex-direction: column;
     }
-
     .input-box {
         flex: 0 0 100%; 
+    }
+}
+@media (max-width: 320px) {
+    .container {
+        min-height: 45vh;
+    }
+}
+@media (min-width: 321px) and (max-width: 480px) {
+    .container {
+        min-height: 50vh;
+    }
+}
+@media (min-height: 800px) {
+    .container {
+        min-height: 70vh;
+    }
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .container {
+        min-height: 65vh;
     }
 }
