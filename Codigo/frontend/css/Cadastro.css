@@ -79,8 +79,6 @@ body, html {
     align-items: center;
 }
 
-// responsa
-
 @media (max-width: 768px) {
     .input-group {
         flex-direction: column;
