@@ -30,8 +30,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    novoProdutoButton.addEventListener('click', function() {
-        console.log('novo produto adicionado!');
-    });
 });
