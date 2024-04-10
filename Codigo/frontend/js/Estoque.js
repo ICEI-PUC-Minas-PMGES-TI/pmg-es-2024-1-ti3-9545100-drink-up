@@ -1,66 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const editarButtons = document.querySelectorAll('.editar');
-    const salvarButtons = document.querySelectorAll('.salvar');
+    const adicionarButtons = document.querySelectorAll('.adicionar');
     const removerButtons = document.querySelectorAll('.remover');
-    const novoProdutoButton = document.querySelector('.button-NovoProduto'); 
+    const novoProdutoButton = document.querySelector('.button-NovoProduto');
 
-  
-    function habilitarEdicao(event) {
-        const tr = event.target.closest('tr');
-        const tdNome = tr.querySelector('td:nth-child(1)');
-        const tdCategoria = tr.querySelector('td:nth-child(2)');
-        const tdQuantidade = tr.querySelector('td:nth-child(3)');
-
-        // Habilitar edição dos campos
-        tdNome.setAttribute('contenteditable', 'true');
-        tdCategoria.setAttribute('contenteditable', 'true');
-        tdQuantidade.setAttribute('contenteditable', 'true');
-    }
-
-  
-    function salvarAlteracoes(event) {
-        const tr = event.target.closest('tr');
-        const tdNome = tr.querySelector('td:nth-child(1)');
-        const tdCategoria = tr.querySelector('td:nth-child(2)');
-        const tdQuantidade = tr.querySelector('td:nth-child(3)');
-
-        const nome = tdNome.textContent;
-        const categoria = tdCategoria.textContent;
-        const quantidade = parseInt(tdQuantidade.textContent);
-
-     
-        console.log('Nome:', nome);
-        console.log('Categoria:', categoria);
-        console.log('Quantidade:', quantidade);
-    }
-
-   
-    function removerProduto(event) {
-        const tr = event.target.closest('tr');
-        tr.remove();
-    }
-
-   
-    function adicionarNovoProduto() {
-      
-        console.log('Botão "Novo Produto" clicado!');
-    }
-
-   
-    editarButtons.forEach(button => {
-        button.addEventListener('click', habilitarEdicao);
+    adicionarButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const tr = event.target.closest('tr');
+            const tdQuantidade = tr.querySelector('td:nth-child(3)');
+            let quantidade_produto = parseInt(prompt("Quantos itens queremos adicionar?"));
+            if (quantidade_produto) {
+                tdQuantidade.textContent = parseInt(tdQuantidade.textContent) + quantidade_produto;
+                console.log(`foram adicionados ${quantidade_produto} itens ao ${tr.querySelector('td:nth-child(1)').textContent}.`);
+            }
+        });
     });
 
-   
-    salvarButtons.forEach(button => {
-        button.addEventListener('click', salvarAlteracoes);
-    });
-
-   
     removerButtons.forEach(button => {
-        button.addEventListener('click', removerProduto);
+        button.addEventListener('click', function(event) {
+            const tr = event.target.closest('tr');
+            const tdQuantidade = tr.querySelector('td:nth-child(3)');
+            let quantidade_produto = parseInt(prompt("Quantos itens queremos remover?"));
+            if (quantidade_produto) {
+                if (parseInt(tdQuantidade.textContent) >= quantidade_produto) {
+                    tdQuantidade.textContent = parseInt(tdQuantidade.textContent) - quantidade_produto;
+                    console.log(`Foram removidos ${quantidade_produto} itens de ${tr.querySelector('td:nth-child(1)').textContent}.`);
+                } else {
+                    alert('Quantidade insuficinete para esta operação :(           tente novamente');
+                }
+            }
+        });
     });
 
-   
-    novoProdutoButton.addEventListener('click', adicionarNovoProduto);
+    novoProdutoButton.addEventListener('click', function() {
+        console.log('novo produto adicionado!');
+    });
 });
