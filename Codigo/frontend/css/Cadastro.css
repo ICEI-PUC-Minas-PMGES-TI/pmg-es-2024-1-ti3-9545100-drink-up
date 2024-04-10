@@ -60,8 +60,8 @@ body, html {
     padding: 10px;
     border-radius: 4px;
     border: none;
-    background-color: #F2C029; 
-    color: #fff; 
+    background-color: #f4f4f4; 
+    color: #000000; 
 }
 
 .cadastrar-button button{
@@ -70,7 +70,7 @@ body, html {
     padding: 0.62rem;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #BF9411;
+    background-color: #F2C029; 
     font-family: 'Nunito Sans', sans-serif;
     font-style:italic;
     font-size: 18px;
