@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tdQuantidade.textContent = parseInt(tdQuantidade.textContent) + quantidade_produto;
                 console.log(`foram adicionados ${quantidade_produto} itens ao ${tr.querySelector('td:nth-child(1)').textContent}.`);
             }
+            else{
+                 alert('valor inválido digitado. Favor tentar novamente');
+            }
         });
     });
 
@@ -25,8 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     tdQuantidade.textContent = parseInt(tdQuantidade.textContent) - quantidade_produto;
                     console.log(`Foram removidos ${quantidade_produto} itens de ${tr.querySelector('td:nth-child(1)').textContent}.`);
                 } else {
-                    alert('Quantidade insuficinete para esta operação :(           tente novamente');
+                    alert('Quantidade insuficinete para esta operação :(   tente novamente');
                 }
+            }
+            else{
+                alert('valor inválido digitado. Favor tentar novamente');
             }
         });
     });
