@@ -24,23 +24,25 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        fetch(`${baseUrl}/estoque`)
+       fetch(`${baseUrl}/produtos`) 
         .then(response => response.json())
-        .then(estoque => {
-            const filteredEstoque = estoque.filter(produto => produto.id_categoria == selectedCategoria);
+        .then(produtos => {
+            const filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
             const tbody = document.querySelector('.tabela tbody');
-            tbody.innerHTML = '';
-            filteredEstoque.forEach(produto => {
+            tbody.innerHTML = ''; 
+            filteredProdutos.forEach(produto => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>${produto.nome}</td>
                                 <td>${produto.descricao}</td>
-                                <td>${produto.quantidade}</td>
+                                <td>${produto.estoque_atual}</td>  
                                 <td><button class="adicionar">➕</button></td>
                                 <td><button class="remover">➖</button></td>`;
-                tbody.appendChild(tr);});
-            addEventListenersToButtons(); })
-        .catch(error => console.error('Erro ao puxar estoque do banco', error));
-                });
+                tbody.appendChild(tr);
+            });
+            addEventListenersToButtons();
+        })
+        .catch(error => console.error('Erro ao puxar produtos do banco', error));
+          });
 
     function addEventListenersToButtons() {
         const addButtons = document.querySelectorAll('.adicionar');
