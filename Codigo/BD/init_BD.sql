@@ -110,6 +110,20 @@ CREATE TABLE IF NOT EXISTS tb_estoque (
     FOREIGN KEY (id_produto) REFERENCES tb_produto(id)
 );
 
+CREATE TABLE IF NOT EXISTS tb_itempedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    qnt_itens int not null,
+    valor_uni int not null,
+    FOREIGN KEY (id_produto) REFERENCES tb_produto(id)
+
+);
+
+CREATE TABLE IF NOT EXISTS tb_pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    valor_total int not null,
+    data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_itempedido) REFERENCES tb_itempedido(id)
+);
 
 
 /*SELECTS*/
