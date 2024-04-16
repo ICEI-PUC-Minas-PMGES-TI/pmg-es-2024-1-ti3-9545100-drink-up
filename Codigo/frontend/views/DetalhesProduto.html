@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Detalhes do Produto - DrinkUp</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+        <link rel="stylesheet" href="../css/DetalhesProduto.css" />
+    </head>
+    <body>
+        <header class="header">
+            <img
+                src="../assets/img/DrinkUp_Logo_Preta_PNG.png"
+                alt="DrinkUp Logo"
+            />
+            <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <button onclick="location.href=''">⇦ VOLTAR</button>
+                <div id="imagem">
+                    <img
+                    src="https://www.imigrantesbebidas.com.br/bebida/images/products/full/7281-licor-43-diego-zamora-700ml.jpg"
+                    alt=""
+                    />
+                </div>
+            </aside>
+
+            <main class="content">
+
+                <h1>Licor 43 700ml</h1>
+                <div>
+                    <h3>R$100,00</h3>
+                </div>
+                <div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis diam id imperdiet placerat. Suspendisse blandit lacus sit amet sollicitudin venenatis. Aliquam ex massa, porttitor tincidunt sem at, dictum scelerisque tellus. Suspendisse mattis, metus et tempor aliquet, leo ligula vulputate arcu, non condimentum ante risus sed turpis. Pellentesque efficitur vulputate interdum. Donec bibendum purus porta, varius augue nec, facilisis tortor. Curabitur et auctor erat. Quisque scelerisque porttitor augue, ut pellentesque arcu pretium eget. Sed at tellus fringilla, condimentum diam in, dictum nulla. Nunc ut posuere magna. Vivamus tristique sapien vel vulputate tempus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ac libero vel ex malesuada vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec arcu nibh, finibus laoreet porta sed, congue id sem. Integer fringilla lacinia nibh, euismod molestie quam tincidunt a. In hac habitasse platea dictumst. Phasellus at suscipit odio.</p>
+                </div>
+                <div id="counter">
+                    <div>
+                        <button id="plus" class="count-button">
+                            +
+                        </button>
+                        <span id="value">  
+                           0 
+                        </span>
+                        <button id="minus" class="count-button">
+                            -
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="buttons">
+                    <button id="reset">
+                        RESETAR
+                    </button>
+                    <button class="add-btn" onclick="">ADICIONAR</button>
+                </div>
+            </main>
+        </div>
+
+        <!-- Icons -->
+        <script
+            src="https://kit.fontawesome.com/559e095fe9.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="../js/DetalhesProduto.js"></script>
+    </body>
+</html>
