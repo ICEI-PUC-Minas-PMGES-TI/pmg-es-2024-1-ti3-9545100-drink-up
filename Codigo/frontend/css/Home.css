@@ -1,1 +1,79 @@
+.navbar {
+    background-color: #F2C029;
+    padding: 24px 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    height: 95px; 
+  }
+
+  .navbar img {
+    height: 40px;
+    justify-content: left;
+    display: flex;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+}
+  
+.container {
+    display: flex;
+    margin-top: -2.5rem;
+    width: 100%;
+    height: 70vh;
+    padding: 7rem;
+    justify-content: space-between;
+}
+
+.product-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 300px;
+    margin: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card .description {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-card button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+}
+
+.custom-footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
