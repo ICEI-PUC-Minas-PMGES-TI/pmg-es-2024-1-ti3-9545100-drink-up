@@ -1,3 +1,23 @@
+const fetch = require('node-fetch');
+
+const productId = window.location.search.slice(5).trim();
+
+fetch(`/produtos/${productId}`)
+  .then((response) => response.json())
+  .then((produto) => {
+    // Atualize os elementos HTML com os dados do produto
+    document.querySelector('h1').textContent = `${produto.nome} ${produto.tam_garrafa}ml`;
+    document.querySelector('h3').textContent = `R$ ${produto.valor}`;
+    document.querySelector('p').textContent = produto.descricao;
+
+    // Atualize a imagem do produto
+    const productImage = document.querySelector('#imagem img');
+    productImage.src = produto.imagem;
+    productImage.alt = produto.nome;
+  });
+
+  
+//Botões
 const value = document.getElementById('value');
 const plusbutton = document.getElementById('plus');
 const minusbutton = document.getElementById('minus');
