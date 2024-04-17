@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 const SECRET = 'drinkupTIS3';
 
-const autenticacao = (perfilUsuario) => (req, res, next) => {
+const autenticacao = (requerAutenticacao) => (req, res, next) => {
   // Se a rota não exigir autenticação, permitir o acesso sem token
-  if (!req.route.authenticated) {
+  if (!requerAutenticacao) {
     return next();
   }
 
@@ -20,11 +20,7 @@ const autenticacao = (perfilUsuario) => (req, res, next) => {
     req.id = decoded.id;
     req.perfil = decoded.perfil;
     req.status = decoded.status;
-
-    // Verificação do perfil e status do usuário
-    if (req.route.authenticated && (req.perfil !== perfilUsuario || req.status !== '1')) {
-      return res.status(403).end(); // Acesso negado
-    }
+    
     next();
   });
 };
