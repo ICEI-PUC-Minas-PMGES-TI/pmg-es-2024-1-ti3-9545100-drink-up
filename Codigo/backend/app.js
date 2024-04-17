@@ -11,13 +11,6 @@ const estoqueRoutes = require('./routes/estoqueRoutes');
 const app = express();
 const PORT = 3000;
 
-// Configuração de sessão
-app.use(session({
-  secret: 'drinkupTIS3', //Aparentemente obrigatório
-  resave: false,
-  saveUninitialized: true
-}));
-
 app.use(express.json());
 app.use(cors());
 
@@ -31,3 +24,4 @@ app.use(estoqueRoutes);
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
