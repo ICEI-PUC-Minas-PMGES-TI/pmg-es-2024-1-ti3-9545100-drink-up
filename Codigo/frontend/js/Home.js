@@ -34,6 +34,13 @@ function displayProducts(produtos, productList) {
     });
 }
 
-function buyProduct(productId) {
-    // faltando implementar o carrinho
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.buy-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const productId = this.dataset.id; 
+            window.location.href = `detalhes-produto.html?id=${productId}`;
+        });
+    });
+});
+
