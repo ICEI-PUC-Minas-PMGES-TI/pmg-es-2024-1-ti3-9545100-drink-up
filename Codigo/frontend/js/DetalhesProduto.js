@@ -1,8 +1,9 @@
+document.addEventListener("DOMContentLoaded", function () {
 const fetch = require('node-fetch');
 
 const productId = window.location.search.slice(5).trim();
 
-fetch(`/produtos/${productId}`)
+fetch(`http://localhost:3000/produtos/${productId}`)
   .then((response) => response.json())
   .then((produto) => {
     // Atualize os elementos HTML com os dados do produto
@@ -15,7 +16,7 @@ fetch(`/produtos/${productId}`)
     productImage.src = produto.imagem;
     productImage.alt = produto.nome;
   });
-
+});
   
 //Botões
 const value = document.getElementById('value');
