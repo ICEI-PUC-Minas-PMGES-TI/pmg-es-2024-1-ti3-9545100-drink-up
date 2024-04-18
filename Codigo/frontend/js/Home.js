@@ -1,7 +1,5 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const baseUrl = 'http://localhost:3000';
-
     fetch(`${baseUrl}/produtos`)
         .then(response => response.json())
         .then(produtos => {
@@ -9,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const productList = document.getElementById('product-list');
             if (productList) {
                 displayProducts(produtos, productList);
+                addEventListeners();
             } else {
                 console.error('Nenhum produto encontrado!');
             }
@@ -22,19 +21,19 @@ function displayProducts(produtos, productList) {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
-        <img src="${product.url_imagem}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
+            <img src="${product.url_imagem}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
             <div class="product-description">
                 <h4>${product.nome}</h4>
                 <p>${product.descricao}</p>
                 <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                <button onclick="buyProduct(${product.id})" class="buy-button">Comprar</button>
+                <button data-id="${product.id}" class="buy-button">Comprar</button>
             </div>
         `;
         productList.appendChild(productCard);
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function addEventListeners() {
     const buttons = document.querySelectorAll('.buy-button');
     buttons.forEach(button => {
         button.addEventListener('click', function(event) {
@@ -42,5 +41,4 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = `detalhes-produto.html?id=${productId}`;
         });
     });
-});
-
+}
