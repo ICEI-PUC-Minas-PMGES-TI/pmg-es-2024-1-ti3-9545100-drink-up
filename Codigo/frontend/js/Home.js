@@ -38,7 +38,7 @@ function addEventListeners() {
     buttons.forEach(button => {
         button.addEventListener('click', function(event) {
             const productId = this.dataset.id; 
-            window.location.href = `detalhes-produto.html?id=${productId}`;
+            window.location.href = `DetalhesProduto.html?id=${productId}`;
         });
     });
 }
