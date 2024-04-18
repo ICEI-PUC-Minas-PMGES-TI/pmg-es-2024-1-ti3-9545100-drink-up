@@ -1,3 +1,5 @@
+<!--Não é esperado que esta página exiba qualquer item antes que seja selecionada a categoria a ser filtrada. Caso necessário, isso poderá ser revisto no futuro-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +13,11 @@
     <div class="navbar">
         <a class="navbar-brand" href="#"><img src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
         <div class="campo-busca">
-            <input type="text" class="input" placeholder="Busca por categoria">
+            <select id="categoriaSelect">
+                <option value="">Selecione uma categoria</option>
+            </select>
             <button class="button-busca">Buscar</button>
-        </div>
+        </div>        
         <button class="button-NovoProduto" onclick="window.location.href='CadastroBebidas.html';">Novo produto
             <button class="button-usuario">
                 <span class="material-symbols-outlined">person</span>
