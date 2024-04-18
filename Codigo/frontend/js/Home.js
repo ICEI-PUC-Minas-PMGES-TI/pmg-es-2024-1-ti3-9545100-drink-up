@@ -26,7 +26,7 @@ function displayProducts(produtos, productList) {
                 <h4>${product.nome}</h4>
                 <p>${product.descricao}</p>
                 <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                <button data-id="${product.id}" class="buy-button">Comprar</button>
+                <button data-id="${product.id}" class="botao-comprar">Comprar</button>
             </div>
         `;
         productList.appendChild(productCard);
@@ -34,7 +34,7 @@ function displayProducts(produtos, productList) {
 }
 
 function addEventListeners() {
-    const buttons = document.querySelectorAll('.buy-button');
+    const buttons = document.querySelectorAll('.botao-comprar');
     buttons.forEach(button => {
         button.addEventListener('click', function(event) {
             const productId = this.dataset.id; 
