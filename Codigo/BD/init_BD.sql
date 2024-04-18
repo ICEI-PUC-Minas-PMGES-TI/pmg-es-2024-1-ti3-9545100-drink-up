@@ -144,3 +144,12 @@ INSERT INTO tb_usuario (email, senha, status, perfil) VALUES ('pedro@email.com',
 INSERT INTO tb_endereco (logradouro, numero, bairro, complemento, uf, cep) VALUES ('Rua Exemplo', 122, 'Bairro Exemplo', 'Complemento Exemplo', 'MG', '01237667');
 INSERT INTO tb_cliente (nome, cpf, data_nascimento, telefone, id_usuario, id_endereco) VALUES ('Pedro', '123.423.789-10', '1990-01-01', '(11) 1564-5678', 2, 2);
 INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, id_imagem, id_categoria) VALUES ('Nome do Produto', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 1, 2);
+
+/*Inserts para testar página de HOME, ESTOQUE E DETALHEPEDIDO*/
+
+INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Teste Teste Teste', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
+INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Coca Colaaaa', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
+INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Pepsiiiiii', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
+INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Guaranaaa', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
+
+
