@@ -1,0 +1,189 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+  }
+  .header {
+    background-color: #f2c029;
+    padding: 24px 20px;
+    display: flex; /* Ativa flexbox no header */
+    justify-content: space-between; /* Separa os itens para cada extremidade */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.header img {
+    height: 40px;
+}
+
+.user-icon {
+    height: 30px; /* Ajuste para o ícone do usuário */
+}
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tfoot td {
+    font-weight: bold;
+  }
+  
+  tfoot td:first-child {
+    text-align: right;
+  }
+  
+  tfoot td:nth-child(2),
+  tbody td:nth-child(2) {
+    text-align: center;
+  }
+  
+  tfoot td:nth-child(3),
+  tbody td:nth-child(3) {
+    text-align: center;
+  }
+  
+  tfoot td:nth-child(4),
+  tbody td:nth-child(4) {
+    text-align: right;
+  }
+  
+  tfoot td:last-child,
+  tbody td:last-child {
+    text-align: center;
+  }
+  
+  tfoot {
+    font-size: 1.2em;
+  }
+  
+  tbody tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .quantity-buttons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .quantity-buttons button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      
+      th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      th:first-child,
+      td:first-child {
+        padding-left: 20px;
+      }
+      
+      th:last-child,
+      td:last-child {
+        padding-right: 20px;
+      }
+      
+      tfoot td {
+        font-weight: bold;
+      }
+      
+      tfoot td:first-child {
+        text-align: right;
+      }
+      
+      tfoot td:nth-child(2),
+      tbody td:nth-child(2) {
+        text-align: center;
+      }
+      
+      tfoot td:nth-child(3),
+      tbody td:nth-child(3) {
+        text-align: center;
+      }
+      
+      tfoot td:nth-child(4),
+      tbody td:nth-child(4) {
+        text-align: center;
+      }
+      
+      tfoot td:nth-child(5),
+      tbody td:nth-child(5) {
+        text-align: right;
+      }
+      
+      tfoot td:last-child,
+      tbody td:last-child {
+        text-align: center;
+      }
+      
+      tfoot {
+        font-size: 1.2em;
+      }
+      
+      tbody tr:hover {
+        background-color: #f2f2f2;
+      }
+      
+      .product-image {
+            max-width: 80px;
+            height: auto;
+          
+      }
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .quantity-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .remove-button {
+    background-color: #dc3545;
+  }
+  
+  .remove-button:hover {
+    background-color: #c82333;
+  }

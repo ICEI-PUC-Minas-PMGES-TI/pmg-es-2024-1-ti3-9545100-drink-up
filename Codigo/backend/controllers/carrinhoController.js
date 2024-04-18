@@ -14,7 +14,7 @@ class CarrinhoController{
           res.status(500).json({ message: 'Erro ao adicionar produto no carrinho' });
         }
     }
-
 }
+
 
 module.exports = CarrinhoController;
