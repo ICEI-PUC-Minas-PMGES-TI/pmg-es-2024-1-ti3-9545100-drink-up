@@ -128,6 +128,16 @@ async function atualizarProduto(id, nome, descricao, valor, tamGarrafa, idImagem
   }
 }
 
+async function atualizarEstoque(id, estoqueAtual) {
+  const produto = await Produto.findByPk(id);
+  if (!produto) {
+      throw new Error('Produto não encontrado');
+  }
+  produto.estoque_atual = estoqueAtual;
+  await produto.save();
+  return produto;
+}
+
 async function excluirProduto(id) {
   try {
     const produto = await Produto.findByPk(id);
@@ -149,5 +159,6 @@ module.exports = {
   buscarProdutoPorNome,
   buscarProdutoPorId,
   atualizarProduto,
+  atualizarEstoque,
   excluirProduto
 };
