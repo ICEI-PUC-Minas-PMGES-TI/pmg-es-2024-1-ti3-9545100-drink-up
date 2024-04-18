@@ -16,6 +16,19 @@ class ProdutoController {
     }
   }
 
+ async atualizarEstoqueProduto(req, res) {
+    const { id } = req.params; 
+    const { estoque_atual } = req.body; 
+    try {
+      const produtoAtualizado = await produtoService.atualizarEstoque(id, estoque_atual);
+      res.json({ message: 'Estoque atualizado!', produto: produtoAtualizado });
+    } catch (error) {
+      console.error('Erro em atualizar o estoque:', error);
+      res.status(500).json({ message: 'Erro em atualizar o estoque' });
+    }
+}
+
+
   async buscarProdutoPorNome(req, res) {
     const nome = req.params.nome;
     try {
