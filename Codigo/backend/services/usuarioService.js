@@ -30,9 +30,13 @@ async function login(email, senha) {
     throw new Error('Senha incorreta');
   }
 
+  if (usuario.status !== '1') {
+    throw new Error('Usuario inativo');
+  }
+
   const token = jwt.sign({ id:usuario.id, perfil:usuario.perfil, status:usuario.status }, SECRET);
 
-  return token;
+  return { token, perfil: usuario.perfil };
 }
 
 async function listarTodosUsuarios() {
