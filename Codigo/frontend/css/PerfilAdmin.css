@@ -82,3 +82,11 @@ button {
 .save-btn {
   background-color: #F2C029;
 }
+
+header button{
+  background-color:#F2C029 ;
+}
+
+.button-usuario:hover{
+  color: #424242;
+}

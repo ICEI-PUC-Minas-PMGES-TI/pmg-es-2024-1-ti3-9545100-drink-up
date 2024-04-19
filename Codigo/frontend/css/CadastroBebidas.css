@@ -88,6 +88,14 @@ button {
     margin-left: 10px;
 }
 
+button{
+    background-color:#F2C029 ;
+}
+
+.button-usuario:hover{
+    color: #424242;
+}
+
 .btn {
     padding: 10px 20px;
     border: none;
