@@ -7,7 +7,6 @@ class CarrinhoController{
         try {
             const { listaProdutos } = req.body;
             const carrinho = await carrinhoService.adicionarCarrinho(listaProdutos);
-            console.log('\n\nCriou certo hehehe');
             res.status(201).json(carrinho);
         } catch (error) {
           console.error('Erro ao adicionar produto no carrinho:', error);
