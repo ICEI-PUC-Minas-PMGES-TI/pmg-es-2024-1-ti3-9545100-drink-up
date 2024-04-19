@@ -26,27 +26,15 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><img src="" alt="Produto" class="product-image"></td>
-                <td>Produto 1</td>
-                <td>R$ 50,00</td>
-                <td>
-                  <div class="quantity-buttons">
-                    <button class="decrease-button">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increase-button">+</button>
-                  </div>
-                </td>
-                <td>
-                  <button class="remove-button">Remover</button>
-                </td>
-              </tr>
+            <tbody id="carrinho-body">
+              <!--ITENS DO CARRINHO-->
             </tbody>
             <tfoot>
               <tr>
                 <td colspan="3">Total:</td>
-                <td id="cart-total">R$ 50,00</td>
+                <td id="cart-total">
+                  <!-- TOTAL DO PEDIDO -->
+                </td>
                 <td></td>
               </tr>
               <td colspan="6" class="cart-buttons">
@@ -58,6 +46,6 @@
           </table>
         </div>
       
-        <script src="script.js"></script>
+        <script type="module" src="../js/carrinho.js"></script>
 </body>
 </html>

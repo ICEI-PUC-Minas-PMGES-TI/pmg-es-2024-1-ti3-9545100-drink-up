@@ -140,7 +140,6 @@ function saveProduto() {
   });
 }
 
-
 function loadCategoriaInputSelect() {
   const inputSelect = document.getElementById("categoria");
 
