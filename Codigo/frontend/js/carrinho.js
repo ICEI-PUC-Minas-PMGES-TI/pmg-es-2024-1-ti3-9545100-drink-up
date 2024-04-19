@@ -14,13 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
             <td id="item-value">R$ ${element.valor}</td>
             <td>
                 <div class="quantity-buttons">
-                    <button id="decrease-button${element.id}">-</button>
+                    <button id="decrease-button${element.id}"><i class="fa-solid fa-minus"></i></button>
                     <span class="quantity" id="quantity${element.id}">${element.quant}</span>
-                    <button id="increase-button${element.id}">+</button>
+                    <button id="increase-button${element.id}"><i class="fa-solid fa-plus"></i></button>
                 </div>
             </td>
             <td>
-                <button class="remove-button" id="remove-item${element.id}">Remover</button>
+                <button class="remove-button" id="remove-item${element.id}"><i class="fa-solid fa-trash"></i></button>
             </td>
         </tr>
     `;
