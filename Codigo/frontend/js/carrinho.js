@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let carrinhoHTML = '';
   products.forEach((element) => {
+    //const imageUrl = element.imagem || '../../../img/beer.png'; // verifica se o element de imagem é nulo. Atualmente não funciona pois os testes de banco está passando valores fictícios. Deverá ser adaptado.
+    const imageUrl = '../../../img/beer.png';
     carrinhoHTML += `
         <tr>
-            <td><img src="" alt="Produto" class="product-image"></td>
+        <td><img src="${imageUrl}" alt="Produto" class="product-image"></td>
             <td>${element.nome}</td>
             <td id="item-value">R$ ${element.valor}</td>
             <td>
@@ -35,10 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
     carrinho.setupCounter(element.quant, element.id);
   })
 
-  /**
-   * Removendo Item do carrinho
-   */
 
+
+  
   let elementsRemoveIcons = document.querySelectorAll('[id^="remove-item"]');
 
   elementsRemoveIcons.forEach((element) => {
