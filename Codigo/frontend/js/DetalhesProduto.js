@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       document.querySelector("p").textContent = produto.descricao;
 
       const productImage = document.querySelector("#imagem img");
-      productImage.src = produto.imagem;
-      productImage.alt = produto.nome;
+            productImage.src = produto.imagem || '../../../img/beer.png';  
+            productImage.alt = produto.nome;
 
       return produto;
     })
