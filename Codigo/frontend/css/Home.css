@@ -2,7 +2,7 @@
     background-color: #F2C029;
     padding: 24px 20px;
     display: flex; 
-    justify-content: space-between; 
+    justify-content: space-around; 
     align-items: center; 
     height: 95px; 
   }
