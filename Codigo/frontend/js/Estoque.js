@@ -2,6 +2,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const baseUrl = 'http://localhost:3000';
 
 
+    fetch(`${baseUrl}/produtos`) 
+    .then(response => response.json())
+    .then(produtos => {
+        let filteredProdutos = produtos;
+        if (selectedCategoria) {
+         filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
+         }
+        const tbody = document.querySelector('.tabela tbody');
+        tbody.innerHTML = ''; 
+        filteredProdutos.forEach(produto => {
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-id', produto.id);
+            tr.innerHTML = `<td>${produto.nome}</td>
+                            <td>${produto.descricao}</td>
+                            <td class="quantidade">${produto.estoque_atual}</td>  
+                            <td><button class="adicionar">➕</button></td>
+                            <td><button class="remover">➖</button></td>`;
+            tbody.appendChild(tr);
+        });
+        addEventListenersToButtons();
+    })
+    .catch(error => console.error('Erro ao puxar produtos do banco', error));
+      });
+
+
+
+
     fetch(`${baseUrl}/categorias`)
        .then(response => response.json())
        .then(categorias => {
@@ -18,31 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
    document.querySelector('.button-busca').addEventListener('click', function() {
-       const selectedCategoria = document.getElementById('categoriaSelect').value;
-
-      fetch(`${baseUrl}/produtos`) 
-       .then(response => response.json())
-       .then(produtos => {
-           let filteredProdutos = produtos;
-           if (selectedCategoria) {
-            filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
-            }
-           const tbody = document.querySelector('.tabela tbody');
-           tbody.innerHTML = ''; 
-           filteredProdutos.forEach(produto => {
-               const tr = document.createElement('tr');
-               tr.setAttribute('data-id', produto.id);
-               tr.innerHTML = `<td>${produto.nome}</td>
-                               <td>${produto.descricao}</td>
-                               <td class="quantidade">${produto.estoque_atual}</td>  
-                               <td><button class="adicionar">➕</button></td>
-                               <td><button class="remover">➖</button></td>`;
-               tbody.appendChild(tr);
-           });
-           addEventListenersToButtons();
-       })
-       .catch(error => console.error('Erro ao puxar produtos do banco', error));
-         });
+   const selectedCategoria = document.getElementById('categoriaSelect').value;
 
 
 
