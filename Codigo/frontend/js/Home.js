@@ -9,7 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`${baseUrl}/produtos`)
         .then(response => response.json())
         .then(produtos => {
-            let filteredProdutos = filtroCategoria ? produtos.filter(produto => produto.categoria_id == filtroCategoria) : produtos;
+            if (filtroCategoria) {
+                let filteredProdutos;
+                filteredProdutos = produtos.filter(produto => produto.id_categoria && produto.id_categoria.id == filtroCategoria);
+            } else {
+                filteredProdutos = produtos;
+            }
             const productList = document.getElementById('product-list');
             productList.innerHTML = '';
             filteredProdutos.forEach(product => {
