@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const baseUrl = 'http://localhost:3000';
 
 
+    function carregarProdutos(filtroCategoria) {
     fetch(`${baseUrl}/produtos`) 
     .then(response => response.json())
     .then(produtos => {
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addEventListenersToButtons();
     })
     .catch(error => console.error('Erro ao puxar produtos do banco', error));
+}
       
 
 
@@ -39,12 +41,15 @@ document.addEventListener('DOMContentLoaded', function () {
                option.textContent = categoria.descricao; 
                categoriaSelect.appendChild(option);
            });
+           carregarProdutos();
        })
        .catch(error => console.error('Erro ao carregar categorias:', error));
 
 
+
    document.querySelector('.button-busca').addEventListener('click', function() {
    const selectedCategoria = document.getElementById('categoriaSelect').value;
+   carregarProdutos(selectedCategoria);
 
 
 });
