@@ -19,15 +19,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
    document.querySelector('.button-busca').addEventListener('click', function() {
        const selectedCategoria = document.getElementById('categoriaSelect').value;
-       if (!selectedCategoria) {
-           alert('selecione a categoria que deseja filtrar!');
-           return;
-       }
 
       fetch(`${baseUrl}/produtos`) 
        .then(response => response.json())
        .then(produtos => {
-           const filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
+           let filteredProdutos = produtos;
+           if (selectedCategoria) {
+            filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
+            }
            const tbody = document.querySelector('.tabela tbody');
            tbody.innerHTML = ''; 
            filteredProdutos.forEach(produto => {
