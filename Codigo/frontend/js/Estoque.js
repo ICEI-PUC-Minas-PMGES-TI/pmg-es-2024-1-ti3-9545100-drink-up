@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addEventListenersToButtons();
     })
     .catch(error => console.error('Erro ao puxar produtos do banco', error));
-      });
+      
 
 
 
@@ -43,9 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
        .catch(error => console.error('Erro ao carregar categorias:', error));
 
 
-
    document.querySelector('.button-busca').addEventListener('click', function() {
    const selectedCategoria = document.getElementById('categoriaSelect').value;
+
+
+});
 
 
 
