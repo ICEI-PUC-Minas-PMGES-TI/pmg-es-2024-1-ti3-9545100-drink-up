@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`${baseUrl}/produtos`)
         .then(response => response.json())
         .then(produtos => {
+            let filteredProdutos;
             if (filtroCategoria) {
-                let filteredProdutos;
                 filteredProdutos = produtos.filter(produto => produto.id_categoria && produto.id_categoria.id == filtroCategoria);
             } else {
                 filteredProdutos = produtos;
