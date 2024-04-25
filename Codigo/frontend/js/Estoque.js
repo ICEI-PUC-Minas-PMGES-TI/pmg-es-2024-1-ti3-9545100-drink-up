@@ -6,10 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(`${baseUrl}/produtos`) 
     .then(response => response.json())
     .then(produtos => {
-        let filteredProdutos = produtos;
-        if (selectedCategoria) {
-         filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
-         }
+        let filteredProdutos = filtroCategoria ? produtos.filter(produto => produto.id_categoria.id == filtroCategoria) : produtos;
         const tbody = document.querySelector('.tabela tbody');
         tbody.innerHTML = ''; 
         filteredProdutos.forEach(produto => {
