@@ -94,3 +94,35 @@ body{
     bottom: 0;
     width: 100%;
 }
+
+
+#about-us {
+    display: flex;
+    align-items: center;
+    padding: 50px 10%;
+    background: #f4f4f4;
+    min-height: 400px;
+}
+
+#about-us .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#about-us .logo {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#about-us .logo img {
+    width: 300px; 
+    height: auto;
+}
+
+#about-us .description {
+    flex: 2;
+    text-align: right;
+}
+
