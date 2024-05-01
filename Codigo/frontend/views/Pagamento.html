@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endereço de Entrega</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../css/Pagamento.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <button onclick="location.href='Home.html'">
+        <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      </button>
+      <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
+        <span class="material-symbols-outlined">person</span>
+      </button>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="title">
+          <h2>FINALIZAR COMPRA</h3>
+        </div>
+        <div class="subtitle">
+            <h3>Pagamento</h4>
+        </div>
+        <div class="qrcode">
+            <h3>QR CODE</h4>
+        </div>
+        <div class="qrcode-img">
+            <img src="/Codigo/frontend/assets/img/qrcode-finalizarcompra.jpg" alt="QRCODE">
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label for="codigocc" class="form-label">Coigo Copia e Cola</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="codigocc"
+                  value="00020101021126330014br.gov.bcb.pix0111150874376215204000053039865802BR5918BERNARDO R MARTINS6009NOVA LIMA62070503***63045CE0"
+                  required
+                  disabled
+                  
+                />
+        </div>
+      </div>
+      <div class="button">
+        <button type="button" class="btn" id="btncadastrar">Finalizar</button>
+      </div>
+    </main>
+
+    <script src="../js/EndereçoEntrega.js"></script>
+     
+  </body>
+</html>
