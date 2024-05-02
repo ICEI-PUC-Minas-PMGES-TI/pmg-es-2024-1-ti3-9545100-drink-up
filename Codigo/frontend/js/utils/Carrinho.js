@@ -125,17 +125,19 @@ export class Carrinho {
           this.increase(produtoId);
         };
       
-        let decreaseButton = document.getElementById(`decrease-button${produtoId}`);
-        let increaseButton = document.getElementById(`increase-button${produtoId}`);
-      
-        decreaseButton.addEventListener("click", () => {
-          handleDecrease(produtoId);
-          this.updateCarrinhoTotalValue();
-        });
-      
-        increaseButton.addEventListener("click", () => {
-          handleIncrease(produtoId);
-          this.updateCarrinhoTotalValue();
-        });
+        if (document.getElementById(`decrease-button${produtoId}`) && document.getElementById(`increase-button${produtoId}`)) {
+            let decreaseButton = document.getElementById(`decrease-button${produtoId}`);
+            let increaseButton = document.getElementById(`increase-button${produtoId}`);
+
+            decreaseButton.addEventListener("click", () => {
+                handleDecrease(produtoId);
+                this.updateCarrinhoTotalValue();
+            });
+        
+            increaseButton.addEventListener("click", () => {
+                handleIncrease(produtoId);
+                this.updateCarrinhoTotalValue();
+            });
+        }
       }
 }

@@ -32,4 +32,35 @@ document.addEventListener("DOMContentLoaded", function () {
     carrinho.setupCounter(element.quant, element.id);
   })
 
+  document.getElementById('continuar-button').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    let requestBody = {
+      itens_do_carrinho: products,
+      endereco: null,
+      id_cliente: 1
+    };
+
+    fetch("http://localhost:3000/pedidos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    })
+    .then((response) => {
+
+      if (!response.ok) {
+         alert("Ocorreu um erro ao processar o seu pedido! Entre em contato com a loja!");
+      }
+
+      carrinho.limparCarrinho();
+      alert("Pedido Registrado com sucesso! Realize o pagamento do seu pedido e anexe o comprovante via WhatsApp!");
+      window.location.href = "./EnderecoEntrega.html";
+    })
+    .catch((error) => {
+      console.error("FUDEU", error);
+    });
+  });
+
 });

@@ -8,6 +8,8 @@ const produtoRoutes = require('./routes/produtoRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const estoqueRoutes = require('./routes/estoqueRoutes');
 const carrinhoRoutes = require('./routes/carrinhoRoutes');
+const freteRoutes = require ('./routes/freteRoutes');
+const pedidoRoutes = require ('./routes/pedidoRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -22,7 +24,8 @@ app.use(produtoRoutes);
 app.use(categoriaRoutes);
 app.use(estoqueRoutes);
 app.use(carrinhoRoutes);
-
+app.use(freteRoutes);
+app.use(pedidoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);

@@ -51,7 +51,7 @@ class ProdutoController {
     }
   }
 
-  async listarTodosProdutos(req, res) {
+  async listarTodosProdutos(req, res) { 
     try {
       const produtos = await produtoService.listarTodosProdutos();
       res.json(produtos);

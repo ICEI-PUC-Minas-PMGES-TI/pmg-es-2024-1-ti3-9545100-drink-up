@@ -30,3 +30,4 @@ function abrirValidacao() {
     // Fechar o popup de validação
     document.getElementById('validacao-popup').style.display = 'none';
     }
+
