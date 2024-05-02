@@ -110,19 +110,38 @@ CREATE TABLE IF NOT EXISTS tb_estoque (
     FOREIGN KEY (id_produto) REFERENCES tb_produto(id)
 );
 
-CREATE TABLE IF NOT EXISTS tb_itempedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    qnt_itens int not null,
-    valor_uni int not null,
-    FOREIGN KEY (id_produto) REFERENCES tb_produto(id)
 
+CREATE TABLE tb_item_pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    quantidade int NOT NULL, 
+    data_criacao datetime not null,
+    valor_item DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    id_produto INT NOT NULL, 
+    id_pedido INT NOT NULL,  
+
+    CONSTRAINT fk_id_produto FOREIGN KEY (id_produto) REFERENCES Produto(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_id_pedido FOREIGN KEY (id_pedido) REFERENCES Pedido(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS tb_pedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    valor_total int not null,
-    data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_itempedido) REFERENCES tb_itempedido(id)
+CREATE TABLE tb_pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Chave primária com incremento automático
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP, -- Data de criação do pedido com valor padrão de data atual
+    valor_pedido DECIMAL(10, 2) NOT NULL DEFAULT 0.00, -- Valor do pedido com precisão decimal
+    id_frete INT NOT NULL, -- Chave estrangeira para a tabela Frete
+    id_cliente INT NOT NULL, -- Chave estrangeira para a tabela Cliente
+    id_endereco INT NOT NULL, -- Chave estrangeira para a tabela Endereco
+    
+    -- Definição de chaves estrangeiras
+    CONSTRAINT fk_id_frete FOREIGN KEY (id_frete) REFERENCES Frete(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_id_cliente FOREIGN KEY (id_cliente) REFERENCES Cliente(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_id_endereco FOREIGN KEY (id_endereco) REFERENCES Endereco(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+create table if not exists tb_frete (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+frete_fixo int not null,
+frete_gratis int not null
 );
 
 
@@ -135,13 +154,17 @@ SELECT * FROM tb_cliente;
 SELECT * FROM tb_produto;
 SELECT * FROM tb_usuario;
 SELECT * FROM tb_estoque;
+SELECT * FROM tb_frete;
+SELECT * FROM tb_item_pedido;
+SELECT * FROM tb_pedido;
+
 
 
 
 /*INSERTS*/
 INSERT INTO tb_categoria (descricao) VALUES ('cerveja');
-INSERT INTO tb_usuario (email, senha, status, perfil) VALUES ('pedro@email.com', '123', '2', 'cliente');
-INSERT INTO tb_endereco (logradouro, numero, bairro, complemento, uf, cep) VALUES ('Rua Exemplo', 122, 'Bairro Exemplo', 'Complemento Exemplo', 'MG', '01237667');
+INSERT INTO tb_usuario (email, senha, status, perfil) VALUES ('lucio@email.com', '123', '1', 'admin');
+INSERT INTO tb_endereco (logradouro, numero, bairro, complemento, uf, cep) VALUES ('Rua tals', 122, 'Bairro Exemplo', 'Complemento Exemplo', 'MG', '01237667');
 INSERT INTO tb_cliente (nome, cpf, data_nascimento, telefone, id_usuario, id_endereco) VALUES ('Pedro', '123.423.789-10', '1990-01-01', '(11) 1564-5678', 2, 2);
 INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, id_imagem, id_categoria) VALUES ('Nome do Produto', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 1, 2);
 
@@ -152,4 +175,7 @@ INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_i
 INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Pepsiiiiii', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
 INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Guaranaaa', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
 
+INSERT INTO tb_frete VALUES (1,30, 300);
 
+ALTER TABLE tb_item_pedido
+ADD COLUMN data_criacao DATETIME NOT NULL;
