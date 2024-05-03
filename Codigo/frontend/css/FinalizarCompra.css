@@ -24,6 +24,7 @@ body {
   
 tbody{
     border: 2px solid #b1b1b1;
+    box-shadow: 2px 2px 2px #b1b1b1;
 }
 
 .subtitle{
@@ -32,8 +33,9 @@ tbody{
 
 .buttons{
     display: flex;
-    justify-content: right;
+    justify-content: center;
     padding-top: 400px;
+    padding-left: 120px;
 }
 
 .continuar-button{
@@ -76,7 +78,7 @@ tbody{
   
   tfoot td:nth-child(2),
   tbody td:nth-child(2) {
-    text-align: left;
+    text-align: center;
   }
   
   tfoot td:nth-child(3),
@@ -195,6 +197,7 @@ tbody{
             height: auto;
           
       }
+
     background-color: #F2C029;
     color: #000000;
     cursor: pointer;
@@ -261,6 +264,7 @@ tbody{
     color: #111;
     padding: 20px;
     width: 900px;
+    padding-top: 60px;
   }
 
   .content {
@@ -268,8 +272,33 @@ tbody{
     padding: 20px;
     padding-left: 100px;
     text-align: justify;
+    padding-top: 60px;
   }
 
   .total{
     width:50px;
+  }
+
+  .espaco-imagem{
+    width: 250px;
+  }
+
+  .thead-products{
+    text-align: left;
+    font-size: larger;
+    width: 250px;
+  }
+
+  .thead-name{
+    width: 216px;
+    opacity: 0.8;
+  }
+
+  .thead-price{
+    width: 268px;
+    opacity: 0.8;
+  }
+
+  .thead-qnt{
+    opacity: 0.8;
   }

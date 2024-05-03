@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <button class="cancel-btn" onclick="cancel()">
                             CANCELAR
                         </button>
-                        <button class="save-btn" onclick="save()">SALVAR</button>
+                        <button class="save-btn" id="salvarDados" onclick="saveDados()">SALVAR</button>
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button class="cancel-btn" onclick="cancel()">
                     CANCELAR
                 </button>
-                <button class="save-btn" onclick="save()">SALVAR</button>
+                <button class="save-btn" id="salvarEndereco" onclick="saveEndereco()">SALVAR</button>
             </div>
             
         </form>
@@ -174,3 +174,88 @@ function fecharPopup() {
     popup.querySelector(".popup-content").innerHTML =
         '<span class="close-popup" onclick="fecharPopup()">&times;</span><h4>Detalhes do Pedido</h4>';
 }
+
+
+function saveEndereco() {
+
+    document.getElementById("salvarEndereco").addEventListener('click', (event) => {
+  
+      event.preventDefault();
+  
+      const formData = {
+        cep: document.getElementById('cep').value,
+        logradouro: document.getElementById('logradouro').value,
+        bairro: document.getElementById('bairro').value,
+        complemento: document.getElementById('complemento').value,
+        numero: document.getElementById('numero').value,
+        cidade: document.getElementById('cidade').value,
+      };
+
+      const usuarioLogadoId = localStorage.getItem('usuarioId');
+      const url = `http://localhost:3000/clientes/${usuarioLogadoId}`; 
+  
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Address updated successfully
+            console.log("Endereço do usuário atualizado!");
+            // Display success message to the user (optional)
+            // Potentially reload the page to reflect changes (optional)
+          } else {
+            console.error('Erro ao atualizar o endereço:', response.statusText);
+            // Display error message to the user
+          }
+        })
+        .catch((error) => {
+          console.error('Erro ao atualizar o endereço:', error);
+          // Display error message to the user
+        });
+    });
+}
+
+
+  function saveDados() {
+
+    document.getElementById("salvarDados").addEventListener('click', (event) => {
+  
+      event.preventDefault();
+  
+      const formData = {
+        cpf: document.getElementById('cpf').value,
+        nome: document.getElementById('full-name').value,
+        dataNascimento: document.getElementById('birthdate').value,
+        email: document.getElementById('email').value, // Assuming 'email' is in 'usuario' object
+      };
+
+      const usuarioLogadoId = localStorage.getItem('usuarioId');
+      const url = `http://localhost:3000/clientes/${usuarioLogadoId}`; 
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+        .then((response) => {
+          if (response.ok) {
+            // User data updated successfully
+            console.log("Dados do usuário atualizados!");
+            // Display success message to the user (optional)
+            // Potentially reload the page to reflect changes (optional)
+          } else {
+            console.error('Erro ao atualizar os dados do usuário:', response.statusText);
+            // Display error message to the user
+          }
+        })
+        .catch((error) => {
+          console.error('Erro ao atualizar os dados do usuário:', error);
+          // Display error message to the user
+        });
+    });
+  }

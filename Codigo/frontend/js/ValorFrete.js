@@ -1,19 +1,26 @@
-const freteGratisOriginal = document.getElementById('frete-gratis').value;
-const freteFixoOriginal = document.getElementById('frete-fixo').value;
+// const bodyParser = require("body-parser");
+
 
 
 // Carrega valores padrão ao carregar a página
-window.onload = function() {
-fetchFreteValues()
+document.addEventListener("DOMContentLoaded", function() {
+  const freteGratisOriginal = document.getElementById('frete-gratis');
+  const freteFixoOriginal = document.getElementById('frete-fixo');
+
+  console.log("dg")
   // Buscar os valores de frete padrão
-  fetch('/')
+  fetch('http://localhost:3000/fretes')
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       // Definir os valores obtidos nos campos de entrada
-      freteGratisInput.value = data.freteGratis;
-      freteFixoInput.value = data.freteFixo;    
+      freteGratisOriginal.value = data.frete_gratis;
+      freteFixoOriginal.value = data.frete_fixo; 
+      
     })
-};
+
+console.log("frete");
+});
 
 function abrirValidacao() {
     // Mostrar o popup de validação
@@ -22,10 +29,17 @@ function abrirValidacao() {
   
   function salvarFreteValues() {
     // Obter os novos valores de frete dos campos de entrada
-    const freteGratis = document.getElementById('frete-gratis').value;
-    const freteFixo = document.getElementById('frete-fixo').value;
+    const frete_gratis = document.getElementById('frete-gratis').value;
+    const frete_fixo = document.getElementById('frete-fixo').value;
+    const requestOptions = {
+      method: "PUT", 
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({frete_gratis, frete_fixo}),
+    }
+    fetch('http://localhost:3000/fretes', requestOptions)
+    fecharValidacao()
   }
-  
+
   function fecharValidacao() {
     // Fechar o popup de validação
     document.getElementById('validacao-popup').style.display = 'none';

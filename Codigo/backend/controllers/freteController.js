@@ -14,7 +14,7 @@ const freteController = {
 
 
   async atualizarFrete(req, res) {
-
+    console.log(req.body)
     const { frete_fixo, frete_gratis } = req.body;
     try {
       const frete = await freteService.atualizarFrete(frete_fixo, frete_gratis);

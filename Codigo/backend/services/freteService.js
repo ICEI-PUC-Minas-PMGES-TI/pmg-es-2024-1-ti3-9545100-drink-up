@@ -27,7 +27,7 @@ async function calcularFrete(valorCarrinho) {
 async function listarFretes() {
     try {
         // Retorna todas as configurações de frete da tabela
-        const frete = await Frete.findAll();
+        const frete = await Frete.findByPk(1);
         return frete;
     } catch (error) {
         console.error('Erro ao listar fretes:', error);
@@ -37,23 +37,28 @@ async function listarFretes() {
 
 async function atualizarFrete(frete_fixo, frete_gratis) {
     try {
-    id = 1;
-    const frete = await Frete.findByPk(id);
-    if (!frete) {
-      throw new Error('Usuário não encontrado');
+    Frete.findByPk(1) // Substitua idDoRegistro pelo ID do registro que deseja atualizar
+  .then(registroEncontrado => {
+    if (registroEncontrado) {
+      // Atualize os valores do registro encontrado
+      registroEncontrado.update({
+        frete_fixo: frete_fixo,
+        frete_gratis: frete_gratis,
+      })
+      .then(registroAtualizado => {
+        console.log('Registro atualizado:', registroAtualizado.toJSON());
+      })
+      .catch(error => {
+        console.error('Erro ao atualizar registro:', error);
+      });
+    } else {
+      console.log('Registro não encontrado.');
     }
-    // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
-
-    if (frete_fixo) {
-      frete.frete_fixo = frete_fixo;
-    }
-    if (frete_gratis) {
-      frete.frete_gratis = frete_gratis;
-    }
-
-    await frete.save();
-    return frete;
-
+  })
+  .catch(error => {
+    console.error('Erro ao encontrar registro:', error);
+  });
+    
     } catch (error) {
         console.error('Erro ao atualizar o frete fixo:', error);
         throw new Error('Erro ao atualizar o frete fixo');
