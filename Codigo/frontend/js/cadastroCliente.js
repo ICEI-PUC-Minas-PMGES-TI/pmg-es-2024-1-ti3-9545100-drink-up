@@ -30,12 +30,53 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
         return;
     }
 
-    if (isNaN(Date.parse(dataNascimento))) {
-        alert('insira uma data de nascimento válida.');
+    if (isNaN(Date.parse(dataNascimento)) || new Date(dataNascimento) > new Date()) {
+        alert('Insira uma data de nascimento válida e que não seja futura.');
         return;
     } else {
         dataNascimento = new Date(dataNascimento).toISOString().split('T')[0];
     }
+
+    if (cpf.length !== 11 || !cpf.split('').every(c => !isNaN(parseInt(c)))) {
+        alert('Valor de CPF inválido!');
+        return;
+    }
+
+    if (cep.length !== 8 || !cep.split('').every(c => !isNaN(parseInt(c)))) {
+        alert('Valor de CEP inválido!');
+        return;
+    }
+
+    if (!telefone.split('').every(c => !isNaN(parseInt(c)))) {
+        alert('Número de telefone inválido!');
+        return;
+    }
+
+    if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+        alert('e-mail inválido!');
+        return;
+    }
+
+    if (senha.length < 8) {
+        alert('senha deve ter pelo menos 8 caracteres.');
+        return;
+    }
+
+    if (!cidade.trim()) {
+        alert('cidade é obrigatório.');
+        return;
+    }
+
+    if (!rua.trim()) {
+        alert('rua é obrigatório.');
+        return;
+    }
+
+    if (!bairro.trim()) {
+        alert('bairro é obrigatório.');
+        return;
+    }
+
 
     const endereco = { rua, numero, complemento, bairro, cidade, cep, uf };
     const usuario = { email, senha };
