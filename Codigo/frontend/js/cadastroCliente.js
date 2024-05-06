@@ -15,6 +15,12 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
     const telefone = document.getElementById('telefone').value;
     const senha = document.getElementById('senha').value;
 
+
+    if (!nome.trim()) {
+        alert('Nome é obrigatório!');
+        return;
+    }
+
     if (!numero) {
         alert('insira um número válido.');
         return;
@@ -47,8 +53,8 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
         return;
     }
 
-    if (!telefone.split('').every(c => !isNaN(parseInt(c)))) {
-        alert('Número de telefone inválido!');
+    if (!telefone.trim() || isNaN(parseInt(telefone)) || telefone.trim().length > 11) {
+        alert('Telefone inválido!');
         return;
     }
 
