@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Saida de Bebida</title>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+        <link rel="stylesheet" href="../css/SaidadeBebida.css" />
+    </head>
+    <body>
+        <header class="header">
+            <button onclick="location.href='Home.html'">
+                <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo"/>
+            </button>
+            <button
+                class="button-usuario"
+                onclick="location.href='PerfilAdmin.html'"
+            >
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <button onclick="location.reload()">MINHA CONTA</button>
+                <button onclick="location.href='Estoque.html'">ESTOQUE</button>
+                <button onclick="location.href='CadastroBebidas.html'">CADASTRO DE BEBIDA</button>
+                <button onclick="location.href='ListagemDeBebidas.html'">LISTA DE BEBIDAS</button>
+                <button onclick="location.href='ValorFrete.html'">FRETE</button>
+                <button onclick="location.href='SaidadeBebida.html'">SAIDA DE BEBIDAS</button>
+            </aside>
+
+            <!-- Main -->
+            <main class="content">
+                <h3>SAIDA DE BEBIDAS</h3>
+                <table class="saida-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Qnt</th>
+                            <th>Valor</th>
+                            <th>Nome da Bebida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01/01/2024</td>
+                            <td>Venda</td>
+                            <td>1</td>
+                            <td>R$ 100,00</td>
+                            <td>Bebida</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </div>
+
+        <!-- Icons -->
+        <script
+            src="https://kit.fontawesome.com/559e095fe9.js"
+            crossorigin="anonymous"
+        ></script>
+
+    </body>
+</html>
