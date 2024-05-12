@@ -3,26 +3,20 @@ const Cliente = require('../models/Cliente');
 const Pedido = require('../models/Pedido');
 const Endereco = require('../models/Endereco');
 const ItemPedido = require('../models/ItemPedido');
-const Usuario = require('../services/clienteService');
+const clienteService = require('../services/clienteService');
 const freteService = require('../services/freteService');
 
 
 async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
   let transaction;
-  let usuarioCriado;
+  let enderecoPedido;
   try {
     //Inicia uma transação passível de rollback
     const db = new Database();
     const sequelize = db.getInstance();
     transaction = await sequelize.transaction();
 
-    //Cria o endereço dentro da transação
-    // if(!endereco){
-    //     const enderecoCriado = await Endereco.create(endereco, { transaction });
-    // }
-
-    // Cria o usuário dentro da transação
-    cliente = await Usuario.buscarClientePorId(id_cliente, { transaction });
+    cliente = await clienteService.buscarClientePorId(id_cliente, { transaction });
 
     const valorTotalPedido = itens_do_carrinho.map(item => item.valor * item.quant).reduce((total, valor) => total + valor , 0);
 
@@ -32,8 +26,8 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
     const pedido = await Pedido.create({
       "id_frete": 1,
       "valor_pedido": (valorTotalPedido + frete),
-      "id_cliente": id_cliente,
-      "id_endereco": cliente.id_endereco, //TODO: Deixar o endereço dinamico na chamada
+      "id_cliente": cliente.id_endereco,
+      "id_endereco": enderecoPedido, //TODO: Deixar o endereço dinamico na chamada
     }, { transaction });
 
     try {
@@ -60,13 +54,34 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
     // Em caso de erro, faz o rollback da transação
     if (transaction) await transaction.rollback();
 
-    // Se houver erro no Pedido, destrua o usuário criado
-    if (usuarioCriado) await Usuario.excluirUsuario(usuarioCriado.id);
-
     console.error('Erro ao criar Pedido:', error);
     throw new Error('Erro ao criar Pedido');
   }
 }
+
+
+async function alterarEnderecoPedido(endereco, id_pedido) {
+  try {
+
+    if (!endereco || !id_pedido) {
+      throw new Error('Endereco não informado corretamente');
+    }
+
+    const enderecoCriado = await Endereco.create(endereco);
+  
+    const pedido = await Pedido.findByPk(id_pedido);
+
+    pedido.id_endereco = enderecoCriado.id;
+
+    await pedido.save();
+    return pedido;
+
+  } catch (error) {
+    console.error('Erro ao alterar endereço:', error);
+    throw new Error('Erro ao alterar endereço');
+  }
+}
+
 
 
 async function buscarPedidoPorCpf(cpf) {
@@ -140,6 +155,7 @@ async function atualizarPedido(id, nome, dataNascimento, telefone, endereco_para
 
 module.exports = {
   criarPedido,
+  alterarEnderecoPedido,
   listarTodosPedidos,
   buscarPedidoPorCpf,
   buscarPedidoPorId,

@@ -1,4 +1,4 @@
-const pedidoService = require('../services/PedidoService');
+const pedidoService = require('../services/pedidoService');
 const Database = require("../models/Database");
 
 
@@ -13,6 +13,19 @@ async function criarPedido(req, res) {
         res.status(500).json({ error: 'Erro ao criar pedido' });
     }
 }
+
+async function alterarEnderecoPedido(req, res) {
+    try {
+        const { id } = req.params;
+        const { endereco } = req.body;
+        const pedidos = await pedidoService.alterarEnderecoPedido(endereco, id);
+        res.json(pedidos);
+    } catch (error) {
+        console.error('Erro ao alterar endereco do pedido:', error);
+        res.status(500).json({ error: 'Erro ao alterar endereco do pedido' });
+    }
+}
+
 
 // Controlador para listar todos os pedidos
 async function listarTodosPedidos(req, res) {
@@ -76,6 +89,7 @@ async function excluirPedido(req, res) {
 
 module.exports = {
     criarPedido,
+    alterarEnderecoPedido,
     listarTodosPedidos,
     buscarPedidoPorId,
     atualizarPedido,
