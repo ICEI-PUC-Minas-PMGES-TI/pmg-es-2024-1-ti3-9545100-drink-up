@@ -18,17 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => { 
-            console.log(data);
 
-            if (!data.error && data.token.perfil=='admin' ) {
-                console.log('teste 1');
-                window.location.href = "../views/PerfilAdmin.html";
-            }
-            else if (!data.error && data.token.perfil=='cliente' ) {
-                console.log('teste 1');
-                window.location.href = "../views/Perfil.html";
-            }
-            
+
+
+            if(!data.error){
+
+                sessionStorage.setItem("authorization", data.token.token);
+                
+                data.token.perfil=='admin'?window.location.href = "../views/PerfilAdmin.html":
+                                           window.location.href = "../views/Perfil.html";
+            }      
         })
         .catch(error => { console.log(error); });
     });
