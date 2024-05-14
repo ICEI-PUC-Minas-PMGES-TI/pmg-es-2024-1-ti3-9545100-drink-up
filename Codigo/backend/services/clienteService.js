@@ -65,7 +65,16 @@ async function buscarClientePorId(id) {
        throw new Error('Erro ao buscar cliente por ID');
     }
 }
-  
+
+async function buscarClientePorIdUsuario(idUsuario) {
+  try {
+    const cliente = await Cliente.findOne({ where: { id_usuario: idUsuario } });
+    return cliente;
+  } catch (error) {
+    console.error('Erro ao buscar cliente por ID de usuário:', error);
+    throw new Error('Erro ao buscar cliente por ID de usuário');
+  }
+}
 
 async function listarTodosClientes() {
     try {
@@ -134,6 +143,7 @@ module.exports = {
   listarTodosClientes,
   buscarClientePorCpf,
   buscarClientePorId,
+  buscarClientePorIdUsuario,
   atualizarCliente,
   excluirCliente
 };
