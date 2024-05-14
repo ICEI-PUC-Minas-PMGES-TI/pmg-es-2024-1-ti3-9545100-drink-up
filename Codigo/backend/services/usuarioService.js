@@ -34,9 +34,9 @@ async function login(email, senha) {
     throw new Error('Usuario inativo');
   }
 
-  const token = jwt.sign({ id:usuario.id, perfil:usuario.perfil, status:usuario.status }, SECRET);
+  const token = jwt.sign({user_id:usuario.id, perfil:usuario.perfil, status:usuario.status, email:usuario.email}, SECRET);
 
-  return { token, perfil: usuario.perfil };
+  return {token};
 }
 
 async function listarTodosUsuarios() {
@@ -92,6 +92,30 @@ async function atualizarUsuario(id, senha, status) {
   }
 }
 
+async function alterarSenha(id, senhaAtual, novaSenha) {
+  try {
+    const usuario = await Usuario.findByPk(id);
+    if (!usuario) {
+      throw new Error('Usuário não encontrado');
+    }
+    // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
+
+    if(usuario.senha == senhaAtual){
+
+      usuario.senha = novaSenha;
+      await usuario.save();
+      return usuario;
+    }
+    else {
+      throw new Error('Senha atual está incorreta');
+    }
+
+  } catch (error) {
+    console.error('Senha atual está incorreta:', error);
+    throw new Error('Senha atual está incorreta');
+  }
+}
+
 async function excluirUsuario(id) {
   try {
     const usuario = await Usuario.findByPk(id);
@@ -113,6 +137,7 @@ module.exports = {
   buscarUsuarioPorEmail,
   buscarUsuarioPorId,
   atualizarUsuario,
+  alterarSenha,
   excluirUsuario,
   login
 };

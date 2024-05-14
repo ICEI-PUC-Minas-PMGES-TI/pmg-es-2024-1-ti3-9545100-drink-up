@@ -13,6 +13,7 @@ router.get('/usuarios', autenticacao(true, 'admin') ,usuarioController.listarTod
 router.get('/usuarios/:id', autenticacao(false, 'admin'), usuarioController.buscarUsuarioPorId);
 router.get('/usuarios/email/:email', autenticacao(false, 'admin'), usuarioController.buscarUsuarioPorEmail);
 router.put('/usuarios/:id', autenticacao(false, 'admin'), usuarioController.atualizarUsuario);
+router.put('/usuarios/alterarSenha/:id', autenticacao(false, 'admin'), usuarioController.alterarSenha);
 router.delete('/usuarios/:id', autenticacao(false, 'admin'), usuarioController.excluirUsuario);
 
 module.exports = router;

@@ -19,7 +19,7 @@ const usuarioController = {
 
     try {
       const token = await usuarioService.login(email, senha);
-      return res.json({token});
+      return res.json(token);
     } catch (error) {
       console.error('Erro ao realizar login:', error);
       return res.status(500).json({ error: 'Erro ao realizar login' });
@@ -73,6 +73,18 @@ const usuarioController = {
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error);
       res.status(500).json({ error: 'Erro ao atualizar usuário ' + error});
+    }
+  },
+
+  async alterarSenha(req, res) {
+    const { id } = req.params;
+    const { senhaAtual, novaSenha } = req.body;
+    try {
+      const usuario = await usuarioService.alterarSenha(id, senhaAtual, novaSenha);
+      res.json(usuario);
+    } catch (error) {
+      console.error('Erro ao alterar senha:', error);
+      res.status(500).json({ error: 'Erro ao alterar senha ' + error});
     }
   },
 
