@@ -19,13 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => { 
 
-
-
             if(!data.error){
+                const token = data.token;
+                const parts = token.split('.');
+                const payload = JSON.parse(atob(parts[1]));
 
-                sessionStorage.setItem("authorization", data.token.token);
+                sessionStorage.setItem("authorization", data.token);
+                sessionStorage.setItem("user_id", payload.user_id);
                 
-                data.token.perfil=='admin'?window.location.href = "../views/PerfilAdmin.html":
+                payload.perfil=='admin'?window.location.href = "../views/PerfilAdmin.html":
                                            window.location.href = "../views/Perfil.html";
             }      
         })
