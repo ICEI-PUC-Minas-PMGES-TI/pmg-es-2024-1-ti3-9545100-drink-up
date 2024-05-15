@@ -29,37 +29,18 @@
    <main>
       <div class="container">
          <div class="row">
-            <div class="col-md-3">
-               <div class="form-container">
-                  <form>
-                     <div class="mb-3" id="imgperfil">
-                        <img src="imgs/imagemperfil.png" alt="Imagem de Perfil">
-                     </div>
-                     <div class="mb-3">
-                        <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario">
-                     </div>
-                     <div class="mb-3">
-                        <label for="descricao" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="descricao" rows="2"></textarea>
-                     </div>
-               </div>
-            </div>
             <div class="col-md-9">
                <div class="form-container dados">
                   <div class="row">
                      <div class="col-md-6">
                         <div class="mb-3">
                            <label for="nome" class="form-label">Nome</label>
+                           <input type="hidden" id="cliente-id" />
                            <input type="text" class="form-control" id="nome">
                         </div>
                         <div class="mb-3">
                            <label for="cpf" class="form-label">CPF</label>
-                           <input type="number" class="form-control" id="cpf">
-                        </div>
-                        <div class="mb-3">
-                           <label for="cidade" class="form-label">Cidade</label>
-                           <input type="text" class="form-control" id="cidade">
+                           <input type="text" class="form-control" id="cpf">
                         </div>
                         <div class="mb-3">
                            <label for="bairro" class="form-label">Bairro</label>
@@ -104,6 +85,7 @@
       </form>
       </div>
    </main>
+   <script src="../js/PerfilCliente.js"></script>
 </body>
 
 
