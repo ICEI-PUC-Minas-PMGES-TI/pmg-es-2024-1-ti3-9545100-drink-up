@@ -49,7 +49,10 @@ async function criarCliente(nome, cpf, dataNascimento, telefone, endereco, usuar
 async function buscarClientePorCpf(cpf) {
     try {
       const cliente = await Cliente.findOne({ where: { cpf } });
-      return cliente;
+      const endereco = await Endereco.findByPk(cliente.id_endereco);
+      const usuario = await Usuario.buscarUsuarioPorId(cliente.id_usuario);
+
+      return {email: usuario.email, cliente, endereco}
     } catch (error) {
       console.error('Erro ao buscar cliente por CPF:', error);
       throw new Error('Erro ao buscar cliente por CPF');
@@ -59,7 +62,10 @@ async function buscarClientePorCpf(cpf) {
 async function buscarClientePorId(id) {
     try {
        const cliente = await Cliente.findByPk(id);
-       return cliente;
+       const endereco = await Endereco.findByPk(cliente.id_endereco);
+       const usuario = await Usuario.buscarUsuarioPorId(cliente.id_usuario);
+
+       return {email: usuario.email, cliente, endereco}
     } catch (error) {
        console.error('Erro ao buscar cliente por ID:', error);
        throw new Error('Erro ao buscar cliente por ID');
@@ -69,7 +75,10 @@ async function buscarClientePorId(id) {
 async function buscarClientePorIdUsuario(idUsuario) {
   try {
     const cliente = await Cliente.findOne({ where: { id_usuario: idUsuario } });
-    return cliente;
+    const endereco = await Endereco.findByPk(cliente.id_endereco);
+    const usuario = await Usuario.buscarUsuarioPorId(cliente.id_usuario);
+
+    return {email: usuario.email, cliente, endereco}
   } catch (error) {
     console.error('Erro ao buscar cliente por ID de usuário:', error);
     throw new Error('Erro ao buscar cliente por ID de usuário');
@@ -109,7 +118,10 @@ async function atualizarCliente(id, nome, dataNascimento, telefone, endereco_par
       // Atualiza somente os campos de endereço preenchidos por parâmetro
       for (const key in endereco_param) {
         if (Object.hasOwnProperty.call(endereco_param, key)) {
-          endereco[key] = endereco_param[key];
+          if(endereco_param[key]){
+            endereco[key] = endereco_param[key];
+          }
+          
         }
       }
       await endereco.save();
