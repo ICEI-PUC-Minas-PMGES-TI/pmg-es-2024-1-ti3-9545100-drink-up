@@ -22,7 +22,7 @@ const autenticacao = (requerAutenticacao, permissao) => (req, res, next) => {
       req.status = decoded.status;
 
       //Verifica se o perfil definido para acesso na rota condiz com o perfil do token gerado
-      if (permissao == 'admin'|| permissao == req.perfil || !permissao && req.status == 1) {
+      if (req.perfil == 'admin'|| permissao == req.perfil || !permissao && req.status == 1) {
         next();
       }
       else{
