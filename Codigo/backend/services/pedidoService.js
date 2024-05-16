@@ -16,19 +16,27 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
     const sequelize = db.getInstance();
     transaction = await sequelize.transaction();
 
-    cliente = await clienteService.buscarClientePorId(id_cliente, { transaction });
+    console.log(id_cliente);
+
+    cliente = await Cliente.findByPk(id_cliente, { transaction });
 
     const valorTotalPedido = itens_do_carrinho.map(item => item.valor * item.quant).reduce((total, valor) => total + valor , 0);
 
     const frete = await freteService.calcularFrete(valorTotalPedido);
 
+
+    console.log("===================");
+
     // Cria o Pedido usando os IDs do usuário e endereço criados
     const pedido = await Pedido.create({
       "id_frete": 1,
       "valor_pedido": (valorTotalPedido + frete),
-      "id_cliente": cliente.id_endereco,
-      "id_endereco": enderecoPedido, //TODO: Deixar o endereço dinamico na chamada
+      "id_cliente": cliente.id,
+      "id_endereco": cliente.id_endereco, //TODO: Deixar o endereço dinamico na chamada
     }, { transaction });
+
+    console.log("===*****************==");
+
 
     try {
       for (const element of itens_do_carrinho) {
@@ -39,6 +47,8 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
           id_pedido: pedido.id
         }, { transaction });
       }
+
+      console.log("===*****************==");
     } catch (error) {
       await transaction.rollback();
       console.error("Erro ao confirmar transação:", error);
