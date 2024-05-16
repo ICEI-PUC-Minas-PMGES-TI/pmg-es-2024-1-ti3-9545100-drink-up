@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     carrinho.setupCounter(element.quant, element.id);
   })
 
-  document.getElementById('continuar-button').addEventListener('click', (event) => {
+  document.getElementById('btnpagar').addEventListener('click', (event) => {
     event.preventDefault();
 
     let requestBody = {

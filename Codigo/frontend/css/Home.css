@@ -31,6 +31,13 @@ body{
     font-family: 'Nunito Sans', sans-serif;
 }
 
+  header button{
+    background-color:#F2C029 ;
+  }
+  
+  .button-usuario:hover{
+    color: #424242;
+  }
   
 .container {
     display: flex;
@@ -69,13 +76,13 @@ body{
 
 .product-card .description {
     padding: 15px;
-    text-align: center;
+    text-align: center !important;
+    margin: auto !important;
 }
 
 .product-card button {
     background-color: #4CAF50;
     color: white;
-    border: none;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -83,6 +90,8 @@ body{
     font-size: 16px;
     margin: 10px 2px;
     cursor: pointer;
+    border-radius: 5px;
+    margin-left: 86px;
 }
 
 .custom-footer {

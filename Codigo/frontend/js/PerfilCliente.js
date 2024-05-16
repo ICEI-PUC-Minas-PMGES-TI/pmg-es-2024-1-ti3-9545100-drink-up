@@ -87,3 +87,4 @@ window.onload = function() {
 
 // Adicionando evento de clique ao botão salvar
 document.getElementById('btnsalvar').addEventListener('click', save);
+
