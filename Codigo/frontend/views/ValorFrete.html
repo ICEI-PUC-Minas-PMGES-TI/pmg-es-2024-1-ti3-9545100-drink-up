@@ -66,5 +66,37 @@
             crossorigin="anonymous"
         ></script>
         <script src="../js/ValorFrete.js"></script>
+        <script>
+  
+            const token = sessionStorage.getItem("authorization");
+            if (!token) {
+                alert("Você não está autenticado. Por favor, faça login.");
+                window.location.href = "Login.html";
+            }
+      
+            
+            function cadastrarFrete(data) {
+                fetch('http://localhost:3000/fretes', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Frete cadastrada com sucesso');
+                        return response.json();
+                    } else {
+                        throw new Error('Erro ao cadastrar frete');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            }
+      
+        </script>
     </body>
 </html>

@@ -55,5 +55,38 @@
             src="https://kit.fontawesome.com/559e095fe9.js"
             crossorigin="anonymous"
         ></script>
+        <script>
+     
+          const token = sessionStorage.getItem("authorization");
+          if (!token) {
+              alert("Você não está autenticado. Por favor, faça login.");
+              window.location.href = "Login.html";
+          }
+  
+      
+          function loadCarrinho() {
+              fetch('http://localhost:3000/produtos/saida-bebidas', {
+                  method: 'GET',
+                  headers: {
+                      'x-access-token': token
+                  }
+              })
+              .then(response => {
+                  if (response.ok) {
+                      return response.json();
+                  } else {
+                      throw new Error('Erro ao carregar carrinho');
+                  }
+              })
+              .then(data => {
+              
+                  console.log(data);
+              })
+              .catch(error => {
+                  console.error('Erro:', error);
+              });
+          }
+          window.onload = loadCarrinho;
+        </script>
 </body>
 </html>

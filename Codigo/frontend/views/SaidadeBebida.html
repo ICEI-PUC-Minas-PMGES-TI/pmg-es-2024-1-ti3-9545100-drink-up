@@ -77,5 +77,38 @@
         });
     </script>
     <script src="../js/SaidaDeBebida.js"></script>
+    <script>
+     
+        const token = sessionStorage.getItem("authorization");
+        if (!token) {
+            alert("Você não está autenticado. Por favor, faça login.");
+            window.location.href = "Login.html";
+        }
+
+    
+        function loadSaidadeBebida() {
+            fetch('http://localhost:3000/produtos/saida-bebidas', {
+                method: 'GET',
+                headers: {
+                    'x-access-token': token
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao carregar saida de bebidas');
+                }
+            })
+            .then(data => {
+            
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+        window.onload = loadSaidadeBebida;
+    </script>
 </body>
 </html>

@@ -33,7 +33,10 @@ function abrirValidacao() {
     const frete_fixo = document.getElementById('frete-fixo').value;
     const requestOptions = {
       method: "PUT", 
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': sessionStorage.getItem("authorization")
+      },
       body: JSON.stringify({frete_gratis, frete_fixo}),
     }
     fetch('http://localhost:3000/fretes', requestOptions)
