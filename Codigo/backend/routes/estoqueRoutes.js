@@ -8,5 +8,6 @@ const router = express.Router();
 router.post('/estoque', autenticacao(false), estoqueController.estoqueEntradaSaida);
 router.get('/estoque', autenticacao(false), estoqueController.listarEstoqueCompleto);
 router.get('/estoque/:nome', autenticacao(false), estoqueController.listarEstoquePorProduto);
+//router.get('/estoque/relatorioSaidaBebidas', autenticacao(false), estoqueController.relatorioSaidaBebidas);
 
 module.exports = router;

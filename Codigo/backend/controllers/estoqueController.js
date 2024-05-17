@@ -1,7 +1,6 @@
 const estoqueService = require('../services/estoqueService');
 
 const estoqueController = {
-
     async estoqueEntradaSaida(req, res) {
         try {
             const { idProduto, quantidade, tipo, observacao } = req.body;
@@ -29,9 +28,16 @@ const estoqueController = {
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
-    }
+    },
 
-}
+    async relatorioSaidaBebidas(req, res) {
+        try {
+            const saidaBebidas = await estoqueService.relatorioSaidaBebidas();
+            res.status(200).json(saidaBebidas);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+};
 
 module.exports = estoqueController;
-
