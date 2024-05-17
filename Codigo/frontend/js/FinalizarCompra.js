@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let response = await fetch("http://localhost:3000/pedidos", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
+          'x-access-token': sessionStorage.getItem("authorization")
         },
         body: JSON.stringify(requestBody),
       });
