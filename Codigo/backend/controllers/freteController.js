@@ -59,7 +59,9 @@ const freteController = {
   async calcularFrete(req, res) {
     try {
       // Obtém o valor total do carrinho de compras dos cookies
-      const valorCarrinho = parseFloat(req.cookies.valorCarrinho);
+      const valorCarrinho = parseFloat(req.body.total);
+      
+      console.log(valorCarrinho);
 
       if (isNaN(valorCarrinho)) {
         return res.status(400).json({ message: 'Valor do carrinho inválido' });

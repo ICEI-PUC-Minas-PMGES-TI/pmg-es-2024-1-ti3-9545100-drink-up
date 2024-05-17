@@ -16,6 +16,6 @@ router.get('/fretes/frete-fixo', autenticacao(false), freteController.buscarFret
 // Rota para frete grátis
 router.get('/fretes/frete-gratis', autenticacao(false), freteController.buscarFreteGratis);
 
-router.get('/frete/calcular', autenticacao(false), freteController.calcularFrete);
+router.post('/frete/calcular', autenticacao(false), freteController.calcularFrete);
 
 module.exports = router;

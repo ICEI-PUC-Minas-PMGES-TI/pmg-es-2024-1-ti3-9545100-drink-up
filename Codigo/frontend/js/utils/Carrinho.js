@@ -80,6 +80,10 @@ export class Carrinho {
         document.getElementById("cart-total").innerText = `${somaProduto}`;
     }
 
+    somaProdutoTotal() {
+        return this.produtos.reduce((acc, p) => acc + p.valor * p.quant, 0);
+    }
+
     getCookieExpiration() {
         const date = new Date();
         date.setDate(date.getDate() + 1);
@@ -139,5 +143,26 @@ export class Carrinho {
                 this.updateCarrinhoTotalValue();
             });
         }
-      }
+    }
+
+    async calculaFrete() {
+        try {
+            const response = await fetch('http://localhost:3000/frete/calcular', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': window.sessionStorage.getItem('authorization')
+                },
+                body: JSON.stringify({total: this.somaProdutoTotal()})
+            });
+    
+            const data = await response.json();
+            
+            document.getElementById('valorFrete').textContent = parseFloat(data.valorFrete).toFixed(2);
+
+        } catch (error) {
+            console.error('Erro ao buscar dados:', error);
+        }
+    }
+    
 }

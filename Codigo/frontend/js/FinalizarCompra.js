@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   carrinho.updateCarrinhoTotalValue();
 
+  carrinho.calculaFrete();
+
   products.forEach((element) => {
     carrinho.setupCounter(element.quant, element.id);
   })

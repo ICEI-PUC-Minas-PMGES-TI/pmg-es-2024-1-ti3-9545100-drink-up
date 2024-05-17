@@ -133,4 +133,25 @@ document.addEventListener('DOMContentLoaded', function () {
         // Redirecionar para a tela de Pagamento.html
         window.location.href = 'Pagamento.html';
     });
+
+    function obterFrete() {
+        fetch(urlFrete)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter o frete');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Atualiza o conteúdo da div com o ID 'valorFrete' com o valor do frete
+                const valorFreteDiv = document.getElementById('valorFrete');
+                valorFreteDiv.textContent = `R$ ${data.valor.toFixed(2)}`;
+            })
+            .catch(error => {
+                console.error('Erro ao obter o frete:', error);
+            });
+    }
+
+    // Chama a função para obter o valor do frete quando a página carregar
+    obterFrete();
 });
