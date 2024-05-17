@@ -18,6 +18,7 @@ async function alterarEnderecoPedido(req, res) {
     try {
         const { id } = req.params;
         const { endereco } = req.body;
+        console.log(endereco)
         const pedidos = await pedidoService.alterarEnderecoPedido(endereco, id);
         res.json(pedidos);
     } catch (error) {

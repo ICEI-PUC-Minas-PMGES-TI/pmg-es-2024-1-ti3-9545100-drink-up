@@ -16,16 +16,12 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
     const sequelize = db.getInstance();
     transaction = await sequelize.transaction();
 
-    console.log(id_cliente);
-
     cliente = await Cliente.findByPk(id_cliente, { transaction });
 
     const valorTotalPedido = itens_do_carrinho.map(item => item.valor * item.quant).reduce((total, valor) => total + valor , 0);
 
     const frete = await freteService.calcularFrete(valorTotalPedido);
 
-
-    console.log("===================");
 
     // Cria o Pedido usando os IDs do usuário e endereço criados
     const pedido = await Pedido.create({
@@ -34,8 +30,6 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
       "id_cliente": cliente.id,
       "id_endereco": cliente.id_endereco, //TODO: Deixar o endereço dinamico na chamada
     }, { transaction });
-
-    console.log("===*****************==");
 
 
     try {
@@ -59,7 +53,7 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
     // Se tudo ocorreu bem, faz o commit da transação
     await transaction.commit();
 
-    return Pedido;
+    return pedido;
   } catch (error) {
     // Em caso de erro, faz o rollback da transação
     if (transaction) await transaction.rollback();
@@ -80,6 +74,8 @@ async function alterarEnderecoPedido(endereco, id_pedido) {
     const enderecoCriado = await Endereco.create(endereco);
   
     const pedido = await Pedido.findByPk(id_pedido);
+
+    console.log(id_pedido);
 
     pedido.id_endereco = enderecoCriado.id;
 

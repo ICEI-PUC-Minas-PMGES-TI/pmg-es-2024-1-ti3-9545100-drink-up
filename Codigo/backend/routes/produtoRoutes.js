@@ -13,5 +13,6 @@ router.get('/produtos', autenticacao(false), produtoController.listarTodosProdut
 router.put('/produtos', autenticacao(false), produtoController.atualizarProduto);
 router.put('/produtos/atualizar-estoque/:id', autenticacao(false), produtoController.atualizarEstoqueProduto);
 router.delete('/produtos/:id', autenticacao(false), produtoController.excluirProduto);
+router.get('/produtos/saida-bebidas', autenticacao(false), produtoController.saidaBebida);
 
 module.exports = router;

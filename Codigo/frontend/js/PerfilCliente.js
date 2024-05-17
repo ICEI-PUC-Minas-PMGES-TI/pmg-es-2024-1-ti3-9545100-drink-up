@@ -30,6 +30,8 @@ function getCliente() {
     })
     .then(data => {
         preencherCampos(data.cliente, data.endereco, data.email);
+        sessionStorage.setItem('cliente_id',data.cliente.id);
+        console.log(data.cliente.id);
     })
     .catch(error => {
         console.error('Erro ao obter usuário:', error);
@@ -70,6 +72,7 @@ function save() {
         console.log('Resposta da requisição PUT:', response);
         if (response.ok) {
             alert('Usuário alterado com sucesso');
+            window.location.href = 'Home.html'
         } else {
             throw new Error('Erro ao alterar usuário');
         }

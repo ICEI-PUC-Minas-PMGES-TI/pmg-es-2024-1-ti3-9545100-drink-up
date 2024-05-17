@@ -90,6 +90,27 @@ async function listarTodosProdutos() {
   }
 }
 
+async function saidaBebidas() {
+  try {
+    const produtos = await Produto.findAll();
+
+    const produtosFormatados = produtos.map(async (product) => {
+      const categoria = await categoriaService.buscarCategoriaPorId(parseInt(product.id_categoria));
+      return {
+        nome: product.nome,
+        valor: product.valor,
+        id_categoria: id_categoria,
+      };
+    });
+
+    return Promise.all(produtosFormatados);
+  } catch (error) {
+    console.error('Erro ao listar produtos:', error);
+    throw new Error('Erro ao listar produtos');
+  }
+}
+
+
 async function atualizarProduto(id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria) {
   console.log({id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria})
   try {

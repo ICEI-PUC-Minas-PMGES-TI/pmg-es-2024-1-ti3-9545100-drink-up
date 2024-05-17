@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
   });
-
+  
   document.getElementById("carrinho-body").innerHTML = carrinhoHTML;
 
   carrinho.updateCarrinhoTotalValue();
@@ -32,35 +32,41 @@ document.addEventListener("DOMContentLoaded", function () {
     carrinho.setupCounter(element.quant, element.id);
   })
 
-  document.getElementById('btnpagar').addEventListener('click', (event) => {
+  document.getElementById('btnpagar').addEventListener('click', async (event) => {
     event.preventDefault();
-
+  
     let requestBody = {
       itens_do_carrinho: products,
       endereco: null,
-      id_cliente: 1
+      id_cliente: sessionStorage.getItem('cliente_id')
     };
-
-    fetch("http://localhost:3000/pedidos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    })
-    .then((response) => {
-
+  
+    try {
+      let response = await fetch("http://localhost:3000/pedidos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
       if (!response.ok) {
-         alert("Ocorreu um erro ao processar o seu pedido! Entre em contato com a loja!");
+        alert("Ocorreu um erro ao processar o seu pedido! Entre em contato com a loja!");
+        return;  // Exit if response is not okay
       }
+  
+      let responseBody = await response.text();
+      let data = responseBody ? JSON.parse(responseBody) : {};
 
       carrinho.limparCarrinho();
       alert("Pedido Registrado com sucesso! Realize o pagamento do seu pedido e anexe o comprovante via WhatsApp!");
-      window.location.href = "./EnderecoEntrega.html";
-    })
-    .catch((error) => {
-      console.error("FUDEU", error);
-    });
+  
+      // Assuming `data` contains an object with a `pedido` property
+      sessionStorage.setItem('pedido_id', data.id);
+      window.location.href = `EnderecoEntrega.html?id=${data.id}`
+  
+    } catch (error) {
+      console.error("Regra de 3", error);
+    }
   });
-
 });

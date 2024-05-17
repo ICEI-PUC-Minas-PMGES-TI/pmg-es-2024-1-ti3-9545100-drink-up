@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const baseUrl = 'http://localhost:3000';
+    const btnLogin = document.getElementById('btnLogin');
 
 
     
@@ -84,4 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+    btnLogin.addEventListener('click', function() {
+        window.location.href= 'Login.html'
+    });
 });

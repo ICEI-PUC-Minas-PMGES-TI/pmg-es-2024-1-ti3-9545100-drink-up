@@ -33,10 +33,10 @@
           <div class="input-group">
             <label for="nome">Escolha seu endereço ou crie um novo:</label>
             <select class="form-control" id="selectCategoria" required>
-                <option disabled selected value="">
-                  Escolha um endereço
-                </option>
-            </select>
+              <option disabled selected value="">Escolha um endereço</option>
+              <option value="meu_endereco">Meu Endereço</option>
+              <option value="endereco_novo">Endereço Novo</option>
+          </select>
           </div>
 
           <div class="input-group">
@@ -95,18 +95,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="input-group">
-                <label for="cidade" class="form-label">Cidade</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="cidade"
-                  placeholder="Digite a sua Cidade"
-                  required
-                />
-            </div>
-
             <div class="input-group">
                 <label for="UF" class="form-label">UF</label>
                 <input
@@ -114,19 +102,15 @@
                   class="form-control"
                   id="UF"
                   value="MG"
-                  disabled
                   required
                 />
             </div>
 
         </div>
       </div>
-      <div 
-          id="valorFrete">Valor Frete: 
-      </div>
       <div class="button">
         <button type="button" class="btn" id="btncadastrar">Cancelar</button>
-        <button class="checkout-button" id="btnContinuar" onclick="location.href = 'FinalizarCompra.html'">Continuar</button>
+        <button class="checkout-button" id="btnContinuar">Continuar</button>
       </div>
     </main>
 

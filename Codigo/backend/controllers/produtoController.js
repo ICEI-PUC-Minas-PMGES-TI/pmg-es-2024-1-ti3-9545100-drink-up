@@ -86,6 +86,21 @@ class ProdutoController {
       res.status(500).json({ message: 'Erro ao excluir produto' });
     }
   }
+
+  async saidaBebida(req,res){
+      try {
+          // Chamando a função do service para obter os produtos formatados
+          const produtosFormatados = await saidaBebidasService();
+  
+          // Retornando os produtos formatados como resposta
+          res.json(produtosFormatados);
+      } catch (error) {
+          // Em caso de erro, retornar uma resposta de erro
+          console.error('Erro ao buscar produtos para saída de bebidas:', error);
+          res.status(500).json({ error: 'Erro ao buscar produtos para saída de bebidas' });
+      }
+  }
+ 
   
 };
 

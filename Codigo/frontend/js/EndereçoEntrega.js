@@ -1,24 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
-    //document.getElementById('selectCategoria').addEventListener('click', function (event) {
-        //event.preventDefault();
 
-        function preencherCampos(endereco) {
-            document.getElementById('bairro').value = endereco.bairro;
-            document.getElementById('cep').value = endereco.cep;
-            document.getElementById('rua').value = endereco.rua;
-            document.getElementById('complemento').value = endereco.complemento;
-            document.getElementById('numero').value = endereco.numero;
-            document.getElementById('cidade').value = endereco.cidade;
+    const params = new URLSearchParams(window.location.search);
+    const pedidoId = parseInt(params.get('id'), 10);
+
+    function preencherCampos(endereco) {
+        document.getElementById('bairro').value = endereco.bairro;
+        document.getElementById('cep').value = endereco.cep;
+        document.getElementById('rua').value = endereco.rua;
+        document.getElementById('complemento').value = endereco.complemento;
+        document.getElementById('numero').value = endereco.numero;
+    }
+
+    function limparCampos() {
+        document.getElementById('bairro').value = '';
+        document.getElementById('cep').value = '';
+        document.getElementById('rua').value = '';
+        document.getElementById('complemento').value = '';
+        document.getElementById('numero').value = '';
+    }
+
+    async function alterarEnderecoPedido(endereco, id_pedido) {
+        try {
+            if (!endereco || !id_pedido) {
+                throw new Error('Endereço não informado corretamente');
+            }
+
+            const response = await fetch(`/pedidos/endereco/${id_pedido}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': window.sessionStorage.getItem('authorization')
+                },
+                body: JSON.stringify(endereco)
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao alterar endereço do pedido');
+            }
+
+            const data = await response.json();
+            return data;
+
+        } catch (error) {
+            console.error('Erro ao alterar endereço:', error);
+            throw new Error('Erro ao alterar endereço');
         }
+    }
 
-        const rua = document.getElementById('rua').value;
-        const numero = document.getElementById('numero').value;
-        const complemento = document.getElementById('complemento').value;
-        const bairro = document.getElementById('bairro').value;
-        const cidade = document.getElementById('cidade').value;
-        const cep = document.getElementById('cep').value;
-
-        function getEndereco() {
+    function getEndereco() {
+        const selectedOption = document.getElementById('selectCategoria').value;
+        
+        // Verifica se a opção selecionada é "Meu Endereço"
+        if (selectedOption === 'meu_endereco') {
             fetch(`http://localhost:3000/clientes/usuario/${window.sessionStorage.getItem("user_id")}`, {
                 method: 'GET',
                 headers: {
@@ -39,41 +72,65 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Erro ao obter endereço:', error);
             });
-        }
-
-        // // Verificar se o usuário está logado antes de chamar a função de obter endereço
-        if (window.sessionStorage.getItem("user_id") && window.sessionStorage.getItem('authorization')) {
-            getEndereco();
         } else {
-            console.error('Usuário não está logado.');
+            // Se a opção selecionada for "Novo Endereço", limpa os campos
+            limparCampos();
         }
+    }
+    // Adicionando um ouvinte de evento de mudança ao elemento <select>
+    document.getElementById('selectCategoria').addEventListener('change', getEndereco);
 
-        // fetch('http://localhost:3000/api/usuarios', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         rua: rua,
-        //         numero: numero,
-        //         complemento: complemento,
-        //         bairro: bairro,
-        //         cidade: cidade,
-        //         cep: cep,
+    // Verificar se o usuário está logado antes de chamar a função de obter endereço
+    if (window.sessionStorage.getItem("user_id") && window.sessionStorage.getItem('authorization')) {
+        getEndereco();
+    } else {
+        console.error('Usuário não está logado.');
+    }
+
+    document.getElementById('btnContinuar').addEventListener('click', async (event) => {
+        event.preventDefault();
         
-        //     })
-        // })
-        // .then(response => {
-        //     if (response.ok) {
-        //         return response.json();
-        //     }
-        //     throw new Error('Erro ao cadastrar usuário');
-        // })
-        // .then(data => {
-        //     console.log(data);
-        // })
-        // .catch(error => {
-        //     console.error('Erro ao cadastrar usuário:', error);
-        // });
-    //});
+        const selectedCategoria = document.getElementById('selectCategoria').value;
+
+        if (selectedCategoria === 'endereco_novo') {
+
+            const endereco = {
+               "endereco" : {
+                bairro: document.getElementById('bairro').value,
+                cep: document.getElementById('cep').value,
+                rua: document.getElementById('rua').value,
+                complemento: document.getElementById('complemento').value,
+                numero: document.getElementById('numero').value,
+                uf: document.getElementById('UF').value
+               }
+            }
+    
+            try {
+                const response = await fetch(`http://localhost:3000/pedidos/endereco/${window.sessionStorage.getItem("pedido_id")}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': window.sessionStorage.getItem('authorization')
+                    },
+                    body: JSON.stringify(endereco)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao alterar endereço do pedido');
+                }
+
+                const data = await response.json();
+                console.log('Endereço alterado com sucesso:', data);
+                alert('Endereço alterado com sucesso!');
+            } catch (error) {
+                console.error('Erro ao alterar endereço:', error);
+                alert('Erro ao alterar endereço. Por favor, tente novamente.');
+            }
+        } else {
+            // Se a opção for "Meu Endereço", não é necessário fazer nada adicional aqui
+        }
+        
+        // Redirecionar para a tela de Pagamento.html
+        window.location.href = 'Pagamento.html';
+    });
 });

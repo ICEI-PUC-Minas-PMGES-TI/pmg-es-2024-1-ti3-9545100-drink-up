@@ -33,9 +33,7 @@
             <table class="saida-table">
                 <thead>
                     <tr>
-                        <th>Data</th>
                         <th>Tipo</th>
-                        <th>Qnt</th>
                         <th>Valor</th>
                         <th>Nome da Bebida</th>
                     </tr>
@@ -49,31 +47,33 @@
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/559e095fe9.js" crossorigin="anonymous"></script>
-    <script src="../js/SaidaDeBebida.js"></script>
-
-   
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Recuperando o relatório da sessionStorage
-            const relatorioString = sessionStorage.getItem('relatorioSaidaBebidas');
-            const relatorioSaidaBebidas = JSON.parse(relatorioString);
+            // Função para carregar os dados de saída de bebidas
+            function carregarDadosSaidaBebidas() {
+                // Recuperando o relatório da sessionStorage
+                const relatorioString = sessionStorage.getItem('relatorioSaidaBebidas');
+                const relatorioSaidaBebidas = JSON.parse(relatorioString);
 
-            // Exibindo o relatório na tabela de saída de bebidas
-            const tbody = document.getElementById('saida-table-body');
+                // Exibindo o relatório na tabela de saída de bebidas
+                const tbody = document.getElementById('saida-table-body');
+                tbody.innerHTML = ''; // Limpa o conteúdo anterior
 
-            relatorioSaidaBebidas.forEach((item) => {
-                const row = `
-                    <tr>
-                        <td>${item.data}</td>
-                        <td>${item.tipo}</td>
-                        <td>${item.quantidade}</td>
-                        <td>R$ ${item.valor}</td>
-                        <td>${item.nome_bebida}</td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
+                relatorioSaidaBebidas.forEach((item) => {
+                    const row = `
+                        <tr>
+                            <td>${item.tipo}</td>
+                            <td>R$ ${item.valor}</td>
+                            <td>${item.nome_bebida}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            }
+
+            carregarDadosSaidaBebidas();
         });
     </script>
+    <script src="../js/SaidaDeBebida.js"></script>
 </body>
 </html>
