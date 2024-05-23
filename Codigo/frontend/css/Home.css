@@ -1,29 +1,34 @@
-*{
+* {
+    
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
+    
     width: 100%;
     height: 100vh;
     font-family: 'Nunito Sans', sans-serif;
 }
 
 .navbar {
+    
     background-color: #F2C029;
     padding: 24px 20px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    height: 95px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 95px;
 }
 
 .navbar img {
+    
     height: 40px;
 }
 
 .btn-about {
+    
     background-color: #F2C029;
     border: none;
     color: black;
@@ -34,26 +39,31 @@ body{
 }
 
 .btn-about:hover {
+    
     color: white;
     background-color: #d1a71d;
 }
 
 .campo-busca {
-    display: flex; 
+    
+    display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
 .navbar-icons {
-    display: flex; 
-    align-items: center; 
+    
+    display: flex;
+    align-items: center;
 }
 
-header button{
-    background-color:#F2C029 ;
+header button {
+    
+    background-color: #F2C029;
 }
 
-#perfilBtn, #carrinhoBtn {
+#perfilBtn, #carrinhoBtn, #filterBtn {
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +75,10 @@ header button{
     transition: color 0.3s;
 }
 
-#perfilBtn .material-symbols-outlined, #carrinhoBtn .material-symbols-outlined {
+#perfilBtn .material-symbols-outlined,
+#carrinhoBtn .material-symbols-outlined,
+#filterBtn .material-symbols-outlined {
+    
     font-size: 24px;
     color: black;
     transition: color 0.3s;
@@ -74,65 +87,76 @@ header button{
 #perfilBtn:hover .material-symbols-outlined,
 #perfilBtn:focus .material-symbols-outlined,
 #carrinhoBtn:hover .material-symbols-outlined,
-#carrinhoBtn:focus .material-symbols-outlined {
-    color: black; 
+#carrinhoBtn:focus .material-symbols-outlined,
+#filterBtn:hover .material-symbols-outlined,
+#filterBtn:focus .material-symbols-outlined {
+    
+    color: black;
 }
+
 .button-login {
-    background-color: #F2C029; /* Cor de fundo do botão (azul) */
-    color: black; /* Cor do texto do botão (branco) */
-    border: none; /* Remover borda */
-    padding: 10px 20px; /* Adicionar preenchimento interno */
-    border-radius: 5px; /* Adicionar bordas arredondadas */
-    cursor: pointer; /* Mudar cursor ao passar por cima */
-    transition: background-color 0.3s; /* Adicionar transição suave para mudanças de cor */
+    
+    background-color: #F2C029; 
+    color: black; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
 .button-login:hover {
-    background-color: rgba(241, 229, 55, 0.822); /* Alterar cor de fundo ao passar o mouse sobre o botão */
+    
+    background-color: rgba(241, 229, 55, 0.822); 
 }
 
-
 .container {
+    
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     margin-top: -2.5rem;
     width: 100%;
     padding: 7rem 1rem;
 }
 
 .product-card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    width: 300px; 
+    width: 300px;
     height: auto;
-    margin: 15px; 
+    margin: 15px;
     border-radius: 5px;
     overflow: hidden;
 }
 
 .product-card img {
-    width: 100%; 
-    height: auto; 
-    max-height: 200px; 
-    object-fit: cover; 
+    
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 .product-list {
+    
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 15px; 
-    max-width: 1200px; 
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1200px;
 }
 
 .product-card .description {
+    
     padding: 15px;
     text-align: center !important;
     margin: auto !important;
 }
 
 .product-card button {
+    
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -147,6 +171,7 @@ header button{
 }
 
 .custom-footer {
+    
     background-color: #333;
     color: white;
     text-align: center;
@@ -154,9 +179,11 @@ header button{
     position: fixed;
     bottom: 0;
     width: 100%;
+    left: 0; 
 }
 
 #about-us {
+    
     display: flex;
     align-items: center;
     padding: 50px 10%;
@@ -165,23 +192,73 @@ header button{
 }
 
 #about-us .container {
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 #about-us .logo {
+    
     flex: 1;
     display: flex;
     justify-content: flex-start;
 }
 
 #about-us .logo img {
-    width: 300px; 
+    
+    width: 300px;
     height: auto;
 }
 
 #about-us .description {
+    
     flex: 2;
     text-align: right;
+}
+
+#sidebar-wrapper {
+    
+    min-height: 100vh;
+    width: 0;
+    transition: width 0.3s ease;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 1;
+    background-color: #f8f9fa;
+}
+
+#sidebar-wrapper.open {
+    
+    width: 250px;
+}
+
+#sidebar-wrapper .list-group {
+    
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar-wrapper.open .list-group {
+    
+    opacity: 1;
+}
+
+#page-content-wrapper {
+    
+    min-width: 100vw;
+    transition: margin-left 0.3s ease;
+}
+
+#page-content-wrapper.shifted {
+    
+    margin-left: 250px;
+}
+
+.carousel-inner img {
+    
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
 }
