@@ -78,8 +78,8 @@ h6{
 }
 
 .input-box input{
-    margin: 0.6rem 0;
-    padding: 0.8rem 1.2rem;
+    margin: none;
+    padding: 6px;
     border:none;
     border-radius: 4px;
     box-shadow: 1px 1px 6px #0000001c;
@@ -125,7 +125,7 @@ h6{
 }
 
 .register-button {
-    margin-top: 1rem;
+    margin-top: 10px;
 }
 .register-button button{
     border: none;
