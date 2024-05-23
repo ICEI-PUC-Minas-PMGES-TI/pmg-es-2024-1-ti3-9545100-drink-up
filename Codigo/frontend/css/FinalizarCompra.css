@@ -302,3 +302,12 @@ tbody{
   .thead-qnt{
     opacity: 0.8;
   }
+  .checkout-button{
+    background-color: #F2C029;
+  }
+  .checkout-button:hover{
+    background-color: green;
+  }
+  button{
+    margin-left: 10px;
+  }

@@ -7,15 +7,16 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .header {
     background-color: #f2c029;
-    padding: 24px 20px;
+    padding: 8px 12px;
     display: flex; /* Ativa flexbox no header */
     justify-content: space-between; /* Separa os itens para cada extremidade */
     align-items: center; /* Centraliza verticalmente */
+    max-height: calc(100vh - 200px);
 }
 
 .header img {
@@ -28,11 +29,13 @@ body {
 
 main {
     padding: 30px 50px;
+     /* Define uma altura máxima para o conteúdo com base na altura da tela */
 }
 
 .title {
     display: flex;
     justify-content: center;
+    margin-bottom: -30px; /* Reduz a distância entre o título e o próximo elemento */
 }
 
 button {
@@ -144,7 +147,7 @@ textarea {
 }
 
 /* Botão fechar */
-.close {
+/*.close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -157,7 +160,7 @@ textarea {
     text-decoration: none;
     cursor: pointer;
 }
-
+*/
 #niggassaurs {
     display: none;
 }
@@ -169,12 +172,11 @@ textarea {
 
 .qrcode{
     display: flex;
-    
     justify-content: center;
 }
 
 .qrcode-img img{
-    width: 400px;
+    width: 300px;
 }
 
 .qrcode-img{

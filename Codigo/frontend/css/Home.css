@@ -1,24 +1,3 @@
-.navbar {
-    background-color: #F2C029;
-    padding: 24px 20px;
-    display: flex; 
-    justify-content: space-around; 
-    align-items: center; 
-    height: 95px; 
-  }
-
-  .navbar img {
-    height: 40px;
-}
-
-.campo-busca {
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
-    flex-basis: 100%; 
-}
-
-
 *{
     padding: 0;
     margin: 0;
@@ -31,14 +10,88 @@ body{
     font-family: 'Nunito Sans', sans-serif;
 }
 
-  header button{
+.navbar {
+    background-color: #F2C029;
+    padding: 24px 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    height: 95px; 
+}
+
+.navbar img {
+    height: 40px;
+}
+
+.btn-about {
+    background-color: #F2C029;
+    border: none;
+    color: black;
+    font-weight: bold;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.btn-about:hover {
+    color: white;
+    background-color: #d1a71d;
+}
+
+.campo-busca {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+}
+
+.navbar-icons {
+    display: flex; 
+    align-items: center; 
+}
+
+header button{
     background-color:#F2C029 ;
-  }
-  
-  .button-usuario:hover{
-    color: #424242;
-  }
-  
+}
+
+#perfilBtn, #carrinhoBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#perfilBtn .material-symbols-outlined, #carrinhoBtn .material-symbols-outlined {
+    font-size: 24px;
+    color: black;
+    transition: color 0.3s;
+}
+
+#perfilBtn:hover .material-symbols-outlined,
+#perfilBtn:focus .material-symbols-outlined,
+#carrinhoBtn:hover .material-symbols-outlined,
+#carrinhoBtn:focus .material-symbols-outlined {
+    color: black; 
+}
+.button-login {
+    background-color: #F2C029; /* Cor de fundo do botão (azul) */
+    color: black; /* Cor do texto do botão (branco) */
+    border: none; /* Remover borda */
+    padding: 10px 20px; /* Adicionar preenchimento interno */
+    border-radius: 5px; /* Adicionar bordas arredondadas */
+    cursor: pointer; /* Mudar cursor ao passar por cima */
+    transition: background-color 0.3s; /* Adicionar transição suave para mudanças de cor */
+}
+
+.button-login:hover {
+    background-color: rgba(241, 229, 55, 0.822); /* Alterar cor de fundo ao passar o mouse sobre o botão */
+}
+
+
 .container {
     display: flex;
     justify-content: center; 
@@ -73,7 +126,6 @@ body{
     max-width: 1200px; 
 }
 
-
 .product-card .description {
     padding: 15px;
     text-align: center !important;
@@ -104,7 +156,6 @@ body{
     width: 100%;
 }
 
-
 #about-us {
     display: flex;
     align-items: center;
@@ -134,4 +185,3 @@ body{
     flex: 2;
     text-align: right;
 }
-
