@@ -12,6 +12,12 @@ body, html {
     font-family: 'Nunito Sans', sans-serif;
 }
 
+.title{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
 .container {
     display: flex;
     width: 100vw;
@@ -46,6 +52,8 @@ body, html {
     flex-wrap: wrap;
     gap: 20px; 
     padding: 1rem;
+    border: 2px solid rgba(0,0,0, .2);
+    border-radius: 5px;
 }
 
 
@@ -77,6 +85,12 @@ body, html {
     font-weight:900;
     height: 50px;
     align-items: center;
+}
+
+.cadastrar-button{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {
