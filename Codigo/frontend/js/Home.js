@@ -1,12 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const baseUrl = 'http://localhost:3000';
-    const btnLogin = document.getElementById('btnLogin');
+const baseUrl = 'http://localhost:3000';
 
-
-    
-
-    function carregarProdutos(filtroCategoria) {
-        fetch(`${baseUrl}/produtos`)
+function carregarProdutos(filtroCategoria) {
+    fetch(`${baseUrl}/produtos`)
         .then(response => response.json())
         .then(produtos => {
             let filteredProdutos;
@@ -21,36 +16,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 productList.innerHTML = 'Nenhum produto encontrado para esta categoria.';
             } else {
                 displayProducts(filteredProdutos, productList);
-                addEventListeners();  // para ficar aberto pra direcionar pra outra página
+                addEventListeners();  
             }
         })
         .catch(error => console.error('Erro ao carregar produtos:', error));
-    }
+}
 
+function displayProducts(produtos, productList) {
+    produtos.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.innerHTML = `
+            <img src="${product.url_imagem}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
+            <div class="product-description">
+                <h4>${product.nome}</h4>
+                <p>${product.descricao}</p>
+                <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
+                <button data-id="${product.id}" class="botao-comprar">Comprar</button>
+            </div>
+        `;
+        productList.appendChild(productCard);
+    });
+}
 
-    
-
-    function displayProducts(produtos, productList) {
-        produtos.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
-            productCard.innerHTML = `
-                <img src="${product.url_imagem}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
-                <div class="product-description">
-                    <h4>${product.nome}</h4>
-                    <p>${product.descricao}</p>
-                    <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                    <button data-id="${product.id}" class="botao-comprar">Comprar</button>
-                </div>
-            `;
-            productList.appendChild(productCard);
+function addEventListeners() {
+    const buttons = document.querySelectorAll('.botao-comprar');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const productId = this.dataset.id; 
+            window.location.href = `DetalhesProduto.html?id=${productId}`;
         });
-    }
+    });
+}
 
-
-
-
-
+document.addEventListener('DOMContentLoaded', function () {
     fetch(`${baseUrl}/categorias`)
         .then(response => response.json())
         .then(categorias => {
@@ -65,27 +64,28 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Erro para carregar categorias:', error));
 
-
-
-
-    document.querySelector('.button-busca').addEventListener('click', function() {
-        const selectedCategoria = document.getElementById('categorySelect').value;
-        console.log("Categoria selecionada para filtragem:", selectedCategoria);  
-        carregarProdutos(selectedCategoria);
-    });
-
-
-
-    function addEventListeners() {
-        const buttons = document.querySelectorAll('.botao-comprar');
-        buttons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                const productId = this.dataset.id; 
-                window.location.href = `DetalhesProduto.html?id=${productId}`;
-            });
+    const filterBtn = document.getElementById('filterBtn');
+    if (filterBtn) {
+        filterBtn.addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar-wrapper');
+            const content = document.getElementById('page-content-wrapper');
+            sidebar.classList.toggle('open');
+            content.classList.toggle('shifted');
         });
     }
-    btnLogin.addEventListener('click', function() {
-        window.location.href= 'Login.html'
-    });
+
+    const searchButton = document.getElementById('searchButton');
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
+            const selectedCategoria = document.getElementById('categorySelect').value;
+            carregarProdutos(selectedCategoria);
+        });
+    }
+
+    const btnLogin = document.getElementById('loginBtn');
+    if (btnLogin) {
+        btnLogin.addEventListener('click', function() {
+            window.location.href = 'Login.html';
+        });
+    }
 });
