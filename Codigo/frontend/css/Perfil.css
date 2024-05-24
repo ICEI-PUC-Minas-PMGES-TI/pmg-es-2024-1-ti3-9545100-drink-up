@@ -1,92 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap');
 
-/* 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif; 
-}
-
-
-.form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-  
-.btn-dark {
-    background-color: #333;
-    border-color: #333;
-    font-weight: 500;
-}
-  
-.btn-dark:hover {
-    background-color: #555;
-    border-color: #555;
-}
-  
-.btn-primary {
-    background-color: #E2B420;
-    border-color: #E2B420;
-}
-  
-.btn-primary:hover {
-    background-color: #D7A11E;
-    border-color: #D7A11E;
-}
-  
-main{
-    background-color: white;
-    padding: 30px 50px;
-}
-
-.button{
-    display: flex;
-    justify-content: end;
-    margin-top: 30px;
-}
-
-#btncancelar{
-    margin-right: 10px;
-}
-
-#imgperfil{
-    display: flex;
-    justify-content: center;
-} */
-
-
-
 body {
     font-family: 'Nunito Sans', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
 }
-  
-  .circle-button:hover {
-    background-color: #000000; /* Lighter red color on hover */
-  }
-.navbar {
-    background-color: #E2B420;
-}
-
-.navbar-brand img {
-    margin-top: 10px;
-}
 
 .header {
+    background-color: #F2C029;
+    padding: 24px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+}
+
+.header img {
+    height: 40px;
+}
+
+.user-icon {
+    height: 30px;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 20px;
+    width: 200px;
+}
+
+.content {
+    flex: 1;
     padding: 20px;
 }
 
@@ -95,6 +45,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 1500px;
 }
 
 .form-group {
@@ -108,11 +59,12 @@ body {
 
 .btn {
     background-color: #E2B420;
-    color: #fff;
+    color: #000000;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bolder;
 }
 
 .btn:hover {
@@ -127,4 +79,35 @@ body {
     .col-md-6 {
         margin-bottom: 20px;
     }
+}
+
+/* Estilos adicionais para organizar os inputs lado a lado */
+.content .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.content .row > .col-md-6 {
+    flex: 1;
+    min-width: calc(50% - 20px); /* Ajuste para espaçamento */
+}
+
+.mb-3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.mb-3 label {
+    margin-bottom: 5px;
+}
+
+.mb-3 input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input{
+    margin-bottom: 10px;
 }

@@ -5,30 +5,31 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Cadastro de Bebida</title>
-   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap"
+      rel="stylesheet">
    <link rel="stylesheet" href="../css/Perfil.css">
+   <link rel="stylesheet" href="../css/SaidadeBebida.css" />
+   <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
 
-   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #E2B420;">
-      <div class="container">
-         <a class="navbar-brand" href="#"><img width="100px" src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
-      </div>
-   </nav>
-
-   <header class="container mt-5 mb-3">
-      <div class="row">
-         <div class="col">
-            <h2 class="text-center">Perfil</h2>
-         </div>
-      </div>
+   <header class="header">
+      <button onclick="location.href='Home.html'">
+         <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      </button>
+      <button class="button-usuario" onclick="location.href='Perfil.html'">
+         <span class="material-symbols-outlined">person</span>
+      </button>
    </header>
 
-
-   <main>
-      <button onclick="location.href='RelatorioDeCompras.html'">MEUS PEDIDOS</button>
-      <div class="container">
+   <div class="container">
+      <aside class="sidebar">
+         <button onclick="location.href='Perfil.html'">MINHA CONTA</button>
+         <button onclick="location.href='RelatorioDeCompras.html'">MEUS PEDIDOS</button>
+      </aside>
+      <main class="content">
          <div class="row">
             <div class="col-md-9">
                <div class="form-container dados">
@@ -76,18 +77,16 @@
                      </div>
                      <div class="button">
                         <button type="submit" class="btn btn-primary" id="btnsalvar">Salvar</button>
-                    </div>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
-      </div>
-      </form>
-      </div>
-   </main>
+      </main>
+   </div>
+   <!-- Icons -->
+   <script src="https://kit.fontawesome.com/559e095fe9.js" crossorigin="anonymous"></script>
    <script src="../js/PerfilCliente.js"></script>
 </body>
-
 
 </html>
