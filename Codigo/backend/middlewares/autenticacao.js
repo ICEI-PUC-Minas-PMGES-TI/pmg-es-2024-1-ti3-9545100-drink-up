@@ -15,6 +15,9 @@ const autenticacao = (requerAutenticacao, permissao) => (req, res, next) => {
     //Validação e decodificação do token
     jwt.verify(token, SECRET, (err, decoded) => {
       if (err) {
+        if (err.name === 'TokenExpiredError') {
+          return res.status(401).json({ error: 'Token expirado' });
+        }
         return res.status(401).json({ error: 'Token inválido' });
       }
 
