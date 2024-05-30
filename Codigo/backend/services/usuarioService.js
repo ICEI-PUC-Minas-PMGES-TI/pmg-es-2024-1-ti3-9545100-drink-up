@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const Usuario = require('../models/Usuario');
 const jwt = require('jsonwebtoken');
 const SECRET = 'drinkupTIS3';
@@ -25,18 +26,33 @@ async function login(email, senha) {
   if (!usuario) {
     throw new Error('Usuário não encontrado');
   }
+  // Verificaa se a senha armazenada no banco de dados é criptografada
+  const possuiCriptografia = usuario.senha.startsWith('$2b$');
+  let senhaValida = false;
 
-  if (usuario.senha !== senha) {
-    throw new Error('Senha incorreta');
+  if (possuiCriptografia) {
+    // Tenta comparar a senha do parâmetro com a senha criptografada no banco de dados
+    try {
+      senhaValida = await bcrypt.compare(senha, usuario.senha);
+    } catch (err) {
+      console.error('Erro ao comparar a senha criptografada:', err);
+      throw new Error('Erro ao verificar a senha');
+    }
+  } else {
+    // Compara com a senha não criptografada no banco de dados. Para o caso de usuário criados anteriormente
+    senhaValida = senha === usuario.senha;
   }
 
+  if (!senhaValida) {
+    throw new Error('Senha incorreta');
+  }
   if (usuario.status !== '1') {
     throw new Error('Usuario inativo');
   }
 
-  const token = jwt.sign({user_id:usuario.id, perfil:usuario.perfil, status:usuario.status, email:usuario.email}, SECRET);
+  const token = jwt.sign({user_id:usuario.id, perfil:usuario.perfil, status:usuario.status, email:usuario.email}, SECRET, {expiresIn: '1h'});
 
-  return {token};
+  return { token };
 }
 
 async function listarTodosUsuarios() {
@@ -78,7 +94,8 @@ async function atualizarUsuario(id, senha, status) {
     // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
 
     if (senha) {
-      usuario.senha = senha;
+      const salt = await bcrypt.genSalt(10);
+      usuario.senha = await bcrypt.hash(senha, salt);
     }
     if (status) {
       usuario.status = status;
@@ -98,21 +115,20 @@ async function alterarSenha(id, senhaAtual, novaSenha) {
     if (!usuario) {
       throw new Error('Usuário não encontrado');
     }
-    // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
 
-    if(usuario.senha == senhaAtual){
-
-      usuario.senha = novaSenha;
-      await usuario.save();
-      return usuario;
-    }
-    else {
+    const isMatch = await bcrypt.compare(senhaAtual, usuario.senha);
+    if (!isMatch) {
       throw new Error('Senha atual está incorreta');
     }
 
+    const salt = await bcrypt.genSalt(10);
+    usuario.senha = await bcrypt.hash(novaSenha, salt);
+    await usuario.save();
+    return usuario;
+
   } catch (error) {
-    console.error('Senha atual está incorreta:', error);
-    throw new Error('Senha atual está incorreta');
+    console.error('Erro ao alterar senha:', error);
+    throw new Error('Erro ao alterar senha');
   }
 }
 
