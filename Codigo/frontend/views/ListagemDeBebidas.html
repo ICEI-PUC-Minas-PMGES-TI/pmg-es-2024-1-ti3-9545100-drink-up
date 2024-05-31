@@ -15,7 +15,9 @@
   </head>
   <body>
     <header class="header">
-      <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo"/>
+      <button onclick="location.href='Home.html'">
+        <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      </button>
       <button
         class="button-NovoProduto"
         onclick="location.href='CadastroBebidas.html'"
@@ -111,5 +113,37 @@
     </div>
 
     <script src="../js/ListagemDeBebidas.js"></script>
+    <script>
+  
+      const token = sessionStorage.getItem("authorization");
+      if (!token) {
+          alert("Você não está autenticado. Por favor, faça login.");
+          window.location.href = "Login.html";
+      }
+
+      
+      function cadastrarFrete(data) {
+          fetch('http://localhost:3000/produtos', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'x-access-token': token
+              },
+              body: JSON.stringify(data)
+          })
+          .then(response => {
+              if (response.ok) {
+                  alert('Produto atualizado com sucesso');
+                  return response.json();
+              } else {
+                  throw new Error('Erro ao atualizar o produto');
+              }
+          })
+          .catch(error => {
+              console.error('Erro:', error);
+          });
+      }
+
+    </script>
   </body>
 </html>

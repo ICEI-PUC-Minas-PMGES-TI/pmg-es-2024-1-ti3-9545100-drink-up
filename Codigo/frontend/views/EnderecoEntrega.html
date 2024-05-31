@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endereço de Entrega</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../css/EndereçoEntrega.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <button onclick="location.href='Home.html'">
+        <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      </button>
+      <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
+        <span class="material-symbols-outlined">person</span>
+      </button>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="title">
+          <h2>FINALIZAR COMPRA</h3>
+        </div>
+        <div class="subtitle">
+            <h3>Endereço de entrega</h4>
+        </div>
+        <div class="row"> 
+          <div class="input-group">
+            <label for="nome">Escolha seu endereço ou crie um novo:</label>
+            <select class="form-control" id="selectCategoria" required>
+              <option disabled selected value="">Escolha um endereço</option>
+              <option value="meu_endereco">Meu Endereço</option>
+              <option value="endereco_novo">Endereço Novo</option>
+          </select>
+          </div>
+
+          <div class="input-group">
+            <label for="CEP">CEP</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cep"
+              placeholder="Digite o seu CEP"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="rua" class="form-label">Rua</label>
+            <input
+              type="text"
+              class="form-control"
+              id="rua"
+              placeholder="Digite sua rua"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="bairro"
+                    placeholder="Digite o seu Bairro"
+                    required
+                />
+            </div>
+
+            <div class="input-group">
+                <label for="numero" class="form-label">Numero</label>
+                <input
+                type="text"
+                class="form-control"
+                id="numero"
+                placeholder="Digite o seu Numero de Endereço"
+                required
+                />
+            </div>
+
+            <div class="input-group">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="complemento"
+                  placeholder="Digite o seu Complemento"
+                  required
+                />
+            </div>
+        </div>
+
+            <div class="input-group">
+                <label for="UF" class="form-label">UF</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="UF"
+                  value="MG"
+                  required
+                />
+            </div>
+
+        </div>
+      </div>
+      <div class="button">
+        <button type="button" class="btn" id="btncadastrar">Cancelar</button>
+        <button class="checkout-button" id="btnContinuar">Continuar</button>
+      </div>
+    </main>
+
+    <script src="../js/EndereçoEntrega.js"></script>
+     
+  </body>
+</html>

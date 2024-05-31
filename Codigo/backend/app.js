@@ -7,16 +7,12 @@ const clienteRoutes = require('./routes/clienteRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const estoqueRoutes = require('./routes/estoqueRoutes');
+const carrinhoRoutes = require('./routes/carrinhoRoutes');
+const freteRoutes = require ('./routes/freteRoutes');
+const pedidoRoutes = require ('./routes/pedidoRoutes');
 
 const app = express();
 const PORT = 3000;
-
-// Configuração de sessão
-app.use(session({
-  secret: 'drinkupTIS3', //Aparentemente obrigatório
-  resave: false,
-  saveUninitialized: true
-}));
 
 app.use(express.json());
 app.use(cors());
@@ -27,7 +23,11 @@ app.use(clienteRoutes);
 app.use(produtoRoutes);
 app.use(categoriaRoutes);
 app.use(estoqueRoutes);
+app.use(carrinhoRoutes);
+app.use(freteRoutes);
+app.use(pedidoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+

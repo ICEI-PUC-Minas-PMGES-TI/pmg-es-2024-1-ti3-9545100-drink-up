@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     document.getElementById('bntEntrar').addEventListener('click', function (event) {
         event.preventDefault();
 
         const email = document.getElementById('email').value
         const senha = document.getElementById('senha').value
         
-        fetch('http://localhost:3000/api/login', {
+        fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -13,9 +14,23 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({
                 email: email,
                 senha: senha
-            } ) } )
-                .then(response => response.json())
-                .then(data => { console.log(data) })
-                .catch(error => { console.log(error); });
-        });
+            })
+        })
+        .then(response => response.json())
+        .then(data => { 
+
+            if(!data.error){
+                const token = data.token;
+                const parts = token.split('.');
+                const payload = JSON.parse(atob(parts[1]));
+
+                sessionStorage.setItem("authorization", data.token);
+                sessionStorage.setItem("user_id", payload.user_id);
+                
+                payload.perfil=='admin'?window.location.href = "../views/PerfilAdmin.html":
+                                           window.location.href = "../views/Perfil.html";
+            }      
+        })
+        .catch(error => { console.log(error); });
     });
+});

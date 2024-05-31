@@ -2,6 +2,37 @@ document.addEventListener('DOMContentLoaded', function () {
     const baseUrl = 'http://localhost:3000';
 
 
+    function carregarProdutos(filtroCategoria) {
+    fetch(`${baseUrl}/produtos`) 
+    .then(response => response.json())
+    .then(produtos => {
+        let filteredProdutos;
+        if (filtroCategoria) {
+            filteredProdutos = produtos.filter(produto => produto.id_categoria && produto.id_categoria.id == filtroCategoria);
+        } else {
+            filteredProdutos = produtos;
+        }
+        const tbody = document.querySelector('.tabela tbody');
+        tbody.innerHTML = ''; 
+        filteredProdutos.forEach(produto => {
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-id', produto.id);
+            tr.innerHTML = `<td>${produto.nome}</td>
+                            <td>${produto.descricao}</td>
+                            <td class="quantidade">${produto.estoque_atual}</td>  
+                            <td><button class="adicionar">➕</button></td>
+                            <td><button class="remover">➖</button></td>`;
+            tbody.appendChild(tr);
+        });
+        addEventListenersToButtons();
+    })
+    .catch(error => console.error('Erro ao puxar produtos do banco', error));
+}
+      
+
+
+
+
     fetch(`${baseUrl}/categorias`)
        .then(response => response.json())
        .then(categorias => {
@@ -12,38 +43,18 @@ document.addEventListener('DOMContentLoaded', function () {
                option.textContent = categoria.descricao; 
                categoriaSelect.appendChild(option);
            });
+           carregarProdutos();
        })
        .catch(error => console.error('Erro ao carregar categorias:', error));
 
 
 
    document.querySelector('.button-busca').addEventListener('click', function() {
-       const selectedCategoria = document.getElementById('categoriaSelect').value;
-       if (!selectedCategoria) {
-           alert('selecione a categoria que deseja filtrar!');
-           return;
-       }
+   const selectedCategoria = document.getElementById('categoriaSelect').value;
+   carregarProdutos(selectedCategoria);
 
-      fetch(`${baseUrl}/produtos`) 
-       .then(response => response.json())
-       .then(produtos => {
-           const filteredProdutos = produtos.filter(produto => produto.id_categoria.id == selectedCategoria);
-           const tbody = document.querySelector('.tabela tbody');
-           tbody.innerHTML = ''; 
-           filteredProdutos.forEach(produto => {
-               const tr = document.createElement('tr');
-               tr.setAttribute('data-id', produto.id);
-               tr.innerHTML = `<td>${produto.nome}</td>
-                               <td>${produto.descricao}</td>
-                               <td class="quantidade">${produto.estoque_atual}</td>  
-                               <td><button class="adicionar">➕</button></td>
-                               <td><button class="remover">➖</button></td>`;
-               tbody.appendChild(tr);
-           });
-           addEventListenersToButtons();
-       })
-       .catch(error => console.error('Erro ao puxar produtos do banco', error));
-         });
+
+});
 
 
 

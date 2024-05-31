@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap");
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  background-color: #F2C029;
+  padding: 24px 20px;
+  display: flex; /* Ativa flexbox no header */
+  justify-content: space-between; /* Separa os itens para cada extremidade */
+  align-items: center; /* Centraliza verticalmente */
+}
+
+.header img {
+  height: 40px;
+}
+
+.user-icon {
+  height: 30px; /* Ajuste para o ícone do usuário */
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  color: #111;
+  padding: 20px;
+  width: 850px;
+}
+
+#imagem img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 200px;
+    width: 400px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  text-align: justify;
+}
+
+#id {
+text-align: justify;   
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+    opacity: .4;
+    transition: 0.2s ease-in-out;
+}    
+
+
+.sidebar button {
+  border: none;
+  height: 40px; /* Defina a altura dos botões */
+}
+
+.sidebar button:hover {
+  background-color: #ddd;
+  transition: 0.2s ease-in-out;
+}
+
+#counter {
+    display: flex;
+    justify-content: center;
+    border: 4px;
+    border-color: black;
+    border-radius: 4px;
+    padding: 32px;
+}
+
+#counter div {
+    display: flex;
+    align-items: center;
+}
+
+#value {
+    color: black;
+    min-width: 100px;
+    text-align: center;
+    font-size: 35px
+}
+
+.count-button {
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    background-color: #F2C029;
+    margin-right: 16px;
+}
+
+.count-button:last-child{
+    margin-right: 0px;
+    margin-left: 16px;
+    
+}
+
+#reset {
+ width: 1;
+ margin-left: px;
+ background-color: #F2C029;   
+}
+
+.add-btn {
+  background-color: #F2C029;
+  margin-left: 20px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    background-color: #F2C029;
+}

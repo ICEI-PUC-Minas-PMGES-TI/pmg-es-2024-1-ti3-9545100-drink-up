@@ -158,3 +158,11 @@ input {
 .popup-content th {
     background-color: #f2f2f2;
 }
+
+header button{
+    background-color:#F2C029 ;
+}
+
+.button-usuario:hover{
+    color: #424242;
+}

@@ -1,63 +1,164 @@
-.navbar {
-    background-color: #F2C029;
-    padding: 24px 20px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    height: 95px; 
-  }
-
-  .navbar img {
-    height: 40px;
-    justify-content: left;
-    display: flex;
-}
-
-*{
+* {
+    
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
+    
     width: 100%;
     height: 100vh;
     font-family: 'Nunito Sans', sans-serif;
 }
-  
-.container {
+
+.navbar {
+    
+    background-color: #F2C029;
+    padding: 24px 20px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 95px;
+}
+
+.navbar img {
+    
+    height: 40px;
+}
+
+.btn-about {
+    
+    background-color: #F2C029;
+    border: none;
+    color: black;
+    font-weight: bold;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.btn-about:hover {
+    
+    color: white;
+    background-color: #d1a71d;
+}
+
+.campo-busca {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-icons {
+    
+    display: flex;
+    align-items: center;
+}
+
+header button {
+    
+    background-color: #F2C029;
+}
+
+#perfilBtn, #carrinhoBtn, #filterBtn {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#perfilBtn .material-symbols-outlined,
+#carrinhoBtn .material-symbols-outlined,
+#filterBtn .material-symbols-outlined {
+    
+    font-size: 24px;
+    color: black;
+    transition: color 0.3s;
+}
+
+#perfilBtn:hover .material-symbols-outlined,
+#perfilBtn:focus .material-symbols-outlined,
+#carrinhoBtn:hover .material-symbols-outlined,
+#carrinhoBtn:focus .material-symbols-outlined,
+#filterBtn:hover .material-symbols-outlined,
+#filterBtn:focus .material-symbols-outlined {
+    
+    color: black;
+}
+
+.button-login {
+    
+    background-color: #F2C029; 
+    color: black; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.button-login:hover {
+    
+    background-color: rgba(241, 229, 55, 0.822); 
+}
+
+.container {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: -2.5rem;
     width: 100%;
-    height: 70vh;
-    padding: 7rem;
-    justify-content: space-between;
+    padding: 7rem 1rem;
 }
 
 .product-card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 300px;
+    height: auto;
     margin: 15px;
     border-radius: 5px;
     overflow: hidden;
 }
 
 .product-card img {
+    
     width: 100%;
-    height: 200px;
+    height: auto;
+    max-height: 200px;
     object-fit: cover;
 }
 
+.product-list {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1200px;
+}
+
 .product-card .description {
+    
     padding: 15px;
-    text-align: center;
+    text-align: center !important;
+    margin: auto !important;
 }
 
 .product-card button {
+    
     background-color: #4CAF50;
     color: white;
-    border: none;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -65,9 +166,12 @@ body{
     font-size: 16px;
     margin: 10px 2px;
     cursor: pointer;
+    border-radius: 5px;
+    margin-left: 86px;
 }
 
 .custom-footer {
+    
     background-color: #333;
     color: white;
     text-align: center;
@@ -75,5 +179,86 @@ body{
     position: fixed;
     bottom: 0;
     width: 100%;
+    left: 0; 
 }
 
+#about-us {
+    
+    display: flex;
+    align-items: center;
+    padding: 50px 10%;
+    background: #f4f4f4;
+    min-height: 400px;
+}
+
+#about-us .container {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#about-us .logo {
+    
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#about-us .logo img {
+    
+    width: 300px;
+    height: auto;
+}
+
+#about-us .description {
+    
+    flex: 2;
+    text-align: right;
+}
+
+#sidebar-wrapper {
+    
+    min-height: 100vh;
+    width: 0;
+    transition: width 0.3s ease;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 1;
+    background-color: #f8f9fa;
+}
+
+#sidebar-wrapper.open {
+    
+    width: 250px;
+}
+
+#sidebar-wrapper .list-group {
+    
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar-wrapper.open .list-group {
+    
+    opacity: 1;
+}
+
+#page-content-wrapper {
+    
+    min-width: 100vw;
+    transition: margin-left 0.3s ease;
+}
+
+#page-content-wrapper.shifted {
+    
+    margin-left: 250px;
+}
+
+.carousel-inner img {
+    
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}

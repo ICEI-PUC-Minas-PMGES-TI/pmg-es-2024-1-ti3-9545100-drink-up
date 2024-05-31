@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const tamGarrafa = document.getElementById("tamGarrafa").value;
       const valor = document.getElementById("valor").value;
       const imagem = document.getElementById("imagem").value;
-      // const estoque_atual = document.getElementById("estoque_atual").value;
+      const estoque_atual = 1;
 
       fetch("http://localhost:3000/produtos", {
         method: "POST",
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "descricao": descricao,
           "tam_garrafa": tamGarrafa,
           "valor": valor,
-          //"estoque_atual": estoque_atual,
+          "estoque_atual": estoque_atual,
           "id_imagem": imagem,
         }),
       })

@@ -1,59 +1,113 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap');
 
-
-* {
-    padding: 0;
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif; 
+    padding: 0;
 }
 
+.header {
+    background-color: #F2C029;
+    padding: 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.form-container {
-    background-color: white;
+.header img {
+    height: 40px;
+}
+
+.user-icon {
+    height: 30px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    background-color: #f4f4f4;
+    color: #111;
     padding: 20px;
+    width: 200px;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.dados {
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 1500px;
 }
-  
-.btn-dark {
-    background-color: #333;
-    border-color: #333;
-    font-weight: 500;
+
+.form-group {
+    margin-bottom: 20px;
 }
-  
-.btn-dark:hover {
-    background-color: #555;
-    border-color: #555;
+
+.button {
+    margin-top: 20px;
+    text-align: right;
 }
-  
-.btn-primary {
+
+.btn {
     background-color: #E2B420;
-    border-color: #E2B420;
-}
-  
-.btn-primary:hover {
-    background-color: #D7A11E;
-    border-color: #D7A11E;
-}
-  
-main{
-    background-color: white;
-    padding: 30px 50px;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
 }
 
-.button{
+.btn:hover {
+    background-color: #d4a30e;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand img {
+        width: 80px;
+    }
+
+    .col-md-6 {
+        margin-bottom: 20px;
+    }
+}
+
+/* Estilos adicionais para organizar os inputs lado a lado */
+.content .row {
     display: flex;
-    justify-content: end;
-    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-#btncancelar{
-    margin-right: 10px;
+.content .row > .col-md-6 {
+    flex: 1;
+    min-width: calc(50% - 20px); /* Ajuste para espaçamento */
 }
 
-#imgperfil{
+.mb-3 {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
+.mb-3 label {
+    margin-bottom: 5px;
+}
+
+.mb-3 input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input{
+    margin-bottom: 10px;
+}

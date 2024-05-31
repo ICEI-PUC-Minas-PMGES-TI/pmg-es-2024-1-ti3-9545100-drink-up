@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/baixo_estoque.css">
+</head>
+<body>
+    <div class="navbar">
+        <a class="navbar-brand" href="Home.html"><img src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
+    </div>
+    <header class="titulo">
+        <h1>Relatório estoque baixo</h1>
+    </header>
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script src="../js/baixo_estoque.js"></script>
+
+
+
+    <script>
+     
+        const token = sessionStorage.getItem("authorization");
+        if (!token) {
+            alert("Você não está autenticado. Por favor, faça login.");
+            window.location.href = "Login.html";
+        }
+
+    
+        function loadBaixoEstoque() {
+            fetch('http://localhost:3000/baixo_estoque', {
+                method: 'GET',
+                headers: {
+                    'x-access-token': token
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao carregar bebidas com baixo estoque');
+                }
+            })
+            .then(data => {
+            
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+        window.onload = loadBaixoEstoque;
+    </script>
+
+
+</body>
+</html>

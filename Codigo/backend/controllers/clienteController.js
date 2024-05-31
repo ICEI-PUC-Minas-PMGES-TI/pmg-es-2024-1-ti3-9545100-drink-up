@@ -39,6 +39,20 @@ const clienteController = {
     }
   },
 
+  async buscarClientePorIdUsuario(req, res) {
+    const idUsuario = req.params.idUsuario;
+    try {
+      const cliente = await clienteService.buscarClientePorIdUsuario(idUsuario);
+      if (!cliente) {
+        return res.status(404).json({ message: 'Cliente não encontrado' });
+      }
+      res.json(cliente);
+    } catch (error) {
+      console.error('Erro ao buscar cliente por ID de usuário:', error);
+      res.status(500).json({ message: 'Erro ao buscar cliente por ID de usuário' });
+    }
+  },
+
   async listarTodosClientes(req, res) {
     try {
       const clientes = await clienteService.listarTodosClientes();

@@ -190,3 +190,11 @@ button:hover {
 .form-input {
     padding: 8px;
 }
+
+header button{
+    background-color:#F2C029 ;
+}
+
+.button-usuario:hover{
+    color: #424242;
+}

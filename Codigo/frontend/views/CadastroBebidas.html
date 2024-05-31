@@ -13,7 +13,9 @@
 
   <body>
     <header class="header">
-      <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      <button onclick="location.href='Home.html'">
+        <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+      </button>
       <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
         <span class="material-symbols-outlined">person</span>
       </button>
@@ -120,6 +122,39 @@
     </div>
 
     <script src="../js/CadastroBebida.js"></script>
+
+    <script>
+  
+      const token = sessionStorage.getItem("authorization");
+      if (!token) {
+          alert("Você não está autenticado. Por favor, faça login.");
+          window.location.href = "Login.html";
+      }
+
+      
+      function cadastrarBebida(data) {
+          fetch('http://localhost:3000/bebidas', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'x-access-token': token
+              },
+              body: JSON.stringify(data)
+          })
+          .then(response => {
+              if (response.ok) {
+                  alert('Bebida cadastrada com sucesso');
+                  return response.json();
+              } else {
+                  throw new Error('Erro ao cadastrar bebida');
+              }
+          })
+          .catch(error => {
+              console.error('Erro:', error);
+          });
+      }
+
+  </script>
      
   </body>
 </html>

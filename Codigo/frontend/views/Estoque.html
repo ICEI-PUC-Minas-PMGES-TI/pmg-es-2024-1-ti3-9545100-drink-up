@@ -9,15 +9,19 @@
 </head>
 <body>
     <div class="navbar">
-        <a class="navbar-brand" href="#"><img src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
+        <a class="navbar-brand" href="Home.html"><img src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
         <div class="campo-busca">
-            <input type="text" class="input" placeholder="Busca por categoria">
+            <select id="categoriaSelect">
+                <option value="">Selecione uma categoria</option>
+            </select>
             <button class="button-busca">Buscar</button>
-        </div>
+        </div>        
         <button class="button-NovoProduto" onclick="window.location.href='CadastroBebidas.html';">Novo produto
             <button class="button-usuario">
                 <span class="material-symbols-outlined">person</span>
             </button>
+        </button>
+        <button class="button-baixo_estoque" onclick="window.location.href='baixo_estoque.html';">relatório de estoque baixo
         </button>
     </div>
     <header class="titulo">
@@ -37,6 +41,43 @@
             
         </tbody>
     </table>
+
     <script src="../js/Estoque.js"></script>
+
+    <script>
+        const token = sessionStorage.getItem("authorization");
+        if (!token) {
+            alert("Você não está autenticado. Por favor, faça login.");
+            window.location.href = "Login.html";
+        }
+
+        function loadEstoque() {
+            fetch('http://localhost:3000/estoque', {
+                method: 'GET',
+                headers: {
+                    'x-access-token': token
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao carregar estoque');
+                }
+            })
+            .then(data => {
+
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+
+        window.onload = loadEstoque;
+    </script>
+
+
+
 </body>
 </html>

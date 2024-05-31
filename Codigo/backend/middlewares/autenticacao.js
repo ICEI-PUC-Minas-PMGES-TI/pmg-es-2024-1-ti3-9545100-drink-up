@@ -1,32 +1,44 @@
 const jwt = require('jsonwebtoken');
 const SECRET = 'drinkupTIS3';
 
-const autenticacao = (perfilUsuario) => (req, res, next) => {
-  // Se a rota não exigir autenticação, permitir o acesso sem token
-  if (!req.route.authenticated) {
-    return next();
-  }
+const autenticacao = (requerAutenticacao, permissao) => (req, res, next) => {
 
-  // Verificação do token
-  const token = req.headers['x-access-token'];
-  if (!token) {
-    return res.status(401).end(); // Token não fornecido
-  }
+  //Verifica se a rota exige requisição. Caso exija, prossegue com as validações
+  if (requerAutenticacao) {
 
-  jwt.verify(token, SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).end(); // Token inválido
+    const token = req.headers['x-access-token'];
+    //Verifica se o token foi fornecido
+    if (!token) {
+      return res.status(401).json({ error: 'Token não fornecido' });
     }
-    req.id = decoded.id;
-    req.perfil = decoded.perfil;
-    req.status = decoded.status;
 
-    // Verificação do perfil e status do usuário
-    if (req.route.authenticated && (req.perfil !== perfilUsuario || req.status !== '1')) {
-      return res.status(403).end(); // Acesso negado
-    }
+    //Validação e decodificação do token
+    jwt.verify(token, SECRET, (err, decoded) => {
+      if (err) {
+        if (err.name === 'TokenExpiredError') {
+          return res.status(401).json({ error: 'Token expirado' });
+        }
+        return res.status(401).json({ error: 'Token inválido' });
+      }
+
+      req.perfil = decoded.perfil;
+      req.status = decoded.status;
+
+      //Verifica se o perfil definido para acesso na rota condiz com o perfil do token gerado
+      if (req.perfil == 'admin'|| permissao == req.perfil || !permissao && req.status == 1) {
+        next();
+      }
+      else{
+        return res.status(401).json({ error: 'Usuário inativo ou não possui permissão de acesso' });
+      }
+
+    });
+    
+  }
+  else{
     next();
-  });
+  }
+
 };
 
 module.exports = autenticacao;

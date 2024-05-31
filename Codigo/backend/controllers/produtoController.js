@@ -16,6 +16,19 @@ class ProdutoController {
     }
   }
 
+ async atualizarEstoqueProduto(req, res) {
+    const { id } = req.params; 
+    const { estoque_atual } = req.body; 
+    try {
+      const produtoAtualizado = await produtoService.atualizarEstoque(id, estoque_atual);
+      res.json({ message: 'Estoque atualizado!', produto: produtoAtualizado });
+    } catch (error) {
+      console.error('Erro em atualizar o estoque:', error);
+      res.status(500).json({ message: 'Erro em atualizar o estoque' });
+    }
+}
+
+
   async buscarProdutoPorNome(req, res) {
     const nome = req.params.nome;
     try {
@@ -38,7 +51,7 @@ class ProdutoController {
     }
   }
 
-  async listarTodosProdutos(req, res) {
+  async listarTodosProdutos(req, res) { 
     try {
       const produtos = await produtoService.listarTodosProdutos();
       res.json(produtos);
@@ -63,19 +76,6 @@ class ProdutoController {
     }
   }
 
- async atualizarEstoqueProduto(req, res) {
-    const { id } = req.params; 
-    const { estoque_atual } = req.body; 
-    try {
-      const produtoAtualizado = await produtoService.atualizarEstoque(id, estoque_atual);
-      res.json({ message: 'Estoque atualizado!', produto: produtoAtualizado });
-    } catch (error) {
-      console.error('Erro em atualizar o estoque:', error);
-      res.status(500).json({ message: 'Erro em atualizar o estoque' });
-    }
-}
-  
-
   async excluirProduto(req, res) {
     const id = req.params.id;
     try {
@@ -86,6 +86,21 @@ class ProdutoController {
       res.status(500).json({ message: 'Erro ao excluir produto' });
     }
   }
+
+  async saidaBebida(req,res){
+      try {
+          // Chamando a função do service para obter os produtos formatados
+          const produtosFormatados = await saidaBebidasService();
+  
+          // Retornando os produtos formatados como resposta
+          res.json(produtosFormatados);
+      } catch (error) {
+          // Em caso de erro, retornar uma resposta de erro
+          console.error('Erro ao buscar produtos para saída de bebidas:', error);
+          res.status(500).json({ error: 'Erro ao buscar produtos para saída de bebidas' });
+      }
+  }
+ 
   
 };
 

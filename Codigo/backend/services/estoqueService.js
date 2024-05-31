@@ -52,6 +52,34 @@ async function listarEstoquePorProduto(nome) {
     }
 }
 
+// async function relatorioSaidaBebidas() {
+//     try {
+//         console.log("Executando relatorioSaidaBebidas");
+//         const sequelize = database.getInstance(); // Obter instância do Sequelize aqui
+//         const [results, metadata] = await sequelize.query(`
+//             SELECT 
+//                 cat.descricao AS 'Tipo',
+//                 SUM(est.quantidade) AS 'Qnt',
+//                 prd.nome AS 'Valor',
+//                 prd.valor AS 'Nome da Bebida'
+//             FROM tb_estoque est
+//                 INNER JOIN tb_produto prd ON est.id_produto = prd.id
+//                 INNER JOIN tb_categoria cat ON prd.id_categoria = cat.id
+//             WHERE est.tipo = 'saida'
+//             GROUP BY prd.id
+//             ORDER BY 2 DESC, 1 ASC, 4 ASC
+//         `);
+//         console.log("*********************************");
+//         console.log(results);
+//         console.log("====================================");
+//         return results;
+//     } catch (error) {
+//         console.error('Erro ao exibir relatório:', error);
+//         throw new Error('Erro ao exibir relatório');
+//     }
+// }
+
+
 module.exports = {
     estoqueEntradaSaida,
     listarEstoqueCompleto,
