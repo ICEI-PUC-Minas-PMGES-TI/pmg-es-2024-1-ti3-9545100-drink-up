@@ -164,3 +164,4 @@ INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_i
 INSERT INTO tb_produto (nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria) VALUES ('Guaranaaa', 'Descrição do Produto', 10.99, 'Tamanho da Garrafa', 9, 1, 1);
 
 INSERT INTO tb_frete VALUES (1,30, 300);
+
