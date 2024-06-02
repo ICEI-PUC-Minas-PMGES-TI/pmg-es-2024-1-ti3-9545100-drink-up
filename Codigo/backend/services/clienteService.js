@@ -141,9 +141,16 @@ async function excluirCliente(id) {
     if (!cliente) {
       throw new Error('Cliente não encontrado');
     }
+ 
+    cliente.nome = "Usuario excluído";
+    cliente.cpf = "remov: " + cliente.id;
+    cliente.data_nascimento = "9999-01-01 00:00:00";
+    cliente.telefone = "removido";
 
-    await cliente.destroy();
-    return true;
+    await Usuario.excluirUsuario(cliente.id_usuario);
+
+    await cliente.save();
+    return cliente;
   } catch (error) {
     console.error('Erro ao excluir cliente:', error);
     throw new Error('Erro ao excluir cliente');
