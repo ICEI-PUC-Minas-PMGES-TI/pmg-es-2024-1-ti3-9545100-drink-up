@@ -11,9 +11,12 @@ async function criarUsuario(email, senha, perfil) {
   if (!regexEmail.test(email)) {
     throw new Error('Email inválido');
   }
+
   try {
-    const usuario = await Usuario.create({ email, senha, perfil });
+    const senhaCriptografada = await criptografarSenha(senha);
+    const usuario = await Usuario.create({ email, senha: senhaCriptografada, perfil });
     return usuario;
+
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
     throw new Error('Erro ao criar usuário');
@@ -21,39 +24,36 @@ async function criarUsuario(email, senha, perfil) {
 }
 
 async function login(email, senha) {
-  const usuario = await Usuario.findOne({ where: { email } });
 
+  const usuario = await Usuario.findOne({ where: { email } });
+  
   if (!usuario) {
     throw new Error('Usuário não encontrado');
   }
-  // Verificaa se a senha armazenada no banco de dados é criptografada
-  const possuiCriptografia = usuario.senha.startsWith('$2b$');
-  let senhaValida = false;
-
-  if (possuiCriptografia) {
-    // Tenta comparar a senha do parâmetro com a senha criptografada no banco de dados
-    try {
-      senhaValida = await bcrypt.compare(senha, usuario.senha);
-    } catch (err) {
-      console.error('Erro ao comparar a senha criptografada:', err);
-      throw new Error('Erro ao verificar a senha');
-    }
-  } else {
-    // Compara com a senha não criptografada no banco de dados. Para o caso de usuário criados anteriormente
-    senhaValida = senha === usuario.senha;
-  }
+  
+  const senhaValida = await verificaSenha(senha, usuario.senha);
 
   if (!senhaValida) {
     throw new Error('Senha incorreta');
   }
+  
   if (usuario.status !== '1') {
     throw new Error('Usuario inativo');
   }
 
-  const token = jwt.sign({user_id:usuario.id, perfil:usuario.perfil, status:usuario.status, email:usuario.email}, SECRET, {expiresIn: '1h'});
+  const token = jwt.sign(
+    { 
+      user_id:usuario.id, 
+      perfil:usuario.perfil, 
+      status:usuario.status, 
+      email:usuario.email 
+    }, 
+    SECRET, {expiresIn: '1h'}
+  );
 
   return { token };
 }
+
 
 async function listarTodosUsuarios() {
   try {
@@ -94,8 +94,8 @@ async function atualizarUsuario(id, senha, status) {
     // Verifica quais campos foram passados como parâmetro e atualiza somente esses campos
 
     if (senha) {
-      const salt = await bcrypt.genSalt(10);
-      usuario.senha = await bcrypt.hash(senha, salt);
+      const senhaCriptografada = await criptografarSenha(senha);
+      usuario.senha = senhaCriptografada;
     }
     if (status) {
       usuario.status = status;
@@ -116,13 +116,15 @@ async function alterarSenha(id, senhaAtual, novaSenha) {
       throw new Error('Usuário não encontrado');
     }
 
-    const isMatch = await bcrypt.compare(senhaAtual, usuario.senha);
-    if (!isMatch) {
-      throw new Error('Senha atual está incorreta');
+    const senhaValida = await verificaSenha(senhaAtual, usuario.senha);
+
+    if (!senhaValida) {
+      throw new Error('Senha incorreta');
     }
 
-    const salt = await bcrypt.genSalt(10);
-    usuario.senha = await bcrypt.hash(novaSenha, salt);
+    const senhaCriptografada = await criptografarSenha(novaSenha);
+    usuario.senha = senhaCriptografada;
+
     await usuario.save();
     return usuario;
 
@@ -145,6 +147,27 @@ async function excluirUsuario(id) {
     console.error('Erro ao excluir usuário:', error);
     throw new Error('Erro ao excluir usuário');
   }
+}
+
+async function criptografarSenha(senha) {
+  const salt = await bcrypt.genSalt(10);
+  const senhaCriptografada = await bcrypt.hash(senha, salt);
+  return senhaCriptografada;
+}
+
+async function verificaSenha(senhaEntrada, senhaUsuario) {
+
+  let senhaValida = false;
+  // Verificaa se a senha armazenada no banco de dados é criptografada
+  if (senhaUsuario.startsWith('$2b$')) {
+    // Compara a senha do parâmetro com a senha criptografada no banco de dados
+    senhaValida = await bcrypt.compare(senhaEntrada, senhaUsuario);
+  } else {
+    // Compara com a senha não criptografada no banco de dados. Para o caso de usuário criados anteriormente à criptografia
+    senhaValida = senhaEntrada === senhaUsuario;
+  }
+  
+  return senhaValida;
 }
 
 module.exports = {
