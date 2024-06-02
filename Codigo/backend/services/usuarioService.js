@@ -134,6 +134,9 @@ async function alterarSenha(id, senhaAtual, novaSenha) {
   }
 }
 
+
+//Metodo para exclusão simbólica do usuário, removendo o status e colocado uma senha segura padrao 
+// Senha padrão: "dXN1YXJpbyBleGNsdWlkbyBjb20gc3VjZXNzbw==" -> formatação base64 para "usuario excluido com sucesso"
 async function excluirUsuario(id) {
   try {
     const usuario = await Usuario.findByPk(id);
@@ -141,7 +144,11 @@ async function excluirUsuario(id) {
       throw new Error('Usuário não encontrado');
     }
 
-    await usuario.destroy();
+    usuario.senha = "dXN1YXJpbyBleGNsdWlkbyBjb20gc3VjZXNzbw==";
+    usuario.status = 3;
+
+    await usuario.save();
+
     return true;
   } catch (error) {
     console.error('Erro ao excluir usuário:', error);
