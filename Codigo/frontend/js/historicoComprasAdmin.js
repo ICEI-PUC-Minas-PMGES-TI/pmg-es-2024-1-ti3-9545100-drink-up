@@ -9,7 +9,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     loadUsers();
+    loadAllClients();
+    document.getElementById('buscarTodosPedidos').addEventListener('click', loadAllOrders);
+    document.getElementById('dataInput').addEventListener('change', filterOrdersByDate);
 });
+
+let clientsMap = {};
+
+function loadAllClients() {
+    fetch('http://localhost:3000/clientes', {
+        method: 'GET',
+        headers: {
+            'Authorization': sessionStorage.getItem('authorization')
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao buscar clientes: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(clients => {
+        clients.forEach(client => {
+            clientsMap[client.id] = client;
+        });
+    })
+    .catch(error => {
+        console.error('Erro ao buscar clientes:', error);
+    });
+}
 
 function loadUsers() {
 
@@ -76,8 +104,60 @@ function loadOrders(userId) {
         displayOrders(userOrders);
     })
     .catch(error => {
-
         console.error('Erro ao buscar histórico de compras:', error);
+    });
+}
+
+function loadAllOrders() {
+    fetch('http://localhost:3000/pedidos', {
+        method: 'GET',
+        headers: {
+            'Authorization': sessionStorage.getItem('authorization')
+        }
+    })
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error('ERRO');
+        }
+        return response.json();
+    })
+    .then(orders => {
+        displayOrders(orders);
+    })
+    .catch(error => {
+        console.error('ERRO');
+    });
+}
+
+function filterOrdersByDate() {
+
+    const selectedDate = document.getElementById('dataInput').value;
+    fetch('http://localhost:3000/pedidos', {
+        method: 'GET',
+        headers: {
+            'Authorization': sessionStorage.getItem('authorization')
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            
+            throw new Error('ERRO');
+        }
+        return response.json();
+    })
+    .then(orders => {
+
+        const filteredOrders = orders.filter(order => {
+            const orderDate = new Date(order.data_criacao).toISOString().split('T')[0];
+            return orderDate === selectedDate;
+        });
+        displayOrders(filteredOrders);
+    })
+    .catch(error => {
+
+        console.error('ERRO');
+
     });
 }
 
@@ -86,12 +166,27 @@ function displayOrders(orders) {
     const tbody = document.getElementById('pedidos-tbody');
     tbody.innerHTML = '';
 
+    orders.sort((a, b) => {
+        const nameA = clientsMap[a.id_cliente] && clientsMap[a.id_cliente].nome ? clientsMap[a.id_cliente].nome.toUpperCase() : '';
+        const nameB = clientsMap[b.id_cliente] && clientsMap[b.id_cliente].nome ? clientsMap[b.id_cliente].nome.toUpperCase() : '';
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return new Date(a.data_criacao) - new Date(b.data_criacao);
+    });
+
     orders.forEach(order => {
 
+        const cliente = clientsMap[order.id_cliente];
+        const clienteNome = cliente ? cliente.nome : 'Desconhecido';
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${order.data_criacao}</td>
+            <td>${order.data_criacao.split('T')[0]}</td>
             <td>${order.valor_pedido}</td>
+            <td>${clienteNome}</td>
         `;
         tbody.appendChild(tr);
     });
@@ -115,7 +210,7 @@ function visualizarDetalhes(orderId) {
 }
 
 function displayOrderDetails(orderDetails) {
-    
+
     const popupContent = document.querySelector('.popup-content');
     popupContent.innerHTML = `
         <span class="close-popup" onclick="fecharPopup()">&times;</span>
@@ -145,7 +240,7 @@ function displayOrderDetails(orderDetails) {
 }
 
 function fecharPopup() {
-  
+
     const popup = document.getElementById('detalhesPedidoPopup');
     popup.style.display = 'none';
     popup.querySelector('.popup-content').innerHTML = '';

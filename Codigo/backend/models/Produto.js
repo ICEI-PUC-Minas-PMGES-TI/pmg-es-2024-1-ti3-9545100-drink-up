@@ -3,7 +3,7 @@ const Database = require('./Database');
 const Imagem = require('./Imagem');
 const Categoria = require('./Categoria');
 
-const sequelize = new Database(); // Cria uma nova instância de Database
+const sequelize = new Database(); 
 
 class Produto extends Model {}
 
@@ -58,5 +58,7 @@ Produto.init(
     timestamps: false
   }
 );
+
+Produto.belongsTo(Imagem, { foreignKey: 'id_imagem', as: 'imagem' });
 
 module.exports = Produto;

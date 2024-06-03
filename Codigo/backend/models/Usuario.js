@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
 const Database = require('./Database');
 
 const sequelize = new Database(); // Cria uma nova instância de Database
@@ -34,19 +33,7 @@ Usuario.init(
     sequelize: sequelize.getInstance(),
     modelName: 'Usuario',
     tableName: 'tb_usuario',
-    timestamps: false,
-    hooks: {
-      beforeCreate: async (usuario) => {
-        const salt = await bcrypt.genSalt(10);
-        usuario.senha = await bcrypt.hash(usuario.senha, salt);
-      },
-      beforeUpdate: async (usuario) => {
-        if (usuario.changed('senha')) {
-          const salt = await bcrypt.genSalt(10);
-          usuario.senha = await bcrypt.hash(usuario.senha, salt);
-        }
-      }
-    }
+    timestamps: false
   }
 );
 
