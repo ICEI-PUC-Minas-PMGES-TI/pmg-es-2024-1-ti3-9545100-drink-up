@@ -1,14 +1,11 @@
-const Database = require("../models/Database");
 const produtoService = require('../services/produtoService');
 
 class ProdutoController {
 
   async criarProduto(req, res) {
     try {
-      console.log(req.body)
       const { nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, id_categoria } = req.body;
       const produto = await produtoService.criarProduto(nome, descricao, valor, tam_garrafa, estoque_atual, id_imagem, parseInt(id_categoria));
-
       res.status(201).json(produto);
     } catch (error) {
       console.error('Erro ao criar produto:', error);
@@ -16,7 +13,7 @@ class ProdutoController {
     }
   }
 
- async atualizarEstoqueProduto(req, res) {
+  async atualizarEstoqueProduto(req, res) {
     const { id } = req.params; 
     const { estoque_atual } = req.body; 
     try {
@@ -26,8 +23,7 @@ class ProdutoController {
       console.error('Erro em atualizar o estoque:', error);
       res.status(500).json({ message: 'Erro em atualizar o estoque' });
     }
-}
-
+  }
 
   async buscarProdutoPorNome(req, res) {
     const nome = req.params.nome;
@@ -62,13 +58,9 @@ class ProdutoController {
   }
 
   async atualizarProduto(req, res) {
-
-    console.log(req.body);
-
     const { id, nome, descricao, valor, tam_garrafa, id_imagem, id_categoria } = req.body;
-
     try {
-      const produto = await produtoService.atualizarProduto(id, nome, descricao, valor, id_imagem, id_imagem, id_categoria);
+      const produto = await produtoService.atualizarProduto(id, nome, descricao, valor, tam_garrafa, id_imagem, id_categoria);
       res.json(produto);
     } catch (error) {
       console.error('Erro ao atualizar produto:', error);
@@ -87,21 +79,15 @@ class ProdutoController {
     }
   }
 
-  async saidaBebida(req,res){
-      try {
-          // Chamando a função do service para obter os produtos formatados
-          const produtosFormatados = await saidaBebidasService();
-  
-          // Retornando os produtos formatados como resposta
-          res.json(produtosFormatados);
-      } catch (error) {
-          // Em caso de erro, retornar uma resposta de erro
-          console.error('Erro ao buscar produtos para saída de bebidas:', error);
-          res.status(500).json({ error: 'Erro ao buscar produtos para saída de bebidas' });
-      }
+  async saidaBebida(req, res){
+    try {
+      const produtosFormatados = await produtoService.saidaBebidas();
+      res.json(produtosFormatados);
+    } catch (error) {
+      console.error('Erro ao buscar produtos para saída de bebidas:', error);
+      res.status(500).json({ error: 'Erro ao buscar produtos para saída de bebidas' });
+    }
   }
- 
-  
-};
+}
 
 module.exports = ProdutoController;

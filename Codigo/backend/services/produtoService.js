@@ -4,7 +4,6 @@ const Imagem = require("../models/Imagem");
 const categoriaService = require('./categoriaService');
 
 async function criarProduto(nome, descricao, valor, tamGarrafa, estoque_atual, idImagem, idCategoria) {
-
   console.log({nome, descricao, valor, tamGarrafa, estoque_atual, idImagem, idCategoria});
   let transaction;
   
@@ -13,8 +12,7 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, estoque_atual, i
     const sequelize = db.getInstance();
     transaction = await sequelize.transaction();
 
-    // Verifica se a imagem e a categoria existem antes de criar o produto
-    //await verificarExistenciaImagem(idImagem); quando resolver o bo das imagens
+    await verificarExistenciaImagem(idImagem);
     await verificarExistenciaCategoria(idCategoria);
 
     const produto = await Produto.create({
@@ -23,7 +21,7 @@ async function criarProduto(nome, descricao, valor, tamGarrafa, estoque_atual, i
       valor,
       tam_garrafa: tamGarrafa,
       estoque_atual,
-      id_imagem: null, //idImagem,
+      id_imagem: idImagem,
       id_categoria: parseInt(idCategoria)
     }, { transaction });
 
@@ -48,7 +46,6 @@ async function verificarExistenciaImagem(idImagem) {
 async function verificarExistenciaCategoria(idCategoria) {
   if (idCategoria) {
     const categoria = await categoriaService.buscarCategoriaPorId(idCategoria);
-    return categoria;
     if (!categoria) {
       throw new Error('Categoria não encontrada');
     }
@@ -90,48 +87,18 @@ async function listarTodosProdutos() {
   }
 }
 
-async function saidaBebidas() {
-  try {
-    const produtos = await Produto.findAll();
-
-    const produtosFormatados = produtos.map(async (product) => {
-      const categoria = await categoriaService.buscarCategoriaPorId(parseInt(product.id_categoria));
-      return {
-        nome: product.nome,
-        valor: product.valor,
-        id_categoria: id_categoria,
-      };
-    });
-
-    return Promise.all(produtosFormatados);
-  } catch (error) {
-    console.error('Erro ao listar produtos:', error);
-    throw new Error('Erro ao listar produtos');
-  }
-}
-
-
 async function atualizarProduto(id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria) {
-  console.log({id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria})
+  console.log({id, nome, descricao, valor, tamGarrafa, idImagem, idCategoria});
   try {
     const produto = await Produto.findByPk(id);
     if (!produto) {
       throw new Error('Produto não encontrado');
     }
 
-    // Atualiza somente os campos preenchidos por parâmetro
-    if (nome) {
-      produto.nome = nome;
-    }
-    if (descricao) {
-      produto.descricao = descricao;
-    }
-    if (valor) {
-      produto.valor = valor;
-    }
-    if (tamGarrafa) {
-      produto.tam_garrafa = tamGarrafa;
-    }
+    if (nome) produto.nome = nome;
+    if (descricao) produto.descricao = descricao;
+    if (valor) produto.valor = valor;
+    if (tamGarrafa) produto.tam_garrafa = tamGarrafa;
     if (idImagem) {
       await verificarExistenciaImagem(idImagem);
       produto.id_imagem = idImagem;
@@ -152,7 +119,7 @@ async function atualizarProduto(id, nome, descricao, valor, tamGarrafa, idImagem
 async function atualizarEstoque(id, estoqueAtual) {
   const produto = await Produto.findByPk(id);
   if (!produto) {
-      throw new Error('Produto não encontrado');
+    throw new Error('Produto não encontrado');
   }
   produto.estoque_atual = estoqueAtual;
   await produto.save();
@@ -165,7 +132,6 @@ async function excluirProduto(id) {
     if (!produto) {
       throw new Error('Produto não encontrado');
     }
-
     await produto.destroy();
     return true;
   } catch (error) {

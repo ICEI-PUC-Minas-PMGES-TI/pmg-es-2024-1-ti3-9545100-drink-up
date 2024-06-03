@@ -26,16 +26,45 @@ function displayProducts(produtos, productList) {
     produtos.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
-        productCard.innerHTML = `
-            <img src="${product.url_imagem}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
-            <div class="product-description">
-                <h4>${product.nome}</h4>
-                <p>${product.descricao}</p>
-                <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                <button data-id="${product.id}" class="botao-comprar">Comprar</button>
-            </div>
-        `;
-        productList.appendChild(productCard);
+
+        fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
+        .then(response => {
+            console.log(`Response for image id ${product.id_imagem}:`, response);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar a imagem: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(imageData => {
+            console.log('Image data received:', imageData);
+            if (!imageData || !imageData.caminho) {
+                throw new Error('A URL da imagem não está disponível.');
+            }
+            const imageUrl = imageData.caminho;
+            productCard.innerHTML = `
+                <img src="${imageUrl}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
+                <div class="product-description">
+                    <h4>${product.nome}</h4>
+                    <p>${product.descricao}</p>
+                    <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
+                    <button data-id="${product.id}" class="botao-comprar">Comprar</button>
+                </div>
+            `;
+            productList.appendChild(productCard);
+        })
+        .catch(error => {
+            console.error("Erro ao buscar a imagem:", error);
+            productCard.innerHTML = `
+                <img src="../../../img/beer.png" alt="${product.nome}" class="product-image">
+                <div class="product-description">
+                    <h4>${product.nome}</h4>
+                    <p>${product.descricao}</p>
+                    <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
+                    <button data-id="${product.id}" class="botao-comprar">Comprar</button>
+                </div>
+            `;
+            productList.appendChild(productCard);
+        });
     });
 }
 

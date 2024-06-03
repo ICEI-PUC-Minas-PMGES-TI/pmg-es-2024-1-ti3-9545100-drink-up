@@ -4,16 +4,14 @@ const imagemController = {
   async uploadImagem(req, res) {
     try {
       const { nome, caminho } = req.body;
-
       const imagem = await imagemService.criarImagem(nome, caminho);
-
       res.status(201).json(imagem);
     } catch (error) {
       console.error('Erro ao fazer upload de imagem:', error);
       res.status(500).json({ message: 'Erro ao fazer upload de imagem' });
     }
   },
-  
+
   async buscarImagemPorId(req, res) {
     const id = req.params.id;
     try {
