@@ -16,7 +16,6 @@ function carregarProdutos(filtroCategoria) {
                 productList.innerHTML = 'Nenhum produto encontrado para esta categoria.';
             } else {
                 displayProducts(filteredProdutos, productList);
-                addEventListeners();  
             }
         })
         .catch(error => console.error('Erro ao carregar produtos:', error));
@@ -29,14 +28,14 @@ function displayProducts(produtos, productList) {
 
         fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
         .then(response => {
-            console.log(`Response for image id ${product.id_imagem}:`, response);
+            
             if (!response.ok) {
                 throw new Error('Erro ao buscar a imagem: ' + response.statusText);
             }
             return response.json();
         })
         .then(imageData => {
-            console.log('Image data received:', imageData);
+
             if (!imageData || !imageData.caminho) {
                 throw new Error('A URL da imagem não está disponível.');
             }
@@ -51,6 +50,7 @@ function displayProducts(produtos, productList) {
                 </div>
             `;
             productList.appendChild(productCard);
+            addEventListeners(); 
         })
         .catch(error => {
             console.error("Erro ao buscar a imagem:", error);
@@ -64,6 +64,7 @@ function displayProducts(produtos, productList) {
                 </div>
             `;
             productList.appendChild(productCard);
+            addEventListeners(); 
         });
     });
 }
