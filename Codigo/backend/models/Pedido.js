@@ -43,6 +43,10 @@ Pedido.init(
         model: Endereco,
         key: 'id'
       }
+    },
+    status_pedido: {
+      type: DataTypes.ENUM('1', '2', '3', '4'),
+      defaultValue: '1'
     }
   },
   {

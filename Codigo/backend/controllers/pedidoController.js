@@ -73,26 +73,28 @@ async function atualizarPedido(req, res) {
 }
 
 // Controlador para excluir um pedido
-async function excluirPedido(req, res) {
+async function atualizarStatusPedido(req, res) {
     try {
         const { id } = req.params;
-        const pedido = await pedidoService.excluirPedido(id);
+        const { status_pedido } = req.body;
+        const pedido = await pedidoService.atualizarStatusPedido(id, status_pedido);
         if (pedido) {
-            res.json({ message: 'Pedido excluído com sucesso' });
+            res.json(pedido);
         } else {
             res.status(404).json({ error: 'Pedido não encontrado' });
         }
     } catch (error) {
-        console.error('Erro ao excluir pedido:', error);
-        res.status(500).json({ error: 'Erro ao excluir pedido' });
+        console.error('Erro ao atualizar status do pedidos:', error);
+        res.status(500).json({ error: 'Erro ao atualizar status do pedidos' });
     }
 }
-
+ 
 module.exports = {
     criarPedido,
     alterarEnderecoPedido,
     listarTodosPedidos,
     buscarPedidoPorId,
     atualizarPedido,
-    excluirPedido,
+    atualizarStatusPedido
+    //excluirPedido,
 };

@@ -92,8 +92,8 @@ async function alterarEnderecoPedido(endereco, id_pedido) {
 
 async function buscarPedidoPorCpf(cpf) {
   try {
-    const Pedido = await Pedido.findOne({ where: { cpf } });
-    return Pedido;
+    const pedido = await Pedido.findOne({ where: { cpf } });
+    return pedido;
   } catch (error) {
     console.error('Erro ao buscar Pedido por CPF:', error);
     throw new Error('Erro ao buscar Pedido por CPF');
@@ -102,8 +102,8 @@ async function buscarPedidoPorCpf(cpf) {
 
 async function buscarPedidoPorId(id) {
   try {
-    const Pedido = await Pedido.findByPk(id);
-    return Pedido;
+    const pedido = await Pedido.findByPk(id);
+    return pedido;
   } catch (error) {
     console.error('Erro ao buscar Pedido por ID:', error);
     throw new Error('Erro ao buscar Pedido por ID');
@@ -123,19 +123,19 @@ async function listarTodosPedidos() {
 
 async function atualizarPedido(id, nome, dataNascimento, telefone, endereco_param) {
   try {
-    const Pedido = await Pedido.findByPk(id);
-    if (!Pedido) {
+    const pedido = await Pedido.findByPk(id);
+    if (!pedido) {
       throw new Error('Pedido não encontrado');
     }
     // Atualiza somente os campos de Pedido preenchidos por parâmetro
     if (nome) {
-      Pedido.nome = nome
+      pedido.nome = nome
     }
     if (dataNascimento) {
-      Pedido.data_nascimento = dataNascimento;
+      pedido.data_nascimento = dataNascimento;
     }
     if (telefone) {
-      Pedido.telefone = telefone;
+      pedido.telefone = telefone;
     }
 
     const endereco = await Endereco.findByPk(Pedido.id_endereco);
@@ -150,8 +150,37 @@ async function atualizarPedido(id, nome, dataNascimento, telefone, endereco_para
       await endereco.save();
     }
 
-    await Pedido.save();
-    return Pedido;
+    await pedido.save();
+    return pedido;
+  } catch (error) {
+    console.error('Erro ao atualizar Pedido:', error);
+    throw new Error('Erro ao atualizar Pedido');
+  }
+}
+
+
+async function atualizarStatusPedido(id, status_pedido) {
+  try {
+    const pedido = await Pedido.findByPk(id);
+    if (!pedido) {
+      throw new Error('Pedido não encontrado');
+    }
+    // Atualiza somente os campos de Pedido preenchidos por parâmetro
+    if (status_pedido == 1) {
+      pedido.status_pedido = status_pedido;
+    }
+    if (status_pedido == 2) {
+      pedido.status_pedido = status_pedido;
+    }
+    if (status_pedido == 3) {
+      pedido.status_pedido = status_pedido;
+    }
+    if (status_pedido == 4) {
+      pedido.status_pedido = status_pedido;
+    }
+
+    await pedido.save();
+    return pedido;
   } catch (error) {
     console.error('Erro ao atualizar Pedido:', error);
     throw new Error('Erro ao atualizar Pedido');
@@ -166,6 +195,7 @@ module.exports = {
   buscarPedidoPorCpf,
   buscarPedidoPorId,
   atualizarPedido,
+  atualizarStatusPedido
   //excluirPedido
 };
 
