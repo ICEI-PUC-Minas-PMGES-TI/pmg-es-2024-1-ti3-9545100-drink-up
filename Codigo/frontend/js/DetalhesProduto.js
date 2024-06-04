@@ -1,4 +1,4 @@
-import {Carrinho} from './utils/Carrinho.js'
+import { Carrinho } from './utils/Carrinho.js';
 
 document.addEventListener("DOMContentLoaded", async function () {
   const productId = new URLSearchParams(window.location.search).get("id");
@@ -6,22 +6,34 @@ document.addEventListener("DOMContentLoaded", async function () {
   let product = await fetch(`http://localhost:3000/produtos/${productId}`)
     .then((response) => response.json())
     .then((produto) => {
-
       document.querySelector(
         "h1"
       ).textContent = `${produto.nome} ${produto.tam_garrafa}ml`;
       document.querySelector("h3").textContent = `R$ ${produto.valor}`;
       document.querySelector("p").textContent = produto.descricao;
 
-      const productImage = document.querySelector("#imagem img");
-            productImage.src = produto.imagem || '../../../img/beer.png';  
-            productImage.alt = produto.nome;
-
       return produto;
     })
     .catch((error) =>
       console.error("Falha ao buscar detalhes do produto:", error)
     );
+
+  
+  if (product) {
+    fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
+      .then(response => response.json())
+      .then(imageData => {
+        const productImage = document.querySelector("#imagem img");
+        productImage.src = imageData.caminho || '../../../img/beer.png';
+        productImage.alt = product.nome;
+      })
+      .catch(error => {
+        console.error("Falha ao buscar a imagem do produto:", error);
+        const productImage = document.querySelector("#imagem img");
+        productImage.src = '../../../img/beer.png';
+        productImage.alt = product.nome;
+      });
+  }
 
   const value = document.getElementById("value");
   const plusbutton = document.getElementById("plus");
@@ -50,6 +62,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       updateValue();
       intervalId = setInterval(() => {
         if (count > 0) {
+          count -= 1;
+          updateValue();
         }
       }, 100);
     }
@@ -62,9 +76,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   document.getElementById('add-button').addEventListener('click', () => {
-
     const carrinho = new Carrinho();
-
     carrinho.adicionarProduto({
       id: product.id,
       nome: product.nome,
@@ -74,7 +86,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     alert("Produto Adicionado ao carrinho!");
-
     location.href = "Carrinho.html";
-  })
+  });
 });
