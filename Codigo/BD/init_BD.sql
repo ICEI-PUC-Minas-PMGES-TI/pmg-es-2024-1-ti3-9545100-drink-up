@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS tb_usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(244) NOT NULL UNIQUE,
     senha VARCHAR(244) NOT NULL,
-    status ENUM('1', '2', '3') DEFAULT '1',
+    status ENUM('1', '2', '3','4') DEFAULT '1',
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     perfil ENUM('admin', 'cliente') NOT NULL
 );

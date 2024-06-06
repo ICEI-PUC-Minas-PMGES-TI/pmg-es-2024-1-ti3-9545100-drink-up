@@ -9,20 +9,22 @@
 </head>
 <body>
     <div class="navbar">
-        <a class="navbar-brand" href="Home.html"><img src="../assets/img/DrinkUp_Logo_Preta_PNG.png"></a>
+        <a class="navbar-brand" href="Home.html">
+            <img src="../assets/img/LogoNova.png" alt="DrinkUp Logo"/>
+        </a>
         <div class="campo-busca">
             <select id="categoriaSelect">
                 <option value="">Selecione uma categoria</option>
             </select>
             <button class="button-busca">Buscar</button>
         </div>        
-        <button class="button-NovoProduto" onclick="window.location.href='CadastroBebidas.html';">Novo produto
-            <button class="button-usuario">
+        <div class="button-container">
+            <button class="button-NovoProduto" onclick="window.location.href='CadastroBebidas.html';">Novo produto</button>
+            <button class="button-baixo_estoque" onclick="window.location.href='baixo_estoque.html';">Relatório de estoque baixo</button>
+            <button class="button-usuario" onclick="location.href='Perfil.html'">
                 <span class="material-symbols-outlined">person</span>
             </button>
-        </button>
-        <button class="button-baixo_estoque" onclick="window.location.href='baixo_estoque.html';">relatório de estoque baixo
-        </button>
+        </div>
     </div>
     <header class="titulo">
         <h1>Gestão de Estoque</h1>
@@ -38,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            
+            <!-- Conteúdo da tabela -->
         </tbody>
     </table>
 
@@ -66,7 +68,6 @@
                 }
             })
             .then(data => {
-
                 console.log(data);
             })
             .catch(error => {
@@ -76,8 +77,5 @@
 
         window.onload = loadEstoque;
     </script>
-
-
-
 </body>
 </html>

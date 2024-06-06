@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Função para cadastrar uma bebida
     document.getElementById("btncadastrar").addEventListener("click", function (event) {
         event.preventDefault();
 
-        const nome = document.getElementById("nome").value;
+        const nome = document.getElementById("nome").value + "-" + Date.now();  // Gera um nome único para a imagem
         const categoria = document.getElementById("selectCategoria").value;
         const descricao = document.getElementById("descricao").value;
         const tamGarrafa = document.getElementById("tamGarrafa").value;
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    nome: nome,
+                    nome: document.getElementById("nome").value,  // Usando o nome original para o produto
                     id_categoria: categoria,
                     descricao: descricao,
                     tam_garrafa: tamGarrafa,
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Função para carregar categorias no select
     function loadCategoriaInputSelect() {
         const inputSelect = document.getElementById("selectCategoria");
         fetch("http://localhost:3000/categorias", {
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            for (categoria of data) {
+            for (let categoria of data) {
                 inputSelect.innerHTML += `<option value="${categoria.id}">${categoria.descricao}</option>`;
             }
         })
@@ -77,9 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    loadCategoriaInputSelect();
-
+    // Função para carregar a tabela de categorias
     function loadCategoriaTable() {
+        const tableBody = document.getElementById("tabela-body");
         fetch("http://localhost:3000/categorias", {
             method: "GET",
             headers: {
@@ -88,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById("tabela-body");
             tableBody.innerHTML = "";
             data.forEach(categoria => {
                 const row = document.createElement("tr");
@@ -112,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Função para editar uma categoria
     function editarCategoria(id) {
         var novoNome = prompt("Digite o novo nome da categoria:");
         if (novoNome === null || novoNome === "") {
@@ -125,7 +127,12 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({ descricao: novoNome }),
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao editar categoria: ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             alert("Categoria editada com sucesso!");
             loadCategoriaTable();
@@ -135,21 +142,94 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Função para remover uma categoria
     function removerCategoria(id) {
         if (confirm("Tem certeza que deseja remover esta categoria?")) {
             fetch(`http://localhost:3000/categorias/${id}`, {
                 method: "DELETE",
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir categoria');
+                }
+                return response.json();
+            })
             .then(data => {
                 alert("Categoria removida com sucesso!");
                 loadCategoriaTable();
             })
             .catch(error => {
                 console.error("Erro ao remover categoria:", error);
+                alert("Erro ao remover categoria. Verifique o console para mais detalhes.");
             });
         }
     }
 
+    // Inicialização
+    loadCategoriaInputSelect();
     loadCategoriaTable();
+
+    // Eventos do modal de categoria
+    var modal = document.getElementById("modalCategoria");
+    var selectCategoria = document.getElementById("selectCategoria");
+    var span = document.querySelector(".close");
+
+    selectCategoria.addEventListener("change", function () {
+        if (selectCategoria.value === "adicionar") {
+            modal.style.display = "block";
+        }
+    });
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    var btnNovo = document.getElementById("btnNovo");
+    btnNovo.addEventListener("click", function () {
+        var container = document.getElementById("novoCampoCategoria");
+        container.innerHTML = "";
+
+        var input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Nome da nova categoria";
+        input.classList.add("form-control");
+
+        var btnSave = document.createElement("button");
+        btnSave.innerText = "Salvar";
+        btnSave.classList.add("btn", "btn-primary");
+
+        btnSave.addEventListener("click", function () {
+            var nomeCategoria = input.value;
+            fetch("http://localhost:3000/categorias", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ descricao: nomeCategoria }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const novaOpcao = document.createElement("option");
+                novaOpcao.value = data.id;
+                novaOpcao.innerText = data.descricao;
+                selectCategoria.appendChild(novaOpcao);
+                modal.style.display = "none";
+
+                loadCategoriaTable();
+            })
+            .catch(error => {
+                console.error("Erro ao adicionar categoria:", error);
+            });
+        });
+
+        container.appendChild(input);
+        container.appendChild(btnSave);
+    });
 });
