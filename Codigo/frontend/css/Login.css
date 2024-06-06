@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #F2C029;
+    background-color: #FDB815;
     padding: 24px 20px;
     display: flex; /* Ativa flexbox no header */
     justify-content: space-between; /* Separa os itens para cada extremidade */
@@ -8,9 +8,10 @@
   }
   
 .navbar img {
-    height: 40px;
+    height: 100px;
     justify-content: left;
     display: flex;
+    width: auto;
 }
 
 *{
@@ -37,7 +38,7 @@ body{
 .form{
     width: 50%; 
     height: 60vh; 
-    background-color: #F2C029; 
+    background-color: #FDB815; 
     margin: 0 10px; 
     box-shadow: 5px 5px 10px rgba(0,0,0, 0.212);
     border-radius: 15px;
@@ -99,7 +100,7 @@ h6{
     padding: 0.62rem;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #BF9411;
+    background-color: #DAA520;
     font-family: 'Nunito Sans', sans-serif;
     font-style:italic;
     font-size: 18px;
@@ -109,7 +110,7 @@ h6{
 .register{
     width: 50%; 
     height: 60vh; 
-    background-color: #F2C029; 
+    background-color: #FDB815; 
     margin: 0 10px; 
     box-shadow: 5px 5px 10px rgba(0,0,0, .212);
     border-radius: 15px;
@@ -133,7 +134,7 @@ h6{
     padding: 0.62rem;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #BF9411;
+    background-color: #DAA520;
     font-family: 'Nunito Sans', sans-serif;
     font-style:italic;
     font-size: 18px;
