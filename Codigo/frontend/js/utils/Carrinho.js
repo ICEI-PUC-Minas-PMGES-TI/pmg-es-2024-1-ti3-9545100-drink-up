@@ -1,6 +1,7 @@
 export class Carrinho {
     constructor() {
         this.produtos = this.carregarProdutosDoCookie() || [];
+        this.valorFrete = 0; // Adicionando a propriedade valorFrete
     }
 
     increase(produtoId) {
@@ -108,7 +109,6 @@ export class Carrinho {
     }
 
     setupCounter(initialCount, produtoId) {
-
         let count = initialCount;
       
         const updateValue = (id) => {
@@ -158,11 +158,27 @@ export class Carrinho {
     
             const data = await response.json();
             
-            document.getElementById('valorFrete').textContent = parseFloat(data.valorFrete).toFixed(2);
+            this.valorFrete = parseFloat(data.valorFrete); // Armazenar o valor do frete
+            document.getElementById('valorFrete').textContent = this.valorFrete.toFixed(2);
+
+            // Chamar o método para calcular o valor total com frete
+            this.calculaValorTotalComFrete();
 
         } catch (error) {
             console.error('Erro ao buscar dados:', error);
         }
     }
-    
+
+    calculaValorTotalComFrete() {
+        let totalProdutos = this.somaProdutoTotal();
+        let totalComFrete = totalProdutos + this.valorFrete;
+        
+        let formatter = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
+
+        totalComFrete = formatter.format(totalComFrete);
+        document.getElementById("cart-subtotal").innerText = `${totalComFrete}`;
+    }
 }
