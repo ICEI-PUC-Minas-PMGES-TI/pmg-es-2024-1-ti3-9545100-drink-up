@@ -11,8 +11,18 @@
 <body>
     <div class="navbar">
         <a class="navbar-brand" href="Home.html"><img src="../assets/img/LogoNova.png" alt="Logo DrinkUp"></a>
+        <div class="campo-busca">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar produtos...">
+            <button id="searchBtn" class="btn button-search">
+                <span class="material-symbols-outlined">
+                    search
+                    </span>
+            </button>
+            <button id="filterBtn" class="btn button-filter">
+                <span class="material-symbols-outlined">filter_list</span>
+            </button>
+        </div>
         <div class="navbar-icons">
-            <button id="filterBtn" class="btn button-filtrar">Filtrar</button>
             <button id="loginBtn" class="btn button-login" onclick="location.href='Login.html'">Login</button>
             <button id="carrinhoBtn" class="btn button-carrinho" onclick="location.href='Carrinho.html'">
                 <span class="material-symbols-outlined">shopping_cart</span>
@@ -20,10 +30,9 @@
             <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
                 <span class="material-symbols-outlined">person</span>
             </button>
-           
         </div>
     </div>
-
+    
     <div class="d-flex" id="wrapper">
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Categorias</div>
@@ -62,11 +71,11 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
+    
                 <div class="container">
                     <div id="product-list" class="product-list"></div>
                 </div>
-
+    
                 <section id="about-us">
                     <div class="container">
                         <div class="logo">
@@ -74,7 +83,7 @@
                         </div>
                         <div class="description">
                             <h2>Sobre a DrinkUp</h2>
-                            <p>A solução proposta para a Drink Up consiste na implementação de um sistema de gestão integrado...</p>
+                            <p>Drink Up é uma distribuidora de bebidas que surge como uma ramificação audaciosa de uma empresa já estabelecida. Nascida como uma startup, a Drink Up rapidamente se destacou no mercado com sua qualidade e na satisfação do cliente. Fundada por uma equipe de entusiastas apaixonados pelo mundo das bebidas, a empresa tem como missão oferecer uma ampla variedade de produtos.</p>
                         </div>
                     </div>
                 </section>
@@ -82,7 +91,7 @@
             </div>
         </div>
     </div>
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

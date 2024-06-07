@@ -1,3 +1,4 @@
+/* Estilos globais */
 * {
     padding: 0;
     margin: 0;
@@ -11,9 +12,10 @@ body {
     overflow-x: hidden;
 }
 
+/* Estilos da barra de navegação */
 .navbar {
     background-color: #FDB815;
-    padding: 0 20px; /* Remova o padding vertical e ajuste horizontal se necessário */
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,12 +23,13 @@ body {
 }
 
 .navbar img {
-    height: 90px; /* Ajuste a altura conforme necessário */
+    height: 95px;
     display: flex;
     width: auto;
     margin-top: -10px;
 }
 
+/* Botão sobre */
 .btn-about {
     background-color: #FDB815;
     border: none;
@@ -42,12 +45,66 @@ body {
     background-color: #d1a71d;
 }
 
+/* Campo de busca */
 .campo-busca {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 120px;
 }
 
+.campo-busca input[type="text"] {
+    padding: 10px 20px;
+    width: 300px;
+    border: 2px solid #FDB815;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.campo-busca input[type="text"]:focus {
+    border-color: #d1a71d;
+}
+
+.campo-busca button {
+    padding: 5px 10px;
+    border: 2px solid #FDB815;
+    background-color: #FDB815;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.campo-busca button:hover {
+    background-color: #F2A516;
+    border-color: #F2A516;
+}
+
+/* Botão de filtro */
+.button-filter {
+    margin-left: 10px;
+    border: 2px solid #FDB815;
+    background-color: #FDB815;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    padding: 5px 10px;
+}
+
+.button-filter:hover {
+    background-color: #F2A516;
+    border-color: #F2A516;
+}
+
+/* Ícones da barra de navegação */
 .navbar-icons {
     display: flex;
     align-items: center;
@@ -82,6 +139,7 @@ body {
     color: black;
 }
 
+/* Botão de login */
 .button-login {
     background-color: #F2C029;
     color: black;
@@ -93,9 +151,10 @@ body {
 }
 
 .button-login:hover {
-    background-color: rgba(241, 229, 55, 0.822);
+    background-color: #FDB815;
 }
 
+/* Container de produtos */
 .container {
     display: flex;
     justify-content: center;
@@ -105,29 +164,41 @@ body {
     padding: 7rem 1rem;
 }
 
-.product-card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 300px;
-    height: auto;
-    margin: 15px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
-}
-
 .product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
     max-width: 1200px;
+    padding: auto;
+}
+
+/* Card de produto */
+.product-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
 }
 
 .product-card .description {
@@ -136,19 +207,26 @@ body {
     margin: auto !important;
 }
 
+
 .product-card button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #FDB815;
+    color: black;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px 2px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 86px;
+    margin: 10px 0;
+    border: none;
+    transition: background-color 0.3s;
 }
+
+.product-card button:hover {
+    background-color: #F2A516;
+}
+
 
 .custom-footer {
     background-color: #333;
@@ -161,18 +239,20 @@ body {
     left: 0;
 }
 
+/* Seção sobre nós */
 #about-us {
     display: flex;
     align-items: center;
-    padding: 20px 5%; /* Reduzir padding para diminuir o tamanho vertical */
+    padding: 10px;
     background: #f4f4f4;
-    min-height: 200px; /* Reduzir min-height para diminuir o tamanho vertical */
+    
 }
 
 #about-us .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-height: 250px;
 }
 
 #about-us .logo {
@@ -182,8 +262,9 @@ body {
 }
 
 #about-us .logo img {
-    width: 150px; /* Ajustar tamanho da imagem para corresponder ao novo layout */
+    width: 200px;
     height: auto;
+    margin-top: 20px;
 }
 
 #about-us .description {
@@ -191,6 +272,7 @@ body {
     text-align: right;
 }
 
+/* Barra lateral */
 #sidebar-wrapper {
     min-height: 100vh;
     width: 0;
@@ -224,19 +306,21 @@ body {
     margin-left: 250px;
 }
 
+/* Carrossel */
 .carousel-inner img {
-    width: 700px; /* Definir a largura da imagem como automática */
+    width: 700px;
     height: 300px;
-    object-fit:contain;
+    object-fit: contain;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-    filter: invert(100%); /* Inverte a cor do ícone para branco */
+    filter: invert(100%);
 }
+
 .carousel {
-    width: 70%; /* Definir a largura do carrossel */
-    margin: auto; /* Centralizar o carrossel na página */
-    margin-bottom: 20px; /* Adicionar margem inferior para separar o carrossel dos outros elementos */
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
     margin-top: 20px;
 }
