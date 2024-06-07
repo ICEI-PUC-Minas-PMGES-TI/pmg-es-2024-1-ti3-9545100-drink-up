@@ -118,16 +118,7 @@ async function listarItensDoPedido(id) {
     
     const pedido = await Pedido.findByPk(id);
 
-    console.log('===============11111======================');
-
     console.log(pedido.id);
-
-
-    
-    console.log('===============44444======================');
-
-
-
 
     const itensDoPedido = await ItemPedido.findAll({
       where: {
@@ -141,23 +132,13 @@ async function listarItensDoPedido(id) {
 
       let prd = await Produto.findByPk(item.id_produto);
 
-      console.log('===============2222======================');
-
-
-      console.log(prd.nome);
-
-
       listaItens.push({
         nomeProduto : prd.nome,
         quantidadeProduto: item.quantidade,
-        valorProduto: item.valor_item
+        valorProduto: (item.valor_item * item.quantidade)
       })
 
     }
-
-
-    console.log('===============33333======================');
-
 
     console.log(listaItens);
 

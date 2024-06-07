@@ -9,16 +9,21 @@
 </head>
 <body>
     <body>
-        <header class="header">
-            <button onclick="location.href='Home.html'">
-              <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
-            </button>
-            <button class="button-usuario" onclick="location.href='Perfil.html'">
-              <span class="material-symbols-outlined">person</span>
-            </button>
-        </header>
-
-        <h1>Finalizar Compra</h1> 
+        <div class="navbar">
+            <a class="navbar-brand" href="Home.html"><img src="../assets/img/LogoNova.png" alt="Logo DrinkUp"></a>
+            <div class="navbar-icons">
+                <button id="loginBtn" class="btn button-login" onclick="location.href='Login.html'">Login</button>
+                <button id="carrinhoBtn" class="btn button-carrinho" onclick="location.href='Carrinho.html'">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </button>
+                <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
+                    <span class="material-symbols-outlined">person</span>
+                </button>
+            </div>
+        </div>
+        <div class="title">
+            <h2>FINALIZAR COMPRA</h3>
+          </div>
         <div class="container">
             <aside class="sidebar">
                 <table>

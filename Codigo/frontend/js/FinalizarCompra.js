@@ -1,17 +1,28 @@
 import { Carrinho } from "./utils/Carrinho.js";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   const carrinho = new Carrinho();
 
   const products = carrinho.carregarProdutosDoCookie();
+  
+  for (let element of products) {
+    try {
+        const response = await fetch(`http://localhost:3000/imagens/${element.imagem}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        element.image = data.caminho;
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+  }
 
   let carrinhoHTML = '';
-  products.forEach((element) => {
-    //const imageUrl = element.imagem || '../../../img/beer.png'; // verifica se o element de imagem é nulo. Atualmente não funciona pois os testes de banco está passando valores fictícios. Deverá ser adaptado.
-    const imageUrl = '../../../img/beer.png';
+  for (const element of products) {
     carrinhoHTML += `
         <tr>
-        <td class="espaco-imagem"><img src="${imageUrl}" alt="Produto" class="product-image"></td>
+        <td class="espaco-imagem"><img src="${element.image}" alt="Produto" class="product-image"></td>
             <td>${element.nome}</td>
             <td id="item-value">R$ ${element.valor}</td>
             <td>
@@ -20,9 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </td>
         </tr>
-    `;
-
-  });
+    `;  
+  };
   
   document.getElementById("carrinho-body").innerHTML = carrinhoHTML;
 

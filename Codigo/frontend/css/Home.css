@@ -23,10 +23,11 @@ body {
 }
 
 .navbar img {
-    height: 95px;
+    height: 100px;
     display: flex;
     width: auto;
-    margin-top: -10px;
+    margin-top: -15px;
+    margin-left: -20px;
 }
 
 /* Botão sobre */
@@ -120,6 +121,7 @@ body {
     border: none;
     cursor: pointer;
     transition: color 0.3s;
+    color: black;
 }
 
 #perfilBtn .material-symbols-outlined,
@@ -148,6 +150,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    
 }
 
 .button-login:hover {
@@ -308,7 +311,7 @@ body {
 
 /* Carrossel */
 .carousel-inner img {
-    width: 1500px;
+    width: 100%;
     height: 400px;
     object-fit: contain;
 }
@@ -319,8 +322,15 @@ body {
 }
 
 .carousel {
-    width: 70%;
+    width: 100%;
     margin: auto;
     margin-bottom: 20px;
     margin-top: 20px;
+}
+#searchButton{
+    background-color: #FDB815;
+    color: black;
+    border: none;
+    width: 50%;
+    margin: auto;
 }
