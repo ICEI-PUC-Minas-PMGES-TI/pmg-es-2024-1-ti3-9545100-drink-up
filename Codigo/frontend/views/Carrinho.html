@@ -8,85 +8,82 @@
   <link rel="stylesheet" href="../css/Carrinho.css">
 </head>
 <body>
-    <body>
-        <header class="header">
-            <button onclick="location.href='Home.html'">
-              <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+    <div class="navbar">
+        <a class="navbar-brand" href="Home.html"><img src="../assets/img/LogoNova.png" alt="Logo DrinkUp"></a>
+        <div class="navbar-icons">
+            <button id="loginBtn" class="btn button-login" onclick="location.href='Login.html'">Login</button>
+            <button id="carrinhoBtn" class="btn button-carrinho" onclick="location.href='Carrinho.html'">
+                <span class="material-symbols-outlined">shopping_cart</span>
             </button>
-            <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
-              <span class="material-symbols-outlined">person</span>
+            <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
+                <span class="material-symbols-outlined">person</span>
             </button>
-          </header>
-        <div class="container">
-          <h1>Carrinho de Compras</h1>
-          <table id="cart">
-            <thead>
-              <tr>
-                <th>Imagem</th>
-                <th>Produto</th>
-                <th>Preço Unitário</th>
-                <th>Quantidade</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="carrinho-body">
-              <!--ITENS DO CARRINHO-->
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3">Total:</td>
-                <td id="cart-total">
-                  <!-- TOTAL DO PEDIDO -->
-                </td>
-                <td></td>
-              </tr>
-              <td colspan="6" class="cart-buttons">
-                <button class="continue-shopping-button" onclick="location.href = 'Home.html'">Continuar Comprando</button>
-                <button class="checkout-button" onclick="location.href = 'FinalizarCompra.html'">Finalizar Compra</button>
-              </td>
-            </tr>
-            </tfoot>
-          </table>
         </div>
-      
-        <script type="module" src="../js/carrinho.js"></script>
-        <!-- Icons -->
-        <script
-            src="https://kit.fontawesome.com/559e095fe9.js"
-            crossorigin="anonymous"
-        ></script>
-        <script>
-     
-          const token = sessionStorage.getItem("authorization");
-          if (!token) {
-              alert("Você não está autenticado. Por favor, faça login.");
-              window.location.href = "Login.html";
-          }
-  
-      
-          function loadCarrinho() {
-              fetch('http://localhost:3000/produtos/saida-bebidas', {
-                  method: 'GET',
-                  headers: {
-                      'x-access-token': token
-                  }
-              })
-              .then(response => {
-                  if (response.ok) {
-                      return response.json();
-                  } else {
-                      throw new Error('Erro ao carregar carrinho');
-                  }
-              })
-              .then(data => {
-              
-                  console.log(data);
-              })
-              .catch(error => {
-                  console.error('Erro:', error);
-              });
-          }
-          window.onload = loadCarrinho;
-        </script>
+    </div>
+    <div class="container">
+      <h1>Carrinho de Compras</h1>
+      <table id="cart">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Produto</th>
+            <th>Preço Unitário</th>
+            <th>Quantidade</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="carrinho-body">
+          <!--ITENS DO CARRINHO-->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Total:</td>
+            <td id="cart-total">
+              <!-- TOTAL DO PEDIDO -->
+            </td>
+            <td></td>
+          </tr>
+          <td colspan="6" class="cart-buttons">
+            <button class="continue-shopping-button" onclick="location.href = 'Home.html'">Continuar Comprando</button>
+            <button class="checkout-button" onclick="location.href = 'FinalizarCompra.html'">Finalizar Compra</button>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <script type="module" src="../js/carrinho.js"></script>
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/559e095fe9.js" crossorigin="anonymous"></script>
+    <script>
+      const token = sessionStorage.getItem("authorization");
+      if (!token) {
+          alert("Você não está autenticado. Por favor, faça login.");
+          window.location.href = "Login.html";
+      }
+
+      function loadCarrinho() {
+          fetch('http://localhost:3000/produtos/saida-bebidas', {
+              method: 'GET',
+              headers: {
+                  'x-access-token': token
+              }
+          })
+          .then(response => {
+              if (response.ok) {
+                  return response.json();
+              } else {
+                  throw new Error('Erro ao carregar carrinho');
+              }
+          })
+          .then(data => {
+              console.log(data);
+          })
+          .catch(error => {
+              console.error('Erro:', error);
+          });
+      }
+      window.onload = loadCarrinho;
+    </script>
 </body>
 </html>

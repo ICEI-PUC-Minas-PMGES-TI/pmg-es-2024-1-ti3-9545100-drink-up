@@ -1,31 +1,41 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: "Nunito Sans", sans-serif;
-    background-color: #fff;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
-.header {
-    background-color: #F2C029;
+.navbar {
+    background-color: #FDB815;
     padding: 24px 20px;
-    display: flex; /* Ativa flexbox no header */
-    justify-content: space-between; /* Separa os itens para cada extremidade */
-    align-items: center; /* Centraliza verticalmente */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 95px;
 }
 
-.header img {
-    height: 40px;
+.navbar img {
+    height: 100px;
+    width: auto;
+    margin-left: -20px;
+    cursor: pointer;
+}
+
+.navbar button {
+    background-color: transparent;
+    border: none;
 }
 
 .user-icon {
-    height: 30px; /* Ajuste para o ícone do usuário */
+    height: 40px;
+    margin-top: 10px;
+    cursor: pointer;
 }
-
-
 
 .button-NovoProduto {
     border: 1px solid #000;
@@ -33,7 +43,8 @@ body {
     padding: 10px 20px;
     cursor: pointer;
     font-weight: 700;
-    background-color: #f2c029;
+    background-color: #FDB815;
+    margin-right: -990px; /* Ajuste para posicionar ao lado do user-icon */
 }
 
 .campo-busca {
@@ -67,21 +78,35 @@ h1 {
 }
 
 .tabela {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
 }
 
-.tabela th,
-.tabela td {
-    border: 1px solid #000;
+.tabela th {
+    background-color: #FDB815;
+    color: #333;
+    font-weight: bold;
     padding: 10px;
     text-align: left;
 }
 
-.tabela th {
-    background-color: #f2c029;
-    color: #000;
+.tabela td {
+    padding: 10px;
+}
+
+/* Estilo para linhas alternadas */
+.tabela tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+/* Estilo para hover */
+.tabela tr:hover {
+    background-color: #e9da68; /* Mudando a cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease;
 }
 
 .editar {
@@ -89,6 +114,8 @@ h1 {
     padding: 5px;
     cursor: pointer;
     background-color: orange;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .salvar {
@@ -103,6 +130,9 @@ h1 {
     padding: 5px;
     cursor: pointer;
     background-color: red;
+    border-radius: 5px;
+    text-align: center;
+    
 }
 
 /* Popup */
@@ -120,45 +150,44 @@ h1 {
 }
 
 .popup-content {
-    background-color: #fff;
+    background-color: #f9f9f9;
     padding: 32px;
     border-radius: 8px;
-    width: 600px;
+    width: 400px;
+    height: auto;
     z-index: 1001;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-input[type="text"],
-input[type="number"],
-input[type="file"],
-textarea,
-select {
+.popup-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    padding: auto;
+}
+
+.popup-content input[type="text"],
+.popup-content textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-bottom: 15px;
     box-sizing: border-box;
+    resize: vertical;
 }
 
-.form-row {
-    flex-direction: column;
-}
-
-input[type="file"] {
-    padding: 8px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.popup-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-button {
+.popup-content button {
     padding: 10px 20px;
     cursor: pointer;
     border: none;
@@ -166,33 +195,31 @@ button {
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.2s ease-in-out;
+    background-color: #FDB815;
+    color: #fff;
+    margin-top: 15px;
+}
+.popup-content input[type="number"],
+.popup-content select {
+    width: 100%; /* Reduz a largura para acomodar a seta do select */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
-button#fecharPopup {
-    background-color: #ccc;
-    color: #333;
+.popup-content select {
+    appearance: none; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath fill='%23424242' d='M10 14a.997.997 0 01-.707-.293l-3-3a.999.999 0 111.414-1.414L10 11.586l2.293-2.293a.999.999 0 111.414 1.414l-3 3a.997.997 0 01-.707.293'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 8px); /* Posiciona a seta do select à direita */
+    background-position-y: center;
+    padding-right: 20px; /* Espaçamento para acomodar a seta */
 }
 
-button#salvarBebida {
-    background-color: #ffdd00;
-    color: #111;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-.form-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.form-input {
-    padding: 8px;
-}
-
-header button{
-    background-color:#F2C029 ;
+.popup-content button:hover {
+    background-color: #f2a516;
 }
 
 .button-usuario:hover{

@@ -15,24 +15,23 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
     const telefone = document.getElementById('telefone').value;
     const senha = document.getElementById('senha').value;
 
-
     if (!nome.trim()) {
         alert('Nome é obrigatório!');
         return;
     }
 
     if (!numero) {
-        alert('insira um número válido.');
+        alert('Insira um número válido.');
         return;
     }
 
     if (uf.length !== 2) {
-        alert('insira uma UF válida de 2 caracteres.');
+        alert('Insira uma UF válida de 2 caracteres.');
         return;
     }
 
     if (cep.length !== 8) {
-        alert('insira um CEP válido de 8 dígitos.');
+        alert('Insira um CEP válido de 8 dígitos.');
         return;
     }
 
@@ -59,30 +58,29 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
     }
 
     if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
-        alert('e-mail inválido!');
+        alert('E-mail inválido!');
         return;
     }
 
     if (senha.length < 8) {
-        alert('senha deve ter pelo menos 8 caracteres.');
+        alert('Senha deve ter pelo menos 8 caracteres.');
         return;
     }
 
     if (!cidade.trim()) {
-        alert('cidade é obrigatório.');
+        alert('Cidade é obrigatório.');
         return;
     }
 
     if (!rua.trim()) {
-        alert('rua é obrigatório.');
+        alert('Rua é obrigatório.');
         return;
     }
 
     if (!bairro.trim()) {
-        alert('bairro é obrigatório.');
+        alert('Bairro é obrigatório.');
         return;
     }
-
 
     const endereco = { rua, numero, complemento, bairro, cidade, cep, uf };
     const usuario = { email, senha };
@@ -98,6 +96,12 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
     .then(data => {
         console.log(data);
         alert('Cadastro realizado com sucesso!');
+        
+        // Armazenar os dados do usuário no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify(data));
+        
+        // Redirecionar para a tela de home
+        window.location.href = 'Home.html';
     })
     .catch(error => {
         console.error(error);

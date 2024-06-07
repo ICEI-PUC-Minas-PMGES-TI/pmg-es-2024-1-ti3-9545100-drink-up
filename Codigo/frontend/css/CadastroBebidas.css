@@ -7,24 +7,23 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
-}
-
-.header {
-    background-color: #f2c029;
-    padding: 24px 20px;
+  }
+  
+  .header {
+    background-color: #FDB815;
     display: flex; /* Ativa flexbox no header */
     justify-content: space-between; /* Separa os itens para cada extremidade */
     align-items: center; /* Centraliza verticalmente */
-}
-
-.header img {
-    height: 40px;
-}
-
-.user-icon {
-    height: 30px; /* Ajuste para o ícone do usuário */
-}
+    height: 95px;
+  }
+  
+  .header img {
+    height: 95px;
+  }
+  
+  .user-icon {
+    height: 30px; 
+  }
 
 main {
     padding: 30px 50px;
@@ -89,7 +88,7 @@ button {
 }
 
 button{
-    background-color:#F2C029 ;
+    background-color:transparent ;
 }
 
 .button-usuario:hover{

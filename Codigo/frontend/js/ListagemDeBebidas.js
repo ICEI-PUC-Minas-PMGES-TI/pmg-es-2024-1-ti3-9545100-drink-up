@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td>${bebida.id_categoria.descricao}</td>
                         <td>${bebida.tam_garrafa}</td>
                         <td>R$${bebida.valor}</td>
-                        <td>${bebida.imagem}</td>
                         <td><button class="editar" id=${bebida.id}>✏️</button></td>
                         <td><button class="remover" id=${bebida.id}>🗑️</button></td>
                     `;

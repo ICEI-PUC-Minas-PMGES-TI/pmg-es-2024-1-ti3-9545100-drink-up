@@ -26,7 +26,7 @@ body, html {
 
 .form-image {
     width: 40%; 
-    background-color: #F2C029; 
+    background-color: #FDB815; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,7 +78,7 @@ body, html {
     padding: 0.62rem;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #F2C029; 
+    background-color: #FDB815; 
     font-family: 'Nunito Sans', sans-serif;
     font-style:italic;
     font-size: 18px;

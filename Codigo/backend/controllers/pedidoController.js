@@ -55,6 +55,23 @@ async function buscarPedidoPorId(req, res) {
     }
 }
 
+
+async function listarItensDoPedido(req, res) {
+    try {
+        const { id } = req.params;
+        const listaItens = await pedidoService.listarItensDoPedido(id);
+        if (listaItens) {
+            res.json(listaItens);
+        } else {
+            res.status(404).json({ error: 'Lista não encontrada' });
+        }
+    } catch (error) {
+        console.error('Erro ao buscar lista por ID:', error);
+        res.status(500).json({ error: 'Erro ao buscar lista por ID' });
+    }
+}
+
+
 // Controlador para atualizar um pedido
 async function atualizarPedido(req, res) {
     try {
@@ -95,6 +112,7 @@ module.exports = {
     listarTodosPedidos,
     buscarPedidoPorId,
     atualizarPedido,
-    atualizarStatusPedido
+    atualizarStatusPedido,
+    listarItensDoPedido
     //excluirPedido,
 };

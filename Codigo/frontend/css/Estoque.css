@@ -13,18 +13,17 @@ body {
 
 .navbar {
     background-color: #FDB815;
-    padding: 12px 20px; /* Ajustado para fornecer espaço suficiente */
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px; /* Ajuste conforme necessário */
+    height: 95px;
 }
 
 .navbar img {
-    height: 70px; /* Ajuste a altura conforme necessário */
+    height: 100px;
     width: auto;
     margin-left: -20px;
-    margin-top: -10px; /* Ajuste conforme necessário */
 }
 
 .navbar button {
@@ -39,16 +38,39 @@ body {
 
 .campo-busca {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    margin-right: 20px; /* Adiciona margem à direita */
-    margin-left: 20px; /* Adiciona margem à esquerda */
+    margin-left: 480px;
+    margin-right: auto;
+}
+
+.select-busca {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zM2 5L0 3h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+.select-busca:focus {
+    border-color: #FDB815;
+    outline: none;
 }
 
 .button-container {
     display: flex;
-    gap: 5px; /* Ajuste esse valor conforme necessário */
-    margin-left: auto; /* Empurra o container de botões para a direita */
+    gap: 5px;
+    margin-left: auto;
 }
 
 .button-NovoProduto, .button-baixo_estoque, .button-usuario {
@@ -56,24 +78,25 @@ body {
     padding: 10px;
     cursor: pointer;
     font-weight: 700;
-    background-color: #FDB815; 
-    margin: 0; /* Remover margem padrão */
+    background-color: #FDB815;
+    margin: 0;
+    font-size: 14px;
 }
 
 .input {
     padding: 5px 10px;
-    margin-right: 10px; 
-    font-size: 16px; 
-    border: 1px solid #000; 
+    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #000;
 }
 
 .button-busca {
-    padding: 5px 15px;
-    font-size: 16px;
+    padding: 10px 15px;
+    font-size: 14px;
     border: none;
     cursor: pointer;
-    background-color: #F2C029; 
-    color: #000; 
+    background-color: #F2C029;
+    color: #000;
     font-weight: 700;
 }
 
@@ -84,34 +107,146 @@ h1 {
 }
 
 .tabela {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
 }
 
-.tabela th, .tabela td {
-    border: 1px solid #000;
+.tabela th {
+    background-color: #FDB815;
+    color: #333;
+    font-weight: bold;
     padding: 10px;
     text-align: left;
 }
 
-.tabela th {
-    background-color: #F2C029;
-    color: #000;
+.tabela td {
+    padding: 10px;
 }
 
-.remover {
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    background-color: red;
+/* Estilo para linhas alternadas */
+.tabela tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+/* Estilo para hover */
+.tabela tr:hover {
+    background-color: #e9da68; /* Mudando a cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease;
 }
 
 .adicionar {
     border: none;
     padding: 5px;
     cursor: pointer;
-    background-color: rgb(0, 158, 45);
+    background-color: rgb(67, 205, 67);
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+.remover {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Popup */
+.popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #f9f9f9;
+    padding: 32px;
+    border-radius: 8px;
+    width: 400px;
+    height: auto;
+    z-index: 1001;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    padding: auto;
+}
+
+.popup-content input[type="text"],
+.popup-content textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out;
+    background-color: #FDB815;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.popup-content input[type="number"],
+.popup-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.popup-content select {
+    appearance: none; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath fill='%23424242' d='M10 14a.997.997 0 01-.707-.293l-3-3a.999.999 0 111.414-1.414L10 11.586l2.293-2.293a.999.999 0 111.414 1.414l-3 3a.997.997 0 01-.707.293'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 8px);
+    background-position-y: center;
+    padding-right: 20px;
+}
+
+.popup-content button:hover {
+    background-color: #f2a516;
+}
+
+.button-usuario:hover{
+    color: #424242;
 }
 
 /* Media Queries */
@@ -124,16 +259,39 @@ h1 {
     .navbar img {
         height: 80px;
     }
+    
+    .campo-busca {
+        margin-left: auto;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 @media (max-width: 768px) {
     .navbar {
         padding: 12px 5px;
         height: 70px;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .navbar img {
         height: 70px;
+        margin-bottom: 10px;
+    }
+    
+    .campo-busca {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    
+    .button-container {
+        width: 100%;
+        justify-content: space-between;
     }
 }
 
@@ -141,9 +299,32 @@ h1 {
     .navbar {
         padding: 8px 5px;
         height: 60px;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .navbar img {
         height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .campo-busca {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .select-busca {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .button-container {
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 10px;
     }
 }

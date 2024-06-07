@@ -14,20 +14,19 @@
     />
   </head>
   <body>
-    <header class="header">
+    <header class="navbar">
       <button onclick="location.href='Home.html'">
-        <img src="../assets/img/DrinkUp_Logo_Preta_PNG.png" alt="DrinkUp Logo" />
+          <img src="../assets/img/LogoNova.png" alt="DrinkUp Logo"/>
       </button>
       <button
         class="button-NovoProduto"
         onclick="location.href='CadastroBebidas.html'"
       >
         Novo produto
-      </button>
       <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
-        <span class="material-symbols-outlined">person</span>
+          <span class="material-symbols-outlined">person</span>
       </button>
-    </header>
+  </header>
     <h1>LISTAGEM DE BEBIDAS</h1>
     <table class="tabela">
       <thead>
@@ -36,7 +35,6 @@
           <th>Categoria</th>
           <th>Tam. Garrafa</th>
           <th>Preço</th>
-          <th>Imagem</th>
           <th>Editar</th>
           <th>Remover</th>
         </tr>
@@ -61,7 +59,7 @@
           <div class="form-row">
             <div class="form-input">
               <label for="id_produto">ID:</label>
-              <input type="text" id="id_produto" name="id_produto" required />
+              <input type="text" id="id_produto" name="id_produto" required  readonly/>
             </div>
             <div class="form-input">
               <label for="nomeBebida">Nome da bebida:</label>

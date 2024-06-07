@@ -1,42 +1,63 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 
 body {
+    width: 100%;
+    height: 100vh;
     font-family: 'Nunito Sans', sans-serif;
     background-color: #fff;
 }
 
 .navbar {
-    background-color: #F2C029;
-    padding: 10px 20px;
+    background-color: #FDB815;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 95px;
 }
 
-.navbar .navbar-brand img {
-    width: 300px; 
-    height: auto; 
-    display: block; 
+.navbar img {
+    height: 100px;
+    width: auto;
+    margin-left: -20px;
 }
 
-.button-NovoProduto {
+.navbar button {
+    background-color: transparent;
     border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: 700;
-    background-color: #F2C029; 
+}
+
+.user-icon {
+    height: 40px;
+    margin-top: 10px;
 }
 
 .campo-busca {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    margin-right: 10px;
+    margin-left: 480px;
+    margin-right: auto;
+}
+
+.button-container {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+}
+
+.button-NovoProduto, .button-usuario {
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    background-color: #FDB815;
+    margin: 0;
+    font-size: 14px;
 }
 
 .input {
@@ -63,28 +84,44 @@ h1 {
 }
 
 .tabela {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
 }
 
-.tabela th, .tabela td {
-    border: 1px solid #000;
+.tabela th {
+    background-color: #FDB815;
+    color: #333;
+    font-weight: bold;
     padding: 10px;
     text-align: left;
 }
 
-.tabela th {
-    background-color: #F2C029;
-    color: #000;
+.tabela td {
+    padding: 10px;
 }
 
+/* Estilo para linhas alternadas */
+.tabela tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+/* Estilo para hover */
+.tabela tr:hover {
+    background-color: #e9da68; /* Mudando a cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease;
+}
 
 .remover {
     border: none;
     padding: 5px;
     cursor: pointer;
     background-color: red;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .adicionar {
@@ -92,6 +129,6 @@ h1 {
     padding: 5px;
     cursor: pointer;
     background-color: rgb(0, 158, 45);
+    border-radius: 5px;
+    text-align: center;
 }
-
-

@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const baseUrl = 'http://localhost:3000'; // Certifique-se de que esta URL está correta
+    const baseUrl = 'http://localhost:3000'; 
 
-    // Lógica para carregar categorias
     fetch(`${baseUrl}/categorias`)
         .then(response => response.json())
         .then(categorias => {
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Erro para carregar categorias:', error));
 
-    // Lógica para abrir/fechar barra lateral
     const filterBtn = document.getElementById('filterBtn');
     if (filterBtn) {
         filterBtn.addEventListener('click', function () {
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Lógica para carregar produtos com filtro de categoria
     const searchButton = document.getElementById('searchButton');
     if (searchButton) {
         searchButton.addEventListener('click', function() {
@@ -56,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Função para carregar produtos
 function carregarProdutos(filtroCategoria = null, searchQuery = null) {
-    const baseUrl = 'http://localhost:3000'; // Certifique-se de que esta URL está correta
+    const baseUrl = 'http://localhost:3000'; 
 
     fetch(`${baseUrl}/produtos`)
         .then(response => response.json())

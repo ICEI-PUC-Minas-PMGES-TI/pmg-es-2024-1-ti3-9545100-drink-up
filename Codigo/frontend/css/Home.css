@@ -308,8 +308,8 @@ body {
 
 /* Carrossel */
 .carousel-inner img {
-    width: 700px;
-    height: 300px;
+    width: 1500px;
+    height: 400px;
     object-fit: contain;
 }
 

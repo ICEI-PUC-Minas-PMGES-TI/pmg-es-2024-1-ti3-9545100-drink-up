@@ -5,6 +5,8 @@ const Endereco = require('../models/Endereco');
 const ItemPedido = require('../models/ItemPedido');
 const clienteService = require('../services/clienteService');
 const freteService = require('../services/freteService');
+const estoqueService = require('../services/estoqueService');
+const Produto = require('../models/Produto');
 
 
 async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
@@ -111,6 +113,62 @@ async function buscarPedidoPorId(id) {
 }
 
 
+async function listarItensDoPedido(id) {
+  try {
+    
+    const pedido = await Pedido.findByPk(id);
+
+    console.log('===============11111======================');
+
+    console.log(pedido.id);
+
+
+    
+    console.log('===============44444======================');
+
+
+
+
+    const itensDoPedido = await ItemPedido.findAll({
+      where: {
+        id_pedido: pedido.id
+      }
+    });
+
+    const listaItens = [];
+
+    for (const item of itensDoPedido) {
+
+      let prd = await Produto.findByPk(item.id_produto);
+
+      console.log('===============2222======================');
+
+
+      console.log(prd.nome);
+
+
+      listaItens.push({
+        nomeProduto : prd.nome,
+        quantidadeProduto: item.quantidade,
+        valorProduto: item.valor_item
+      })
+
+    }
+
+
+    console.log('===============33333======================');
+
+
+    console.log(listaItens);
+
+    return listaItens;
+  } catch (error) {
+    console.error('Erro ao buscar Pedido por ID:', error);
+    throw new Error('Erro ao buscar Pedido por ID');
+  }
+}
+
+
 async function listarTodosPedidos() {
   try {
     const Pedidos = await Pedido.findAll();
@@ -166,16 +224,31 @@ async function atualizarStatusPedido(id, status_pedido) {
       throw new Error('Pedido não encontrado');
     }
     // Atualiza somente os campos de Pedido preenchidos por parâmetro
-    if (status_pedido == 1) {
+    if (status_pedido == 1) { // Aguardando Pagamento
       pedido.status_pedido = status_pedido;
     }
-    if (status_pedido == 2) {
+    if (status_pedido == 2) { // Pago 
       pedido.status_pedido = status_pedido;
     }
-    if (status_pedido == 3) {
+    if (status_pedido == 3) { //Entregue
       pedido.status_pedido = status_pedido;
+
+
+      //const estoque = await estoqueService.estoqueEntradaSaida();
+
+      const itensDoPedido = await ItemPedido.findAll({
+        where: {
+          id_pedido: pedido.id
+        }
+      });
+
+      for (const item of itensDoPedido) {
+        await estoqueService.estoqueEntradaSaida(item.id_produto, item.quantidade, 'saida', 'Produto vendido');
+      }
+            
+
     }
-    if (status_pedido == 4) {
+    if (status_pedido == 4) { // Cancelado
       pedido.status_pedido = status_pedido;
     }
 
@@ -195,7 +268,8 @@ module.exports = {
   buscarPedidoPorCpf,
   buscarPedidoPorId,
   atualizarPedido,
-  atualizarStatusPedido
+  atualizarStatusPedido,
+  listarItensDoPedido
   //excluirPedido
 };
 
