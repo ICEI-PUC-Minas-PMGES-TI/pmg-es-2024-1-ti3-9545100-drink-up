@@ -64,6 +64,7 @@ button {
 
 .input-group input[type="text"],
 .input-group input[type="number"],
+.input-group input[type="url"],
 .input-group select,
 .input-group textarea,
 .input-group input[type="file"] {
@@ -161,6 +162,27 @@ textarea {
 }
 
 .tabela-container {
-    max-height: 300px;
+    max-height: 250px;
     overflow-y: auto;
+}
+.btnnovo {
+    background-color: #FDB815; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remover borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-weight: bold; /* Texto em negrito */
+    text-transform: uppercase; /* Texto em letras maiúsculas */
+    cursor: pointer; /* Cursor em forma de mão */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave para o efeito hover */
+}
+
+.btnnovo:hover {
+    background-color: #e0a800; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Aumenta o tamanho do botão */
+}
+
+.btnnovo:active {
+    background-color: #cc8f00; /* Cor de fundo ao clicar */
+    transform: scale(1); /* Retorna ao tamanho original ao clicar */
 }

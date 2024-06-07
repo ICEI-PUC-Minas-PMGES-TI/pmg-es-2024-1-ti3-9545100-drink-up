@@ -38,9 +38,24 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
     if (isNaN(Date.parse(dataNascimento)) || new Date(dataNascimento) > new Date()) {
         alert('Insira uma data de nascimento válida e que não seja futura.');
         return;
-    } else {
-        dataNascimento = new Date(dataNascimento).toISOString().split('T')[0];
     }
+
+    // Verificar se a data de nascimento indica idade maior que 18 anos
+    const today = new Date();
+    const birthDate = new Date(dataNascimento);
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if (age < 18) {
+        alert('Você deve ter pelo menos 18 anos para se cadastrar.');
+        return;
+    }
+
+    dataNascimento = new Date(dataNascimento).toISOString().split('T')[0];
 
     if (cpf.length !== 11 || !cpf.split('').every(c => !isNaN(parseInt(c)))) {
         alert('Valor de CPF inválido!');
