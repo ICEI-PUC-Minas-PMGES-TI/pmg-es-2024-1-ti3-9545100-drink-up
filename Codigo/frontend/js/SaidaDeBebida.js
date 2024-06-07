@@ -1,37 +1,75 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Função para carregar os dados de saída de bebidas
     function carregarDadosSaidaBebidas() {
-        fetch('http://localhost:3000/produtos/saida-bebidas')
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('saida-table-body');
-                tbody.innerHTML = ''; // Limpa o conteúdo anterior
+        const token = sessionStorage.getItem("authorization");
+        if (!token) {
+            alert("Você não está autenticado. Por favor, faça login.");
+            window.location.href = "Login.html";
+            return;
+        }
 
-                data.forEach(item => {
-                    const row = `
-                        <tr>
-                            <td>${item.tipo}</td>
-                            <td>R$ ${item.valor}</td>
-                            <td>${item.nome_bebida}</td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
-            })
-            .catch(error => console.error('Erro ao carregar dados de saída de bebidas:', error));
+        fetch(`http://localhost:3000/pedidos/listarItensDoPedido/${sessionStorage.getItem("user_id")}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Fetched data:', data);
+            const tbody = document.getElementById('saida-table-body');
+            if (!tbody) {
+                console.error('Table body element not found');
+                return;
+            }
+            tbody.innerHTML = ''; // Clear previous content
 
-        // Recuperando o relatório da sessionStorage
+            data.forEach(item => {
+                const row = `
+                    <tr>
+                        <td>Saida</td>
+                        <td>${item.quantidadeProduto}</td>
+                        <td>R$ ${item.valorProduto}</td>
+                        <td>${item.nomeProduto}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Erro ao carregar dados de saída de bebidas:', error));
+
+        // Debug session storage data
         const relatorioString = sessionStorage.getItem('relatorioSaidaBebidas');
-        const relatorioSaidaBebidas = JSON.parse(relatorioString);
+        console.log('Session storage data:', relatorioString);
+        if (!relatorioString) {
+            console.error('relatorioSaidaBebidas is not set in sessionStorage');
+            return;
+        }
 
-        // Exibindo o relatório na tabela de saída de bebidas
+        const relatorioSaidaBebidas = JSON.parse(relatorioString);
+        console.log('Parsed session storage data:', relatorioSaidaBebidas);
+
+        if (!Array.isArray(relatorioSaidaBebidas)) {
+            console.error('Parsed session storage data is not an array');
+            return;
+        }
+
         const tbody = document.getElementById('saida-table-body');
+        if (!tbody) {
+            console.error('Table body element not found');
+            return;
+        }
 
         relatorioSaidaBebidas.forEach((item) => {
             const row = `
                 <tr>
                     <td>${item.tipo}</td>
-                    <td>R$ ${item.valor}</td>
+                    <td>R$ ${item.valor_item}</td>
                     <td>${item.nome_bebida}</td>
                 </tr>
             `;
