@@ -19,6 +19,11 @@ body {
     max-height: calc(100vh - 200px);
 }
 
+h4{
+    display: flex;
+    justify-content: center;
+}
+
 .header img {
     height: 40px;
 }
