@@ -10,22 +10,40 @@ async function estoqueEntradaSaida(idProduto, quantidade, tipo, observacao) {
         throw new Error('Produto não encontrado');
     }
 
-    if (tipo === 'entrada') { // Entrada
-        produto.estoque_atual = parseInt(produto.estoque_atual) + parseInt(quantidade);
-    } else if (tipo === 'saida') { // Saída
-        produto.estoque_atual = parseInt(produto.estoque_atual) - parseInt(quantidade);
+    try {
+        switch (tipo) {
+            case 'entrada':
+                produto.estoque_atual = parseInt(produto.estoque_atual) + parseInt(quantidade);
+                break;
+            case 'saida':
+                if (parseInt(produto.estoque_atual) >= parseInt(quantidade)) {
+                    produto.estoque_atual = parseInt(produto.estoque_atual) - parseInt(quantidade);
+                }
+                else{
+                    throw new Error('Produto com quantidade insuficiente');
+                }
+        
+            default:
+                break;
+        }
+            
+        await produto.save();
+
+        // Crie o registro de movimento no estoque
+        await Estoque.create({
+            quantidade: quantidade,
+            tipo: tipo,
+            observacao: observacao,
+            id_produto: idProduto
+        });
+    
+        return produto;
+    
+    } catch (error) {
+        console.error('Erro ao atualizar estoque:', error);
+        throw new Error('Produto com quantidade insuficiente');
     }
-    await produto.save();
-
-    // Crie o registro de movimento no estoque
-    await Estoque.create({
-        quantidade: quantidade,
-        tipo: tipo,
-        observacao: observacao,
-        id_produto: idProduto
-    });
-
-    return produto;
+    
 }
 
 async function listarEstoqueCompleto() {
