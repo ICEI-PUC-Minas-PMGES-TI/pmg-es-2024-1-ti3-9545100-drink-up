@@ -48,7 +48,7 @@ async function login(email, senha) {
       status:usuario.status, 
       email:usuario.email 
     }, 
-    SECRET, {expiresIn: '1h'}
+    SECRET, {expiresIn: '3h'}
   );
 
   return { token };
