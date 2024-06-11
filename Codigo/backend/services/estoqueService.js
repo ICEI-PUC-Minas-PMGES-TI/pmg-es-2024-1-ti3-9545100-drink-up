@@ -79,7 +79,7 @@ async function relatorioSaidaBebidas() {
                 cat.descricao AS 'Tipo', 
                 SUM(est.quantidade) AS 'Qnt', 
                 prd.valor AS 'Valor', 
-                prd.nome AS 'Nome da Bebida'
+                prd.nome AS 'NomedaBebida'
             FROM
                 tb_estoque est
                 INNER JOIN tb_produto prd ON est.id_produto = prd.id

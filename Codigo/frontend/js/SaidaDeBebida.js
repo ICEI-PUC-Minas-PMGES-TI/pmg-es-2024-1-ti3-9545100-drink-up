@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch(`http://localhost:3000/pedidos/listarItensDoPedido/${sessionStorage.getItem("user_id")}`, {
+        fetch(`http://localhost:3000/estoque/relatorio/SaidaBebidas`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
             data.forEach(item => {
                 const row = `
                     <tr>
-                        <td>Saida</td>
-                        <td>${item.quantidadeProduto}</td>
-                        <td>R$ ${item.valorProduto}</td>
-                        <td>${item.nomeProduto}</td>
+                        <td>${item.Tipo}</td>
+                        <td>${item.Qnt}</td>
+                        <td>R$ ${item.Valor}</td>
+                        <td>${item.NomedaBebida}</td>
                     </tr>
                 `;
                 tbody.innerHTML += row;
