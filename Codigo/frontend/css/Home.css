@@ -230,6 +230,12 @@ body {
     background-color: #F2A516;
 }
 
+.product-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
 
 .custom-footer {
     background-color: #333;

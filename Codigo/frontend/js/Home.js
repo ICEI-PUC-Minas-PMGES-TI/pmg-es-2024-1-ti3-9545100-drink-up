@@ -79,57 +79,82 @@ function carregarProdutos(filtroCategoria = null, searchQuery = null) {
             if (filteredProdutos.length === 0) {
                 productList.innerHTML = 'Nenhum produto encontrado.';
             } else {
-                displayProducts(filteredProdutos, productList);
+                displayProductsByCategory(filteredProdutos, productList);
             }
         })
         .catch(error => console.error('Erro ao carregar produtos:', error));
 }
 
-// Função para exibir produtos
-function displayProducts(produtos, productList) {
-    produtos.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
+function displayProductsByCategory(produtos, productList) {
+    const categories = {};
 
-        fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao buscar a imagem: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(imageData => {
-            if (!imageData || !imageData.caminho) {
-                throw new Error('A URL da imagem não está disponível.');
-            }
-            const imageUrl = imageData.caminho;
-            productCard.innerHTML = `
-                <img src="${imageUrl}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
-                <div class="product-description">
-                    <h4>${product.nome}</h4>
-                    <p>${product.descricao}</p>
-                    <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                    <button data-id="${product.id}" class="botao-comprar">Comprar</button>
-                </div>
-            `;
-            productList.appendChild(productCard);
-            addEventListeners(); 
-        })
-        .catch(error => {
-            console.error("Erro ao buscar a imagem:", error);
-            productCard.innerHTML = `
-                <img src="../../../img/beer.png" alt="${product.nome}" class="product-image">
-                <div class="product-description">
-                    <h4>${product.nome}</h4>
-                    <p>${product.descricao}</p>
-                    <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                    <button data-id="${product.id}" class="botao-comprar">Comprar</button>
-                </div>
-            `;
-            productList.appendChild(productCard);
-            addEventListeners(); 
-        });
+    produtos.forEach(product => {
+        if (!categories[product.id_categoria.descricao]) {
+            categories[product.id_categoria.descricao] = [];
+        }
+        categories[product.id_categoria.descricao].push(product);
     });
+
+    for (const [category, products] of Object.entries(categories)) {
+        const categorySection = document.createElement('div');
+        categorySection.className = 'category-section';
+
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.className = 'category-title';
+        categoryTitle.textContent = category;
+
+        categorySection.appendChild(categoryTitle);
+
+        const productRow = document.createElement('div');
+        productRow.className = 'product-row';
+
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+
+            fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar a imagem: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(imageData => {
+                if (!imageData || !imageData.caminho) {
+                    throw new Error('A URL da imagem não está disponível.');
+                }
+                const imageUrl = imageData.caminho;
+                productCard.innerHTML = `
+                    <img src="${imageUrl}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
+                    <div class="product-description">
+                        <h4>${product.nome}</h4>
+                        <p>${product.descricao}</p>
+                        <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
+                        <button data-id="${product.id}" class="botao-comprar">Comprar</button>
+                    </div>
+                `;
+                productRow.appendChild(productCard);
+                addEventListeners();
+            })
+            .catch(error => {
+                console.error("Erro ao buscar a imagem:", error);
+                productCard.innerHTML = `
+                    <img src="../../../img/beer.png" alt="${product.nome}" class="product-image">
+                    <div class="product-description">
+                        <h4>${product.nome}</h4>
+                        <p>${product.descricao}</p>
+                        <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
+                        <button data-id="${product.id}" class="botao-comprar">Comprar</button>
+                    </div>
+                `;
+                productRow.appendChild(productCard);
+                addEventListeners();
+            });
+        });
+
+        categorySection.appendChild(productRow);
+        productList.appendChild(categorySection);
+    }
 }
 
 // Função para adicionar listeners aos botões de comprar
