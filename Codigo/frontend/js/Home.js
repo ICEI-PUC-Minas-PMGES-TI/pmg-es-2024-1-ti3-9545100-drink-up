@@ -33,25 +33,41 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Lógica para carregar produtos com filtro de busca
-    const searchBtn = document.getElementById('searchBtn');
-    if (searchBtn) {
-        searchBtn.addEventListener('click', function() {
-            const searchInput = document.getElementById('searchInput').value;
-            carregarProdutos(null, searchInput);
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchQuery = searchInput.value.trim();
+            if (searchQuery === "") {
+                carregarProdutos();
+            } else {
+                carregarProdutos(null, searchQuery);
+            }
         });
     }
 
-    // Lógica para o botão de login
     const btnLogin = document.getElementById('loginBtn');
     if (btnLogin) {
         btnLogin.addEventListener('click', function() {
             window.location.href = 'Login.html';
         });
     }
+
+    const btnPerfil = document.getElementById('perfilBtn');
+    const idCliente = sessionStorage.getItem('cliente_id');
+    
+    if (idCliente) {
+        btnPerfil.style.display = 'block';
+        btnPerfil.addEventListener('click', function() {
+            window.location.href = 'Perfil.html';
+        });
+    } else {
+        btnPerfil.style.display = 'none';
+        btnPerfil.addEventListener('click', function() {
+            window.location.href = 'PerfilAmin.html';
+        });
+    }
 });
 
-// Função para carregar produtos
 function carregarProdutos(filtroCategoria = null, searchQuery = null) {
     const baseUrl = 'http://localhost:3000'; 
 
@@ -60,12 +76,10 @@ function carregarProdutos(filtroCategoria = null, searchQuery = null) {
         .then(produtos => {
             let filteredProdutos = produtos;
 
-            // Filtro por categoria
             if (filtroCategoria) {
                 filteredProdutos = filteredProdutos.filter(produto => produto.id_categoria && produto.id_categoria.id == filtroCategoria);
             }
 
-            // Filtro por busca
             if (searchQuery) {
                 const lowerSearchQuery = searchQuery.toLowerCase();
                 filteredProdutos = filteredProdutos.filter(produto => 
@@ -157,7 +171,6 @@ function displayProductsByCategory(produtos, productList) {
     }
 }
 
-// Função para adicionar listeners aos botões de comprar
 function addEventListeners() {
     const buttons = document.querySelectorAll('.botao-comprar');
     buttons.forEach(button => {
