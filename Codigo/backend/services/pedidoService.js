@@ -36,12 +36,22 @@ async function criarPedido(itens_do_carrinho, endereco, id_cliente) {
 
     try {
       for (const element of itens_do_carrinho) {
-        await ItemPedido.create({
-          quantidade: element.quant,
-          valor_item: element.valor,
-          id_produto: element.id,
-          id_pedido: pedido.id
-        }, { transaction });
+
+        let prd = await Produto.findByPk(element.id);
+
+        if (prd.estoque_atual >= element.quant){
+          await ItemPedido.create({
+            quantidade: element.quant,
+            valor_item: element.valor,
+            id_produto: element.id,
+            id_pedido: pedido.id
+          }, { transaction });
+        }
+        else{
+          console.error('Não existe a quantidade no estoque:', error);
+          throw new Error('Não existe a quantidade no estoque');
+        }
+      
       }
 
       console.log("===*****************==");
