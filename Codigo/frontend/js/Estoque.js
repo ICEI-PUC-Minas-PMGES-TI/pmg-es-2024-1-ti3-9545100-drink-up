@@ -84,29 +84,40 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Quantidade insuficinete para esta operação :(   tente novamente');
             return;
         }
-        let novaQuantidade;
-        if (isAdding) {
-            novaQuantidade = quantidadeAtual + quantidadeAlterar;
-        } else {
-            novaQuantidade = quantidadeAtual - quantidadeAlterar;
-        }
 
-        fetch(`${baseUrl}/produtos/atualizar-estoque/${idProduto}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                estoque_atual: novaQuantidade
+        
+        if (isAdding) {
+
+            fetch(`${baseUrl}/estoque`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "idProduto": idProduto,
+                    "quantidade": quantidadeAlterar,
+                    "tipo": "entrada",
+                    "observacao": "Adição Manual pelo admin"
+                })
             })
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-                tdQuantidade.textContent = novaQuantidade;
+        
+            carregarProdutos();
+        
+        } else {
+            fetch(`${baseUrl}/estoque`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "idProduto": idProduto,
+                    "quantidade": quantidadeAlterar,
+                    "tipo": "saida",
+                    "observacao": "Retirada Manual pelo admin"
+                })
             })
-            .catch(error => {
-                console.error('Erro em atualizar estoque :(', error);
-            });
+            carregarProdutos();
+        }
+        carregarProdutos();        
     }
 });
