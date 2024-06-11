@@ -79,10 +79,25 @@
                             required>
                     </div>
                 </fieldset>
+                <div class="input-box">
+                    <input type="checkbox" id="ageConfirmation" name="ageConfirmation" required>
+                    <label for="ageConfirmation">Termo de ciência </label>
+                    <a href="#" id="openPopup">Leia os termos</a>
+                </div>
                 <div class="cadastrar-button">
                     <button id="bntCadastrar" type="button">Cadastrar</button>
                 </div>
             </form>
+            <div id="popupContainer" class="popup-container">
+                <div class="popup-content">
+                    <span class="close-btn" id="closePopup">&times;</span>
+                    <h2>Termos de Ciência</h2>
+                    <p>
+                        <strong>Idade Mínima</strong>: Ao realizar uma compra de bebidas alcoólicas, você declara ter 18 anos ou mais. É proibida a venda de bebidas alcoólicas para menores de 18 anos, conforme disposto no Estatuto da Criança e do Adolescente (ECA), Lei nº 8.069/1990, Art. 81 e Art. 243.
+                    </p>
+                    <p><strong>Responsabilidade</strong>: Ao aceitar estes termos, você assume total responsabilidade pela veracidade das informações fornecidas e pelo cumprimento das leis relativas à compra e ao consumo de bebidas alcoólicas.</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src = "../js/cadastroCliente.js"></script>
