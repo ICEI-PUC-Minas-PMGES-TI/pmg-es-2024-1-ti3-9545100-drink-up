@@ -35,12 +35,9 @@
     
     <div class="d-flex" id="wrapper">
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Categorias</div>
-            <div class="list-group list-group-flush">
-                <select id="categorySelect" class="list-group-item list-group-item-action bg-light">
-                    <option value="">Todas as categorias</option>
-                </select>
-                <button class="btn btn-primary mt-2" id="searchButton">Buscar</button>
+            <div class="sidebar-heading"><strong>Qual a categoria de hoje?</strong></div>
+            <div class="list-group list-group-flush" id="categoryContainer">
+                    <ul id="categoryList"></ul>
             </div>
         </div>
         <div id="page-content-wrapper">

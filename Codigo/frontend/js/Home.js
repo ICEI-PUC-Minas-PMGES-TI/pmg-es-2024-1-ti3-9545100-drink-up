@@ -4,12 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(`${baseUrl}/categorias`)
         .then(response => response.json())
         .then(categorias => {
-            const categorySelect = document.getElementById('categorySelect');
+            const categoryList = document.getElementById('categoryList');
             categorias.forEach(categoria => {
-                const option = document.createElement('option');
-                option.value = categoria.id;
-                option.textContent = categoria.descricao;
-                categorySelect.appendChild(option);
+                const listItem = document.createElement('li');
+                listItem.textContent = categoria.descricao;
+                listItem.dataset.id = categoria.id;
+                listItem.classList.add('category-item'); // Adicione uma classe para estilização
+                categoryList.appendChild(listItem);
             });
             carregarProdutos();  
         })
@@ -28,8 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchButton = document.getElementById('searchButton');
     if (searchButton) {
         searchButton.addEventListener('click', function() {
-            const selectedCategoria = document.getElementById('categorySelect').value;
-            carregarProdutos(selectedCategoria);
+            const selectedCategoria = document.querySelector('.category-item.selected');
+            const categoriaId = selectedCategoria ? selectedCategoria.dataset.id : null;
+            carregarProdutos(categoriaId);
         });
     }
 
@@ -55,17 +57,42 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnPerfil = document.getElementById('perfilBtn');
     const idCliente = sessionStorage.getItem('cliente_id');
     
-    if (idCliente) {
-        btnPerfil.style.display = 'block';
-        btnPerfil.addEventListener('click', function() {
-            window.location.href = 'Perfil.html';
-        });
-    } else {
-        btnPerfil.style.display = 'none';
-        btnPerfil.addEventListener('click', function() {
-            window.location.href = 'PerfilAmin.html';
-        });
+    if (btnPerfil) {
+        btnPerfil.style.display = 'none'; // Initially hide the button
+
+        if (idCliente) {
+            btnPerfil.style.display = 'block';
+            btnPerfil.addEventListener('click', function() {
+                window.location.href = 'Perfil.html';
+            });
+        } else {
+            btnPerfil.style.display = 'block';
+            btnPerfil.addEventListener('click', function() {
+                window.location.href = 'PerfilAdmin.html';
+            });
+        }
     }
+
+    // Event listener for category list items
+   // Event listener for category list items
+document.getElementById('categoryList').addEventListener('click', function(event) {
+    if (event.target && event.target.nodeName === 'LI') {
+        const selectedCategory = document.querySelector('.category-item.selected');
+        if (selectedCategory) {
+            selectedCategory.classList.remove('selected');
+        }
+        event.target.classList.add('selected');
+        const categoriaId = event.target.dataset.id;
+        carregarProdutos(categoriaId);
+
+        // Close the sidebar when a category is clicked
+        const sidebar = document.getElementById('sidebar-wrapper');
+        const content = document.getElementById('page-content-wrapper');
+        sidebar.classList.remove('open');
+        content.classList.remove('shifted');
+    }
+});
+
 });
 
 function carregarProdutos(filtroCategoria = null, searchQuery = null) {
