@@ -180,5 +180,8 @@ export class Carrinho {
 
         totalComFrete = formatter.format(totalComFrete);
         document.getElementById("cart-subtotal").innerText = `${totalComFrete}`;
+
+
+        sessionStorage.setItem("TotalComFrete", totalComFrete);
     }
 }
