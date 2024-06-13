@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Recuperar o valor total do localStorage
-    const valorTotal = localStorage.getItem('valorTotal');
+    const valorTotal = sessionStorage.getItem('TotalComFrete');
     const valorFrete = localStorage.getItem('valorFrete');
     // Verificar se o valor total está disponível e atualizar a página
     if (valorTotal) {
