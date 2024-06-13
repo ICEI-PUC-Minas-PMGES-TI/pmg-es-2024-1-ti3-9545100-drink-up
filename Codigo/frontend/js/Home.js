@@ -88,6 +88,8 @@ function carregarProdutos(filtroCategoria = null, searchQuery = null) {
                 );
             }
 
+            filteredProdutos = filteredProdutos.filter(produto => produto.estoque_atual > 0);
+
             const productList = document.getElementById('product-list');
             productList.innerHTML = '';
             if (filteredProdutos.length === 0) {
@@ -98,6 +100,7 @@ function carregarProdutos(filtroCategoria = null, searchQuery = null) {
         })
         .catch(error => console.error('Erro ao carregar produtos:', error));
 }
+
 
 function displayProductsByCategory(produtos, productList) {
     const categories = {};
