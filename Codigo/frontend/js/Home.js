@@ -177,25 +177,15 @@ function displayProductsByCategory(produtos, productList) {
                         <h4>${product.nome}</h4>
                         <p>${product.descricao}</p>
                         <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                        <button data-id="${product.id}">Comprar</button>
+                        <button class="botao-comprar" onClick="redirectToDetailsPage(${product.id})">
+                            Comprar
+                        </button>
                     </div>
                 `;
                 productRow.appendChild(productCard);
-                addEventListeners();
             })
             .catch(error => {
                 console.error("Erro ao buscar a imagem:", error);
-                productCard.innerHTML = `
-                    <img src="../../../img/beer.png" alt="${product.nome}" class="product-image">
-                    <div class="product-description">
-                        <h4>${product.nome}</h4>
-                        <p>${product.descricao}</p>
-                        <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                        <button data-id="${product.id}" class="botao-comprar">Comprar</button>
-                    </div>
-                `;
-                productRow.appendChild(productCard);
-                addEventListeners();
             });
         });
 
@@ -203,12 +193,7 @@ function displayProductsByCategory(produtos, productList) {
         productList.appendChild(categorySection);
     }
 }
-function addEventListeners() {
-    const buttons = document.querySelectorAll('.botao-comprar');
-    buttons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            const productId = this.dataset.id; 
-            window.location.href = `DetalhesProduto.html?id=${productId}`;
-        });
-    });
+
+function redirectToDetailsPage(productId) {
+    window.location.href = `DetalhesProduto.html?id=${productId}`;
 }
