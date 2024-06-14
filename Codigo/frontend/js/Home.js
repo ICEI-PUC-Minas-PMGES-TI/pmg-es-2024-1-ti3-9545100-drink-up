@@ -56,20 +56,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const btnPerfil = document.getElementById('perfilBtn');
     const idCliente = sessionStorage.getItem('cliente_id');
+    const idUser = sessionStorage.getItem('user_id');
     
     if (btnPerfil) {
-        btnPerfil.style.display = 'none'; // Initially hide the button
+        btnPerfil.style.display = 'none'; 
 
-        if (idCliente) {
+        if (idUser) {
             btnPerfil.style.display = 'block';
-            btnPerfil.addEventListener('click', function() {
-                window.location.href = 'Perfil.html';
-            });
-        } else {
-            btnPerfil.style.display = 'block';
-            btnPerfil.addEventListener('click', function() {
-                window.location.href = 'PerfilAdmin.html';
-            });
+            if (idCliente) {
+                btnPerfil.addEventListener('click', function() {
+                    window.location.href = 'Perfil.html';
+                });
+            } else {
+                btnPerfil.addEventListener('click', function() {
+                    window.location.href = 'PerfilAdmin.html';
+                });
+            }
         }
     }
 
@@ -140,21 +142,22 @@ function displayProductsByCategory(produtos, productList) {
     });
 
     for (const [category, products] of Object.entries(categories)) {
-        const categorySection = document.createElement('div');
-        categorySection.className = 'category-section';
+        const categorySection = document.createElement('section');
+        categorySection.className = 'category-section w-100';
 
-        const categoryTitle = document.createElement('h3');
+        const categoryTitle = document.createElement('div');
         categoryTitle.className = 'category-title';
         categoryTitle.textContent = category;
 
         categorySection.appendChild(categoryTitle);
 
         const productRow = document.createElement('div');
-        productRow.className = 'product-row';
+        productRow.className = 'product-row w-100';
 
         products.forEach(product => {
             const productCard = document.createElement('div');
-            productCard.className = 'product-card';
+            productCard.className = 'product-card d-flex justify-content-center align-items-center';
+            productCard.style.width  = "250px";
 
             fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
             .then(response => {
@@ -169,12 +172,12 @@ function displayProductsByCategory(produtos, productList) {
                 }
                 const imageUrl = imageData.caminho;
                 productCard.innerHTML = `
-                    <img src="${imageUrl}" alt="${product.nome}" class="product-image" onerror="this.onerror=null; this.src='../../../img/beer.png';">
-                    <div class="product-description">
+                    <img src="${imageUrl}" alt="${product.nome}" onerror="this.onerror=null; this.src='../../../img/beer.png';"  style="width: 300px; height: 350px; object-fit: contain; margin-top: 2rem;" >
+                    <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 2rem;">
                         <h4>${product.nome}</h4>
                         <p>${product.descricao}</p>
                         <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
-                        <button data-id="${product.id}" class="botao-comprar">Comprar</button>
+                        <button data-id="${product.id}">Comprar</button>
                     </div>
                 `;
                 productRow.appendChild(productCard);
@@ -200,7 +203,6 @@ function displayProductsByCategory(produtos, productList) {
         productList.appendChild(categorySection);
     }
 }
-
 function addEventListeners() {
     const buttons = document.querySelectorAll('.botao-comprar');
     buttons.forEach(button => {

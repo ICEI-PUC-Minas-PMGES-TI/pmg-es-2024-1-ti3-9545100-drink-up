@@ -172,8 +172,8 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    max-width: 1200px;
-    padding: auto;
+    padding: 0 15px;
+    margin: 0;
 }
 
 /* Card de produto */
@@ -186,7 +186,6 @@ body {
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     max-height: 400px;
     max-width: 400px;
@@ -206,7 +205,7 @@ body {
 
 .product-card .description {
     padding: 15px;
-    text-align: center !important;
+   /* text-align: center !important;*/
     margin: auto !important;
 }
 
@@ -215,7 +214,6 @@ body {
     background-color: #FDB815;
     color: black;
     padding: 10px 20px;
-    text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -364,4 +362,19 @@ body {
     text-align: center;
     padding-top: 15px;
     font-size: 20px;
+}
+
+.category-section {
+    background-color: #FDB815; /* Fundo amarelo */
+    padding: 20px; /* Espaçamento interno */
+    margin-bottom: 20px; /* Margem inferior para separação entre categorias */
+    width: max-content;
+    border-radius: 15px;
+}
+
+.category-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
 }
