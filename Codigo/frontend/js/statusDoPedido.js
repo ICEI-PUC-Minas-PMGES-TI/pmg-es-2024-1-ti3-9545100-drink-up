@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loadUsers();
     loadAllClients();
+    
+    // Corrigido: Passando a função populateUserSelect como referência
+    document.getElementById('usuarioSelect').addEventListener('click', () => populateUserSelect(usuarios));
     document.getElementById('buscarTodosPedidos').addEventListener('click', loadAllOrders);
     document.getElementById('buscarPedidosPorData').addEventListener('click', filterOrdersByDate);
 });
@@ -58,14 +61,43 @@ function loadUsers() {
     });
 }
 
-function populateUserSelect(usuarios) {
+async function loadEmail(id) {
+    try {
+        const response = await fetch(`http://localhost:3000/usuarios/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('authorization')
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao obter usuário');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Erro ao buscar usuário:', error);
+        return null;
+    }
+}
+
+async function populateUserSelect(usuarios) {
     const usuarioSelect = document.getElementById('usuarioSelect');
-    usuarios.forEach(usuario => {
+
+    for (const usuario of usuarios) {
         const option = document.createElement('option');
         option.value = usuario.id;
-        option.textContent = `${usuario.nome} (${usuario.email})`;
+
+        const emailData = await loadEmail(usuario.id_usuario);
+        if (emailData && emailData.email) {
+            option.textContent = `${usuario.nome} (${emailData.email})`;
+        } else {
+            option.textContent = usuario.nome;
+        }
+
         usuarioSelect.appendChild(option);
-    });
+    }
 
     usuarioSelect.addEventListener('change', function () {
         const userId = this.value;
