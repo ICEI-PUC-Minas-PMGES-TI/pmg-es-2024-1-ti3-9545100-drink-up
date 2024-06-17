@@ -163,7 +163,13 @@ function displayOrders(orders) {
     orders.forEach(order => {
         const cliente = clientsMap[order.id_cliente];
         const clienteNome = cliente ? cliente.nome : 'Desconhecido';
-        const valorPedido = typeof order.valor_pedido === 'number' ? order.valor_pedido.toFixed(2) : 'N/A';
+
+        console.log(typeof order.valor_pedido);
+        console.log(order.valor_pedido);
+        console.log(order);
+
+
+        const valorPedido = order.valor_pedido ? order.valor_pedido : 'N/A';
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${order.data_criacao.split('T')[0]}</td>
