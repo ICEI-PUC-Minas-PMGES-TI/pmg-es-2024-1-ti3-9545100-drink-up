@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadUsers();
     loadAllClients();
     document.getElementById('buscarTodosPedidos').addEventListener('click', loadAllOrders);
-    document.getElementById('dataInput').addEventListener('change', filterOrdersByDate);
+    document.getElementById('buscarPedidosPorData').addEventListener('click', filterOrdersByDate);
 });
 
 let clientsMap = {};
@@ -119,7 +119,14 @@ function loadAllOrders() {
 }
 
 function filterOrdersByDate() {
-    const selectedDate = document.getElementById('dataInput').value;
+    const dataInicio = document.getElementById('dataInicioInput').value;
+    const dataFim = document.getElementById('dataFimInput').value;
+
+    if (!dataInicio || !dataFim) {
+        alert('Por favor, selecione ambas as datas.');
+        return;
+    }
+
     fetch('http://localhost:3000/pedidos', {
         method: 'GET',
         headers: {
@@ -135,7 +142,7 @@ function filterOrdersByDate() {
     .then(orders => {
         const filteredOrders = orders.filter(order => {
             const orderDate = new Date(order.data_criacao).toISOString().split('T')[0];
-            return orderDate === selectedDate;
+            return orderDate >= dataInicio && orderDate <= dataFim;
         });
         displayOrders(filteredOrders);
     })
@@ -163,12 +170,6 @@ function displayOrders(orders) {
     orders.forEach(order => {
         const cliente = clientsMap[order.id_cliente];
         const clienteNome = cliente ? cliente.nome : 'Desconhecido';
-
-        console.log(typeof order.valor_pedido);
-        console.log(order.valor_pedido);
-        console.log(order);
-
-
         const valorPedido = order.valor_pedido ? order.valor_pedido : 'N/A';
         const tr = document.createElement('tr');
         tr.innerHTML = `
