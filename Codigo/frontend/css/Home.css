@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;1000&ital,wght@1,1000&display=swap");
+
 /* Estilos globais */
 * {
     padding: 0;
@@ -164,7 +166,7 @@ body {
     align-items: center;
     margin-top: -2.5rem;
     width: 100%;
-    padding: 7rem 1rem;
+    padding: 2rem 1rem;
 }
 
 .product-list {
@@ -187,8 +189,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-height: 400px;
-    max-width: 400px;
+    max-height: 350px;
+    max-width: 350px;
 }
 
 .product-card:hover {
@@ -199,12 +201,13 @@ body {
 .product-card img {
     width: 100%;
     height: auto;
-    max-height: 200px;
+    max-height: 150px;
     object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .product-card .description {
-    padding: 15px;
+    padding: 8px;
    /* text-align: center !important;*/
     margin: auto !important;
 }
@@ -232,7 +235,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 8px;
 }
 
 .custom-footer {
@@ -365,16 +368,34 @@ body {
 }
 
 .category-section {
-    background-color: #FDB815; /* Fundo amarelo */
+    background-color: white; /* Fundo amarelo */
     padding: 20px; /* Espaçamento interno */
     margin-bottom: 20px; /* Margem inferior para separação entre categorias */
     width: max-content;
     border-radius: 15px;
+    border: 0.7px solid #f0f0f0;
 }
 
 .category-title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: black;
     margin-bottom: 10px;
+}
+.minititulo{
+    text-align: center;
+    margin: auto;
+    margin-top: 15px;
+}
+.verMais{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50%; /* Torna o botão redondo */
+    background-color: transparent;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    border: 1px solid black;
 }

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listItem = document.createElement('li');
                 listItem.textContent = categoria.descricao;
                 listItem.dataset.id = categoria.id;
-                listItem.classList.add('category-item'); // Adicione uma classe para estilização
+                listItem.classList.add('category-item'); 
                 categoryList.appendChild(listItem);
             });
             carregarProdutos();  
@@ -76,24 +76,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event listener for category list items
-   // Event listener for category list items
-document.getElementById('categoryList').addEventListener('click', function(event) {
-    if (event.target && event.target.nodeName === 'LI') {
-        const selectedCategory = document.querySelector('.category-item.selected');
-        if (selectedCategory) {
-            selectedCategory.classList.remove('selected');
-        }
-        event.target.classList.add('selected');
-        const categoriaId = event.target.dataset.id;
-        carregarProdutos(categoriaId);
+    document.getElementById('categoryList').addEventListener('click', function(event) {
+        if (event.target && event.target.nodeName === 'LI') {
+            const selectedCategory = document.querySelector('.category-item.selected');
+            if (selectedCategory) {
+                selectedCategory.classList.remove('selected');
+            }
+            event.target.classList.add('selected');
+            const categoriaId = event.target.dataset.id;
+            carregarProdutos(categoriaId);
 
-        // Close the sidebar when a category is clicked
-        const sidebar = document.getElementById('sidebar-wrapper');
-        const content = document.getElementById('page-content-wrapper');
-        sidebar.classList.remove('open');
-        content.classList.remove('shifted');
-    }
-});
+            // Close the sidebar when a category is clicked
+            const sidebar = document.getElementById('sidebar-wrapper');
+            const content = document.getElementById('page-content-wrapper');
+            sidebar.classList.remove('open');
+            content.classList.remove('shifted');
+        }
+    });
 
 });
 
@@ -154,10 +153,14 @@ function displayProductsByCategory(produtos, productList) {
         const productRow = document.createElement('div');
         productRow.className = 'product-row w-100';
 
-        products.forEach(product => {
+        // Mostrar apenas os 5 primeiros produtos
+        const productsToShow = products.slice(0, 5);
+
+        productsToShow.forEach(product => {
             const productCard = document.createElement('div');
             productCard.className = 'product-card d-flex justify-content-center align-items-center';
             productCard.style.width  = "250px";
+            productCard.style.height  = "380px";
 
             fetch(`http://localhost:3000/imagens/${product.id_imagem}`)
             .then(response => {
@@ -190,6 +193,16 @@ function displayProductsByCategory(produtos, productList) {
         });
 
         categorySection.appendChild(productRow);
+
+        // Adicionar botão "Ver mais"
+        const verMaisButton = document.createElement('button');
+        verMaisButton.className = 'verMais';
+        verMaisButton.textContent = 'Todos';
+        verMaisButton.onclick = function() {
+            window.location.href = `ProdutosCategoria.html?id_categoria=${products[0].id_categoria.id}`;
+        };
+        categorySection.appendChild(verMaisButton);
+
         productList.appendChild(categorySection);
     }
 }
