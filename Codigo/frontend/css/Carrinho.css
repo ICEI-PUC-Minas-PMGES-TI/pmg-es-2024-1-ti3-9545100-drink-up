@@ -182,3 +182,7 @@ button {
 .button-usuario:hover {
   color: #424242;
 }
+.btnvoltar{
+  margin-top: 20px;
+  margin-left: 20px;
+}

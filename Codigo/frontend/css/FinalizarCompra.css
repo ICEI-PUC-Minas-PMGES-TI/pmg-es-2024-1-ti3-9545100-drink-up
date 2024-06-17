@@ -63,8 +63,7 @@ body {
 .buttons {
   display: flex;
   justify-content: center;
-  padding-top: 400px;
-  padding-left: 120px;
+  padding-top: 20px;
 }
 
 .continuar-button {
@@ -106,7 +105,7 @@ table {
 }
 
 th, td {
-  padding: 10px;
+  padding: 5px;
 }
 
 tfoot td {

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .then((produto) => {
       document.querySelector(
         "h1"
-      ).textContent = `${produto.nome} ${produto.tam_garrafa}ml`;
+      ).textContent = `${produto.nome} ${produto.tam_garrafa}`;
       document.querySelector("h3").textContent = `R$ ${produto.valor}`;
       document.querySelector("p").textContent = produto.descricao;
 

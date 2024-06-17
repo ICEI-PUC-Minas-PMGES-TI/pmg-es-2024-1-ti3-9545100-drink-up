@@ -37,11 +37,11 @@ body {
 }
 
 #imagem img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 200px;
-    width: 400px;
+  display: block;
+  margin: 0 auto;
+  width: 400px; /* Largura fixa */
+  height: 400px; /* Altura fixa */
+  object-fit: contain; 
 }
 
 .content {
@@ -131,4 +131,38 @@ button:hover {
 
 button{
     background-color: transparent;
+}
+.navbar-icons {
+  display: flex;
+  align-items: center;
+}
+
+#perfilBtn, #carrinhoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: black;
+}
+
+#perfilBtn .material-symbols-outlined,
+#carrinhoBtn .material-symbols-outlined,
+#filterBtn .material-symbols-outlined {
+  font-size: 24px;
+  color: black;
+  transition: color 0.3s;
+}
+
+#perfilBtn:hover .material-symbols-outlined,
+#perfilBtn:focus .material-symbols-outlined,
+#carrinhoBtn:hover .material-symbols-outlined,
+#carrinhoBtn:focus .material-symbols-outlined,
+#filterBtn:hover .material-symbols-outlined,
+#filterBtn:focus .material-symbols-outlined {
+  color: black;
 }
