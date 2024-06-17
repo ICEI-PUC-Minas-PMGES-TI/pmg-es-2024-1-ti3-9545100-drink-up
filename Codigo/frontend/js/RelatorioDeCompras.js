@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   loadOrders();
 });
 
+
 function loadOrders() {
   const token = sessionStorage.getItem('authorization');
   
@@ -20,7 +21,10 @@ function loadOrders() {
   })
   .then(response => response.json())
   .then(orders => {
-    displayOrders(orders);
+    
+    const userOrders = orders.filter(order => order.id_cliente === parseInt(sessionStorage.getItem("cliente_id")));
+
+    displayOrders(userOrders);
   })
   .catch(error => {
     console.error('Error loading orders:', error);
