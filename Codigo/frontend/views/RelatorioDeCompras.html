@@ -12,22 +12,26 @@
         <link rel="stylesheet" href="../css/configs.css" />
     </head>
     <body>
-        <header class="header">
-            <button onclick="location.href='Home.html'">
-                <img src="../assets/img/LogoNova.png" alt="DrinkUp Logo"/>
-            </button>
-            <button
-                class="button-usuario"
-                onclick="location.href='Perfil.html'"
-            >
-                <span class="material-symbols-outlined">person</span>
-            </button>
-        </header>
+        <div class="navbar">
+            <a class="navbar-brand" href="Home.html">
+                <img src="../assets/img/LogoNova.png" alt="Logo DrinkUp">
+            </a>
+            <div class="navbar-icons">
+                <button id="loginBtn" class="button-login" onclick="location.href='Login.html'">Login</button>
+                <button id="carrinhoBtn" class="btn button-carrinho" onclick="location.href='Carrinho.html'">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </button>
+                <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
+                    <span class="material-symbols-outlined">person</span>
+                </button>
+            </div>
+        </div>
 
         <div class="container">
             <aside class="sidebar">
+                <button class="btn-voltar" onclick="location.href='Home.html'">⇦ VOLTAR</button>
                 <button onclick="location.href='Perfil.html'">MINHA CONTA</button>
-                <button>MEUS PEDIDOS</button>
+                <button onclick="location.href='RelatorioDeCompras.html'">MEUS PEDIDOS</button>
             </aside>
 
             <!-- Main -->

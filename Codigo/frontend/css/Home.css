@@ -112,6 +112,9 @@ body {
     display: flex;
     align-items: center;
 }
+#perfilBtn{
+    margin-top: 6px;
+}
 
 #perfilBtn, #carrinhoBtn {
     display: flex;
