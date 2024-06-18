@@ -194,6 +194,7 @@ body {
     justify-content: space-between;
     max-height: 350px;
     max-width: 350px;
+    gap: 20px !important;
 }
 
 .product-card:hover {
