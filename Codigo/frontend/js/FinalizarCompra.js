@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       let data = responseBody ? JSON.parse(responseBody) : {};
 
       carrinho.limparCarrinho();
-      alert("Pedido Registrado com sucesso! Realize o pagamento do seu pedido e anexe o comprovante via WhatsApp!");
   
       // Assuming `data` contains an object with a `pedido` property
       sessionStorage.setItem('pedido_id', data.id);

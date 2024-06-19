@@ -178,7 +178,6 @@ function displayProductsByCategory(produtos, productList) {
                     <img src="${imageUrl}" alt="${product.nome}" onerror="this.onerror=null; this.src='../../../img/beer.png';"  style="width: 300px; height: 350px; object-fit: contain; margin-top: 2rem;" >
                     <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 2rem;">
                         <h4>${product.nome}</h4>
-                        <p>${product.descricao}</p>
                         <p class="product-price">R$ ${product.valor ? parseFloat(product.valor).toFixed(2) : 'N/A'}</p>
                         <button class="botao-comprar" onClick="redirectToDetailsPage(${product.id})">
                             Comprar

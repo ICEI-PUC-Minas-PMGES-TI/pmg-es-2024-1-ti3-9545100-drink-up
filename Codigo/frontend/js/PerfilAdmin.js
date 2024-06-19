@@ -35,11 +35,13 @@ function save() {
     .then(response => {
         if (response.ok) {
             alert('Senha alterada com sucesso');
+            location.reload()
             return response.json();
         }
         else{
             throw new Error('não foi possível alterar a senha');
         }
+        
         
     })
     .catch(error => {

@@ -6,7 +6,7 @@
 
 body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     font-family: 'Nunito Sans', sans-serif;
     overflow-x: hidden;
 }
@@ -29,40 +29,23 @@ body {
     margin-left: -20px;
 }
 
-/* Botão sobre */
-.btn-about {
-    background-color: #FDB815;
-    border: none;
-    color: black;
-    font-weight: bold;
-    margin-left: 20px;
-    cursor: pointer;
-    transition: color 0.3s, background-color 0.3s;
-}
-
-.btn-about:hover {
-    color: white;
-    background-color: #d1a71d;
-}
-
-.container {
+.container-fluid {
     display: flex;
-    justify-content: start;
-    align-items: start;
-    margin-top: -2.5rem;
-    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
     padding: 2rem 1rem;
+    width: 90%;
 }
 
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start !important;
+    justify-content: flex-start;
     gap: 15px;
     padding: 0 15px;
+    width: 100%;
 }
 
-/* Card de produto */
 .product-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -75,7 +58,7 @@ body {
     justify-content: space-between;
     max-height: 350px;
     max-width: 350px;
-    gap: 20px !important;
+    gap: 20px;
 }
 
 .product-card:hover {
@@ -93,10 +76,8 @@ body {
 
 .product-card .description {
     padding: 8px;
-   /* text-align: center !important;*/
-    margin: auto !important;
+    margin: auto;
 }
-
 
 .product-card button {
     background-color: #FDB815;
@@ -116,9 +97,20 @@ body {
     background-color: #F2A516;
 }
 
-.product-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    gap: 8px;
+.btnvoltar {
+    background-color: #FDB815;
+    color: black;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 40px;
+    border: none;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-bottom: 20px;
+}
+
+.btnvoltar:hover {
+    background-color: #F2A516;
+    transform: scale(1.05);
 }
