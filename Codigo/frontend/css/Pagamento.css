@@ -13,7 +13,6 @@
     overflow-x: hidden;
   }
   
-  /* Navbar Styles */
   .navbar {
     background-color: #FDB815;
     padding: 0 20px;
@@ -21,37 +20,72 @@
     justify-content: space-between;
     align-items: center;
     height: 95px;
-    margin: 0 auto;
   }
   
   .navbar img {
     height: 100px;
+    display: flex;
     width: auto;
-    margin-left: -20px;
+    margin-top: 0;
+    margin-left: -24px;
   }
+  
   
   .navbar-icons {
     display: flex;
-    gap: 20px;
+    align-items: center;
   }
   
-  .navbar-icons button {
-    background: none;
+  #perfilBtn, #carrinhoBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: color 0.3s;
+    color: black;
+    margin-top: 20px;
+    padding: 5px 25px;
+  }
+  #perfilBtn{
+    margin-top: 22px;
   }
   
-  .navbar-icons .btn {
-    background-color: transparent;
-    color: #000;
-    font-weight: 700;
-    padding: 10px 20px;
+  #perfilBtn .material-symbols-outlined,
+  #carrinhoBtn .material-symbols-outlined{
+    font-size: 24px;
+    color: black;
+    transition: color 0.3s;
+  }
+  
+  #perfilBtn:hover .material-symbols-outlined,
+  #perfilBtn:focus .material-symbols-outlined,
+  #carrinhoBtn:hover .material-symbols-outlined,
+  #carrinhoBtn:focus .material-symbols-outlined {
+    color: black;
+  }
+  
+  /* Botão de login */
+  .button-login {
+    background-color: transparent !important;
+    border: none;
+    padding: 5px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 23px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: unset;
+    text-transform: none;
+    
   }
   
-  .navbar-icons .btn:hover {
-    background-color: #bd9622;
+  .button-login:hover {
+    background-color: #FDB815;
   }
 
 main {
@@ -76,6 +110,7 @@ button {
 }
 h4{
     text-align: center;
+    margin-top: 20px;
 }
 .row {
     margin-top: 50px;
@@ -202,6 +237,7 @@ textarea {
 .qrcode{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .qrcode-img img{

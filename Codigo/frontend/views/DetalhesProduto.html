@@ -9,19 +9,20 @@
         <link rel="stylesheet" href="../css/DetalhesProduto.css" />
     </head>
     <body>
-        <header class="header">
-            <button onclick="location.href='Home.html'">
-                <img src="../assets/img/LogoNova.png" alt="DrinkUp Logo" />
-            </button>
+        <div class="navbar">
+            <a class="navbar-brand" href="Home.html">
+                <img src="../assets/img/LogoNova.png" alt="Logo DrinkUp">
+            </a>
             <div class="navbar-icons">
-            <button id="carrinhoBtn" class="btn button-carrinho" onclick="location.href='Carrinho.html'">
-                <span class="material-symbols-outlined">shopping_cart</span>
-            </button>
-            <button class="button-usuario" onclick="location.href='Perfil.html'">
-                <span class="material-symbols-outlined">person</span>
-            </button>
+                <button id="loginBtn" class="button-login" onclick="location.href='Login.html'">Login</button>
+                <button id="carrinhoBtn" class="btn button-carrinho" onclick="location.href='Carrinho.html'">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </button>
+                <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
+                    <span class="material-symbols-outlined">person</span>
+                </button>
+            </div>
         </div>
-        </header>
 
         <div class="container">
             <aside class="sidebar">
@@ -42,13 +43,17 @@
                 <div id="counter">
                     <div>
                         <button id="plus" class="count-button">
-                            +
+                            <span class="material-symbols-outlined">
+                                add
+                                </span>
                         </button>
                         <span id="value">  
                            0 
                         </span>
                         <button id="minus" class="count-button">
-                            -
+                            <span class="material-symbols-outlined">
+                                remove
+                                </span>
                         </button>
                     </div>
                     

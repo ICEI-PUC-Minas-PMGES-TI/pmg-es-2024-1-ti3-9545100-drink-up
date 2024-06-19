@@ -403,3 +403,11 @@ body {
     display: flex;
     border: 1px solid black;
 }
+h3{
+    text-align: start;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bolder !important;
+    margin-left: 20px;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+}

@@ -14,19 +14,20 @@
     />
   </head>
   <body>
-    <header class="navbar">
-      <button onclick="location.href='Home.html'">
-          <img src="../assets/img/LogoNova.png" alt="DrinkUp Logo"/>
-      </button>
-      <button
-        class="button-NovoProduto"
-        onclick="location.href='CadastroBebidas.html'"
-      >
-        Novo produto
-      <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
-          <span class="material-symbols-outlined">person</span>
-      </button>
-  </header>
+    <div class="navbar">
+      <a class="navbar-brand" href="Home.html">
+          <img src="../assets/img/LogoNova.png" alt="Logo DrinkUp">
+      </a>
+      <div class="navbar-icons">
+          <button id="loginBtn" class="button-login" onclick="location.href='Login.html'">Login</button>
+          <button id="add-box" class="btn button-carrinho" onclick="location.href='CadastroBebidas.html'">
+            <span class="material-symbols-outlined"> add_box </span>
+            </button>
+          <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
+              <span class="material-symbols-outlined">person</span>
+          </button>
+      </div>
+  </div>
     <h1>LISTAGEM DE BEBIDAS</h1>
     <table class="tabela">
       <thead>
@@ -110,6 +111,9 @@
       </div>
     </div>
 
+
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
     <script src="../js/ListagemDeBebidas.js"></script>
     <script>
   

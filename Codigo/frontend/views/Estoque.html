@@ -19,13 +19,22 @@
             <button class="button-busca">Buscar</button>
         </div>        
         <div class="button-container">
-            <button class="button-NovoProduto" onclick="window.location.href='CadastroBebidas.html';">Novo produto</button>
-            <button class="button-baixo_estoque" onclick="window.location.href='baixo_estoque.html';">Relatório de estoque baixo</button>
+            <button class="button-NovoProduto" id="add-box" onclick="window.location.href='CadastroBebidas.html';">
+                <span class="material-symbols-outlined">
+                    add_box
+                    </span>
+            </button>
+            <button class="button-baixo_estoque" id="relatorio-box" onclick="window.location.href='baixo_estoque.html';">
+                <span class="material-symbols-outlined">
+                    lab_profile
+                    </span>
+            </button>
             <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
                 <span class="material-symbols-outlined">person</span>
             </button>
         </div>
     </div>
+    
     <header class="titulo">
         <h1>Gestão de Estoque</h1>
     </header>
@@ -43,7 +52,8 @@
             <!-- Conteúdo da tabela -->
         </tbody>
     </table>
-
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
     <script src="../js/Estoque.js"></script>
 
     <script>
@@ -76,6 +86,13 @@
         }
 
         window.onload = loadEstoque;
+        tippy('#add-box', {
+            content: 'Adicionar Novo Produto',
+        });
+
+        tippy('#relatorio-box', {
+            content: 'Relatório de baixo estoque',
+        });
     </script>
 </body>
 </html>

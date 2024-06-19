@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="../css/CadastroBebidas.css" />
 </head>
 <body>
-    <header class="header">
-        <button onclick="location.href='Home.html'">
-            <img src="../assets/img/LogoNova.png" alt="DrinkUp Logo" />
-        </button>
-        <button class="button-usuario" onclick="location.href='PerfilAdmin.html'">
-            <span class="material-symbols-outlined">person</span>
-        </button>
-    </header>
+    <div class="navbar">
+        <a class="navbar-brand" href="Home.html">
+            <img src="../assets/img/LogoNova.png" alt="Logo DrinkUp">
+        </a>
+        <div class="navbar-icons">
+            <button id="loginBtn" class="button-login" onclick="location.href='Login.html'">Login</button>
+            <button id="perfilBtn" class="btn button-usuario" onclick="location.href='PerfilAdmin.html'">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </div>
+    </div>
 
     <main>
 

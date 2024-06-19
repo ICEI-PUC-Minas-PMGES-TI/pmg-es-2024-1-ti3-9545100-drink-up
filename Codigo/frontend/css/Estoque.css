@@ -13,7 +13,7 @@ body {
 
 .navbar {
     background-color: #FDB815;
-    padding: 12px 20px;
+    padding: 0px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,13 +22,17 @@ body {
 
 .navbar img {
     height: 100px;
+    display: flex;
     width: auto;
-    margin-left: -20px;
+    margin-top: 0;
+    margin-left: -24px;
 }
 
 .navbar button {
     background-color: transparent;
     border: none;
+    display: flex;
+    align-items: center;
 }
 
 .user-icon {
@@ -42,6 +46,9 @@ body {
     align-items: center;
     margin-left: 480px;
     margin-right: auto;
+}
+.campo-busca select{
+    width: 400px;
 }
 
 .select-busca {
@@ -81,6 +88,7 @@ body {
     background-color: #FDB815;
     margin: 0;
     font-size: 14px;
+    margin-top: 10px;
 }
 
 .input {

@@ -9,20 +9,77 @@ body {
   height: 100vh;
 }
 
-.header {
+.navbar {
   background-color: #FDB815;
-  display: flex; /* Ativa flexbox no header */
-  justify-content: space-between; /* Separa os itens para cada extremidade */
-  align-items: center; /* Centraliza verticalmente */
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 95px;
 }
 
-.header img {
-  height: 95px;
+.navbar img {
+  height: 100px;
+  display: flex;
+  width: auto;
+  margin-top: 0;
+  margin-left: -24px;
 }
 
-.user-icon {
-  height: 30px; 
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+}
+
+#perfilBtn, #carrinhoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: black;
+  margin-top: 20px;
+  padding: 5px 25px;
+}
+#perfilBtn{
+  margin-top: 22px;
+}
+
+#perfilBtn .material-symbols-outlined,
+#carrinhoBtn .material-symbols-outlined{
+  font-size: 24px;
+  color: black;
+  transition: color 0.3s;
+}
+
+#perfilBtn:hover .material-symbols-outlined,
+#perfilBtn:focus .material-symbols-outlined,
+#carrinhoBtn:hover .material-symbols-outlined,
+#carrinhoBtn:focus .material-symbols-outlined {
+  color: black;
+}
+
+/* Botão de login */
+.button-login {
+  background-color: transparent !important;
+  border: none;
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 23px;
+  font-size: 16px;
+  color: #000000;
+  
+}
+
+.button-login:hover {
+  background-color: #FDB815;
 }
 
 .container {
@@ -100,11 +157,11 @@ button:hover {
 }
 
 .count-button {
-    width: 50px;
-    height: 50px;
-    font-size: 35px;
+    width: max-content;
+    height: max-content;
+    font-size: 20px;
     background-color: #F2C029;
-    margin-right: 16px;
+    text-align: center;
 }
 
 .count-button:last-child{
