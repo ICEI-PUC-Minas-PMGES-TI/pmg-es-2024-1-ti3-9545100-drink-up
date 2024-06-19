@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Table body element not found');
                 return;
             }
-            tbody.innerHTML = ''; // Clear previous content
+            tbody.innerHTML = '';
 
             data.forEach(item => {
                 const operacaoClass = item.Movimentacao === 'saida' ? 'operacao-saida' : (item.Movimentacao === 'entrada' ? 'operacao-entrada' : '');
