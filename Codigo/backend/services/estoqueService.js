@@ -71,7 +71,7 @@ async function listarEstoquePorProduto(nome) {
     }
 }
 
-async function relatorioSaidaBebidas() {
+async function relatorioMovimentoEstoque() {
     try {
         const sequelize = database.getInstance(); // Obter instância do Sequelize aqui
         const [results, metadata] = await sequelize.query(`
@@ -79,16 +79,16 @@ async function relatorioSaidaBebidas() {
                 cat.descricao AS 'Tipo', 
                 SUM(est.quantidade) AS 'Qnt', 
                 prd.valor AS 'Valor', 
-                prd.nome AS 'NomedaBebida'
+                prd.nome AS 'NomedaBebida',
+                est.observacao AS 'DescricaoSaida',
+                est.tipo AS 'Movimentacao'
             FROM
                 tb_estoque est
                 INNER JOIN tb_produto prd ON est.id_produto = prd.id
                 INNER JOIN tb_categoria cat ON prd.id_categoria = cat.id
-            WHERE
-                est.tipo = 'saida'
             GROUP BY
-                prd.id
-            ORDER BY 2 DESC, 1 ASC, 4 ASC
+                prd.id, est.tipo, est.observacao
+            ORDER BY 1 ASC, 4 ASC, 2 DESC, 5 ASC, 6 ASC
         `);
         return results;
     } catch (error) {
@@ -101,5 +101,5 @@ module.exports = {
     estoqueEntradaSaida,
     listarEstoqueCompleto,
     listarEstoquePorProduto,
-    relatorioSaidaBebidas
+    relatorioMovimentoEstoque
 };
