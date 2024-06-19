@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch(`http://localhost:3000/estoque/relatorio/SaidaBebidas`, {
+        fetch(`http://localhost:3000/estoque/relatorio/relatorioMovimentoEstoque`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,52 +30,23 @@ document.addEventListener("DOMContentLoaded", function () {
             tbody.innerHTML = ''; // Clear previous content
 
             data.forEach(item => {
+                const operacaoClass = item.Movimentacao === 'saida' ? 'operacao-saida' : (item.Movimentacao === 'entrada' ? 'operacao-entrada' : '');
+
+                
                 const row = `
                     <tr>
                         <td>${item.Tipo}</td>
                         <td>${item.Qnt}</td>
                         <td>R$ ${item.Valor}</td>
                         <td>${item.NomedaBebida}</td>
+                        <td>${item.DescricaoSaida}</td>
+                        <td class="${operacaoClass}">${item.Movimentacao}</td>
                     </tr>
                 `;
                 tbody.innerHTML += row;
             });
         })
         .catch(error => console.error('Erro ao carregar dados de saída de bebidas:', error));
-
-        // Debug session storage data
-        const relatorioString = sessionStorage.getItem('relatorioSaidaBebidas');
-        console.log('Session storage data:', relatorioString);
-        if (!relatorioString) {
-            console.error('relatorioSaidaBebidas is not set in sessionStorage');
-            return;
-        }
-
-        const relatorioSaidaBebidas = JSON.parse(relatorioString);
-        console.log('Parsed session storage data:', relatorioSaidaBebidas);
-
-        if (!Array.isArray(relatorioSaidaBebidas)) {
-            console.error('Parsed session storage data is not an array');
-            return;
-        }
-
-        const tbody = document.getElementById('saida-table-body');
-        if (!tbody) {
-            console.error('Table body element not found');
-            return;
-        }
-
-        relatorioSaidaBebidas.forEach((item) => {
-            const row = `
-                <tr>
-                    <td>${item.tipo}</td>
-                    <td>R$ ${item.valor_item}</td>
-                    <td>${item.nome_bebida}</td>
-                </tr>
-            `;
-            tbody.innerHTML += row;
-        });
     }
-
     carregarDadosSaidaBebidas();
 });
