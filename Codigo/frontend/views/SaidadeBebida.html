@@ -6,6 +6,16 @@
     <title>Saida de Bebida</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="../css/SaidadeBebida.css">
+    <style>
+        .operacao-saida {
+            background-color: white;
+            color: rgb(203, 76, 76); /* Ajuste a cor do texto conforme necessário */
+        }
+        .operacao-entrada {
+            background-color: white;
+            color: rgb(30, 122, 30); /* Ajuste a cor do texto conforme necessário */
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
@@ -27,14 +37,14 @@
             <button onclick="location.href='CadastroBebidas.html'">CADASTRO DE BEBIDA</button>
             <button onclick="location.href='ListagemDeBebidas.html'">LISTA DE BEBIDAS</button>
             <button onclick="location.href='ValorFrete.html'">FRETE</button>
-            <button onclick="location.href='SaidadeBebida.html'">SAIDA DE BEBIDAS</button>
+            <button onclick="location.href='SaidadeBebida.html'">MOVIMENTO ESTOQUE</button>
             <button onclick="location.href='historicoDeComprasAdmin.html'">HISTORICO DE COMPRA</button>
-                <button onclick="location.href='StatusDoPedido.html'">STATUS DOS PEDIDOS</button> 
+            <button onclick="location.href='StatusDoPedido.html'">STATUS DOS PEDIDOS</button> 
         </aside>
 
         <!-- Main -->
         <main class="content">
-            <h3>SAIDA DE BEBIDAS</h3>
+            <h3>MOVIMENTAÇÕES DO ESTOQUE</h3>
             <table class="saida-table">
                 <thead>
                     <tr>
@@ -42,6 +52,8 @@
                         <th>Qnt</th>
                         <th>Valor</th>
                         <th>Nome da Bebida</th>
+                        <th>Descrição</th>
+                        <th>Operação</th>
                     </tr>
                 </thead>
                 <tbody id="saida-table-body">
@@ -53,67 +65,6 @@
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/559e095fe9.js" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Função para carregar os dados de saída de bebidas
-            function carregarDadosSaidaBebidas() {
-                // Recuperando o relatório da sessionStorage
-                const relatorioString = sessionStorage.getItem('relatorioSaidaBebidas');
-                const relatorioSaidaBebidas = JSON.parse(relatorioString);
-
-                // Exibindo o relatório na tabela de saída de bebidas
-                const tbody = document.getElementById('saida-table-body');
-                tbody.innerHTML = ''; // Limpa o conteúdo anterior
-
-                relatorioSaidaBebidas.forEach((item) => {
-                    const row = `
-                        <tr>
-                            <td>${item.tipo}</td>
-                            <td>R$ ${item.valor}</td>
-                            <td>${item.nome_bebida}</td>
-                            <td>${item.quantidade}</td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
-            }
-
-            carregarDadosSaidaBebidas();
-        });
-    </script>
     <script src="../js/SaidaDeBebida.js"></script>
-    <script>
-     
-        const token = sessionStorage.getItem("authorization");
-        if (!token) {
-            alert("Você não está autenticado. Por favor, faça login.");
-            window.location.href = "Login.html";
-        }
-
-    
-        function loadSaidadeBebida() {
-            fetch('http://localhost:3000/produtos/saida-bebidas', {
-                method: 'GET',
-                headers: {
-                    'x-access-token': token
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erro ao carregar saida de bebidas');
-                }
-            })
-            .then(data => {
-            
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-        }
-        window.onload = loadSaidadeBebida;
-    </script>
 </body>
 </html>
