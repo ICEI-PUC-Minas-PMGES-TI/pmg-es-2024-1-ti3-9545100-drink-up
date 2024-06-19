@@ -30,10 +30,10 @@ const estoqueController = {
         }
     },
 
-    async relatorioSaidaBebidas(req, res) {
+    async relatorioMovimentoEstoque(req, res) {
         try {
-            const saidaBebidas = await estoqueService.relatorioSaidaBebidas();
-            res.status(200).json(saidaBebidas);
+            const MovimentoEstoque = await estoqueService.relatorioMovimentoEstoque();
+            res.status(200).json(MovimentoEstoque);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
