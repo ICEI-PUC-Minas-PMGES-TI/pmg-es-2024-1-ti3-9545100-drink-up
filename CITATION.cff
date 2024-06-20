@@ -1,31 +1,31 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: DrinkUp
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names:
+  - family-names: Lobo Leite Neves
+    given-names: Henrique
+  - family-names: Matsuhara Ferraz
+    given-names: Ian
+  - family-names: Temponi Daltro de Castro
+    given-names: João Victor 
+  - family-names: Alves Almeida Neto
+    given-names: Lúcio
+  - family-names: Fantini Almeida
+    given-names: Luís Henrique
+  - family-names: Mendes Rabelo
+    given-names: Sophia
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Alonso Veloso
+    given-names: Eveline
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Hanne Soares de Andrade
+    given-names: Michelle
 keywords:
-  - 
-  - 
-repository-code: 
+  - Ecommerce
+  - Bebidas Alcoólicas
+repository-code: https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2024-1-ti3-9545100-drink-up 
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2022-07-14
+date-released: 2024-06-21
