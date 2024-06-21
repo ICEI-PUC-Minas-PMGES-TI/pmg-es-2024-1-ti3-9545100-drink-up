@@ -19,5 +19,24 @@ Aprimorar o sistema de gerenciamento é uma prioridade para a Drink Up, visando 
 * Michelle Hanne Soares de Andrade
 
 ## Instruções de utilização
+####Pré requisitos:
+1 - Ter o npm e o nodejs(versões compatíveis a partir da v12.0.0) instalados na máquina
+2 - Ter o Mysql instalado na máquina
 
-[Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.]
+####Instruções para instalação
+1 - Realizar o clone do repositório:
+git clone https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2024-1-ti3-9545100-drink-up.git
+
+2 - Acessar o SGBD MySql pela intarface de sua preferência e executar o script init_BD.sql por completo. O Script encontra-se disponível no caminho:
+pmg-es-2024-1-ti3-9545100-drink-up/Codigo/BD
+
+3 - Via terminal, acessar a pasta "backend", sugerido o comando abaixo:
+cd /{caminho até o diretório onde realizou o clone}/pmg-es-2024-1-ti3-9545100-drink-up/Codigo/backend
+
+4 - Após o passo 3, executar o comando abaixo para inicialização do servidor nodejs:
+node app.js
+
+5 - Uma vez que os passos anteriores foram seguidos e o servidor nodejs foi executado com sucesso, a aplicação encontra-se pronta para uso!
+
+Para melhor experiência, sugerimos o uso através da interface Web. Ao inicializar o servidor com os passos anteriores, acesse a Home da aplicação digitando o caminho abaixo através de um navegador:
+http://127.0.0.1:5500/Codigo/frontend/views/Home.html
