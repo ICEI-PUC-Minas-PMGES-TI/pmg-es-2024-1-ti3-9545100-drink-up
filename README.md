@@ -18,12 +18,15 @@ Aprimorar o sistema de gerenciamento é uma prioridade para a Drink Up, visando 
 * Eveline Alonso Veloso
 * Michelle Hanne Soares de Andrade
 
+~~~teste
+Esta é uma linha de código em Javascript.
+
 ## Instruções de utilização
-####Pré requisitos:
+#### Pré requisitos:
 1 - Ter o npm e o nodejs(versões compatíveis a partir da v12.0.0) instalados na máquina
 2 - Ter o Mysql instalado na máquina
 
-####Instruções para instalação
+#### Instruções para instalação
 1 - Realizar o clone do repositório:
 git clone https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2024-1-ti3-9545100-drink-up.git
 
