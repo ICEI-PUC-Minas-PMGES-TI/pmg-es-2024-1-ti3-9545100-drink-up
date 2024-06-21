@@ -221,24 +221,56 @@ textarea {
     max-height: 250px;
     overflow-y: auto;
 }
-.btnnovo {
+/* Botão "Novo" estilizado */
+#btnNovo {
     background-color: #FDB815; /* Cor de fundo */
     color: white; /* Cor do texto */
     border: none; /* Remover borda */
-    border-radius: 4px; /* Bordas arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 12px 24px; /* Espaçamento interno */
     font-weight: bold; /* Texto em negrito */
     text-transform: uppercase; /* Texto em letras maiúsculas */
     cursor: pointer; /* Cursor em forma de mão */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave para o efeito hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    font-size: 1rem; /* Tamanho da fonte */
+    width: 10px;
 }
 
-.btnnovo:hover {
+#btnNovo:hover {
     background-color: #e0a800; /* Cor de fundo ao passar o mouse */
-    transform: scale(1.05); /* Aumenta o tamanho do botão */
+    transform: scale(1); /* Aumenta o tamanho do botão */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Aumenta a sombra ao passar o mouse */
 }
 
-.btnnovo:active {
+#btnNovo:active {
     background-color: #cc8f00; /* Cor de fundo ao clicar */
     transform: scale(1); /* Retorna ao tamanho original ao clicar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra reduzida ao clicar */
+}
+.input-novo {
+    width: 40%;
+    padding: 10px 15px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interna para profundidade */
+    font-size: 1rem; /* Tamanho da fonte */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves para foco */
+}
+
+/* Estilo do input ao focar */
+.input-novo:focus {
+    border-color: #FDB815; /* Cor da borda ao focar */
+    box-shadow: 0 0 8px rgba(253, 184, 21, 0.6); /* Sombra ao focar */
+    outline: none; /* Remove outline padrão */
+}
+
+/* Estilo do input ao passar o mouse */
+.input-novo:hover {
+    border-color: #b3b3b3; /* Cor da borda ao passar o mouse */
+}
+
+/* Adicionar margem ao input do botão "Novo" */
+#novoCampoCategoria .input-novo {
+    margin-top: 10px; /* Espaçamento acima do input */
+
 }

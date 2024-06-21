@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var input = document.createElement("input");
         input.type = "text";
         input.placeholder = "Nome da nova categoria";
-        input.classList.add("form-control");
+        input.classList.add("input-novo");
 
         var btnSave = document.createElement("button");
         btnSave.innerText = "Salvar";

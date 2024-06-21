@@ -190,7 +190,7 @@ document.getElementById('bntCadastrar').addEventListener('click', function (even
         localStorage.setItem('usuarioLogado', JSON.stringify(data));
         
         // Redirecionar para a tela de home
-        window.location.href = 'Home.html';
+        window.location.href = 'Login.html';
     })
     .catch(error => {
         console.error(error);

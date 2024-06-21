@@ -19,11 +19,17 @@
           <img src="../assets/img/LogoNova.png" alt="Logo DrinkUp">
       </a>
       <div class="navbar-icons">
-          <button id="loginBtn" class="button-login" onclick="location.href='Login.html'">Login</button>
+        <div class="campo-busca">
+          <select id="categoriaSelect" class="select-busca">
+              <option value="">Selecione uma categoria</option>
+          </select>
+          <button class="button-busca">Buscar</button>
+      </div>
+          <button id="loginBtn" class="button-login" onclick="location.href='Login.html'">Login</button>     
           <button id="add-box" class="btn button-carrinho" onclick="location.href='CadastroBebidas.html'">
-            <span class="material-symbols-outlined"> add_box </span>
+            <span class="material-symbols-outlined">add_box</span>
             </button>
-          <button id="perfilBtn" class="btn button-usuario" onclick="location.href='Perfil.html'">
+          <button id="perfilBtn" class="btn button-usuario" onclick="location.href='PerfilAdmin.html'">
               <span class="material-symbols-outlined">person</span>
           </button>
       </div>
