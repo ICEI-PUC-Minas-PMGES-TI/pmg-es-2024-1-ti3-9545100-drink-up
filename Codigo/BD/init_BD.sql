@@ -1,45 +1,75 @@
--- Active: 1710028842404@@127.0.0.1@3306@drink_up
 /*============= EXECUTE O ARQUIVO OU TODOS OS COMANDOS MANUALMENTE EM ORDEM SEQUENCIAL ====================*/
 
-/*CRIAÇÃO DA BASE DE DADOS*/
-DROP DATABASE drink_up;
+/*CRIAÇÃO DE UM USUARIO MASTER COM PRIVILEGIOS*/
+CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
+GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
 
+/*CRIACAO DA BASE DE DADOS*/
+CREATE DATABASE drink_up;
+
+/*ACESSO A BASE DE DADOS*/
+USE drink_up;
+
+/*INICIANDO A CRIAÇÃO DAS TABELAS QUE NAO POSSUEM CHAVE ESTRANGEIRA*/
+
+/*ENDERECO*/
+
+DROP TABLE IF EXISTS `tb_endereco`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_endereco` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `rua` varchar(255) NOT NULL,
+  `numero` int NOT NULL,
+  `bairro` varchar(255) NOT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
+  `uf` char(2) NOT NULL,
+  `cep` varchar(8) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+/*CATEGORIA*/
+
+DROP TABLE IF EXISTS `tb_categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_categoria` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+/*IMAGEM*/
+
+DROP TABLE IF EXISTS `tb_imagem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_imagem` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(244) NOT NULL,
+  `caminho` varchar(244) NOT NULL,
+  PRIMARY KEY (`id`),
+ /*============= EXECUTE O ARQUIVO OU TODOS OS COMANDOS MANUALMENTE EM ORDEM SEQUENCIAL ====================*/
+
+/*CRIAÇÃO DE UM USUÁRIO MASTER COM PRIVILÉGIOS*/
+CREATE USER 'drinkup_master'@'localhost' IDENTIFIED BY 'drinkup';
+GRANT ALL PRIVILEGES ON *.* TO 'drinkup_master'@'localhost' WITH GRANT OPTION;
+
+/*CRIAÇÃO DA BASE DE DADOS*/
 CREATE DATABASE drink_up;
 
 /*ACESSO À BASE DE DADOS*/
-USE drink_up;
+USE drink_up; UNIQUE KEY `nome` (`nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*INICIANDO A CRIAÇÃO DAS TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA*/
-
--- Criando a tabela tb_endereco, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_endereco (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    rua VARCHAR(255) NOT NULL,
-    numero INT NOT NULL,
-    bairro VARCHAR(255) NOT NULL,
-    complemento VARCHAR(255),
-    uf CHAR(2) NOT NULL,
-    cep VARCHAR(8) NOT NULL
-);
-
--- Criando a tabela tb_categoria, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_categoria (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(255) NOT NULL
-);
-
-desc tb_categoria;
-
--- Criando a tabela tb_imagem, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_imagem (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(244) NOT NULL UNIQUE,
-    caminho VARCHAR(244) NOT NULL
-);
 
 /* INICIANDO A CRIAÇÃO DAS TABELAS COM CHAVE ESTRANGEIRA, DE ACORDO COM A ORDEM DE DEPENDÊNCIA*/
 
--- Criando a tabela tb_usuario, verificando se a tabela já existe previamente
+/*USUARIO*/
+
 /*
 A coluna status possui três opções de valores:
 1 -> Usuário está ativo
@@ -47,258 +77,142 @@ A coluna status possui três opções de valores:
 3 -> Usuário está caracterizado como excluído das rotinas no sistema, 
 porém seu registro será mantido no banco para rastreabilidade e integridade da informação
 */
-CREATE TABLE IF NOT EXISTS tb_usuario (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(244) NOT NULL UNIQUE,
-    senha VARCHAR(244) NOT NULL,
-    status ENUM('1', '2', '3','4') DEFAULT '1',
-    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    perfil ENUM('admin', 'cliente') NOT NULL
-);
+DROP TABLE IF EXISTS `tb_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(244) NOT NULL,
+  `senha` varchar(244) NOT NULL,
+  `status` enum('1','2','3') DEFAULT '1',
+  `data_criacao` datetime DEFAULT CURRENT_TIMESTAMP,
+  `perfil` enum('admin','cliente') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- Criando a tabela tb_cliente, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_cliente (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(244) NOT NULL,
-    cpf VARCHAR(14) NOT NULL UNIQUE,
-    data_nascimento DATE NOT NULL,
-    telefone VARCHAR(244) NOT NULL,
-    id_usuario INT,
-    id_endereco INT,
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuario (id),
-    FOREIGN KEY (id_endereco) REFERENCES tb_endereco (id)
-);
 
--- Criando a tabela tb_produto, verificando se a tabela já existe
-CREATE TABLE IF NOT EXISTS tb_produto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(244) NOT NULL UNIQUE,
-    descricao TEXT,
-    valor DECIMAL(10, 2) NOT NULL,
-    tam_garrafa VARCHAR(244) NOT NULL,
-    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    estoque_atual INT,
-    id_imagem INT,
-    id_categoria INT,
-    FOREIGN KEY (id_imagem) REFERENCES tb_imagem (id),
-    FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id)
-);
+/*CLIENTE*/
 
--- Criando a tabela tb_estoque, verificando se a tabela já existe previamente
-CREATE TABLE IF NOT EXISTS tb_estoque (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    data_movimento DATETIME DEFAULT CURRENT_TIMESTAMP,
-    quantidade INT NOT NULL,
-    tipo ENUM('entrada', 'saida') NOT NULL,
-    observacao TEXT,
-    id_produto INT,
-    FOREIGN KEY (id_produto) REFERENCES tb_produto (id)
-);
+DROP TABLE IF EXISTS `tb_cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_cliente` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(244) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `telefone` varchar(244) NOT NULL,
+  `id_usuario` int DEFAULT NULL,
+  `id_endereco` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cpf` (`cpf`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_endereco` (`id_endereco`),
+  CONSTRAINT `tb_cliente_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id`),
+  CONSTRAINT `tb_cliente_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `tb_endereco` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE tb_pedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    valor_pedido DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    id_frete INT NOT NULL,
-    id_cliente INT NOT NULL,
-    id_endereco INT NOT NULL,
-    status_pedido ENUM('1', '2', '3') DEFAULT '1',
-    CONSTRAINT fk_id_frete FOREIGN KEY (id_frete) REFERENCES tb_frete (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_id_cliente FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_id_endereco FOREIGN KEY (id_endereco) REFERENCES tb_endereco (id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+/*PRODUTO*/
 
-Drop Table tb_pedido;
+DROP TABLE IF EXISTS `tb_produto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_produto` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(244) NOT NULL,
+  `descricao` text,
+  `valor` decimal(10,2) NOT NULL,
+  `tam_garrafa` varchar(244) NOT NULL,
+  `data_criacao` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estoque_atual` int DEFAULT NULL,
+  `id_imagem` int DEFAULT NULL,
+  `id_categoria` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nome` (`nome`),
+  KEY `id_imagem` (`id_imagem`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `tb_produto_ibfk_1` FOREIGN KEY (`id_imagem`) REFERENCES `tb_imagem` (`id`),
+  CONSTRAINT `tb_produto_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categoria` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE tb_item_pedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    quantidade int NOT NULL,
-    data_criacao datetime not null,
-    valor_item DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    id_produto INT NOT NULL,
-    id_pedido INT NOT NULL,
-    CONSTRAINT fk_id_produto FOREIGN KEY (id_produto) REFERENCES tb_produto (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_id_pedido FOREIGN KEY (id_pedido) REFERENCES tb_pedido (id) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
-Drop Table tb_item_pedido;
+/*ESTOQUE*/
 
-create table if not exists tb_frete (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    frete_fixo int not null,
-    frete_gratis int not null
-);
+DROP TABLE IF EXISTS `tb_estoque`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_estoque` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data_movimento` datetime DEFAULT CURRENT_TIMESTAMP,
+  `quantidade` int NOT NULL,
+  `tipo` enum('entrada','saida') NOT NULL,
+  `observacao` text,
+  `id_produto` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_produto` (`id_produto`),
+  CONSTRAINT `tb_estoque_ibfk_1` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-use drink_up;
 
-/*SELECTS*/
+/*FRETE*/
 
-SELECT * FROM tb_categoria;
+DROP TABLE IF EXISTS `tb_frete`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_frete` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `frete_fixo` int NOT NULL,
+  `frete_gratis` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-SELECT * FROM tb_imagem;
+/*PEDIDO*/
 
-SELECT * FROM tb_endereco;
+DROP TABLE IF EXISTS `tb_pedido`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_pedido` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data_criacao` datetime DEFAULT CURRENT_TIMESTAMP,
+  `valor_pedido` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `id_frete` int NOT NULL,
+  `id_cliente` int NOT NULL,
+  `id_endereco` int NOT NULL,
+  `status_pedido` enum('1','2','3') DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_id_frete` (`id_frete`),
+  KEY `fk_id_cliente` (`id_cliente`),
+  KEY `fk_id_endereco` (`id_endereco`),
+  CONSTRAINT `fk_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `tb_cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_id_endereco` FOREIGN KEY (`id_endereco`) REFERENCES `tb_endereco` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_id_frete` FOREIGN KEY (`id_frete`) REFERENCES `tb_frete` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-SELECT * FROM tb_cliente;
 
-SELECT * FROM tb_produto;
+/*ITENS DO PEDIDO*/
 
-SELECT * FROM tb_usuario;
+DROP TABLE IF EXISTS `tb_item_pedido`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_item_pedido` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `quantidade` int NOT NULL,
+  `data_criacao` datetime NOT NULL,
+  `valor_item` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `id_produto` int NOT NULL,
+  `id_pedido` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_id_produto` (`id_produto`),
+  KEY `fk_id_pedido` (`id_pedido`),
+  CONSTRAINT `fk_id_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `tb_pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_id_produto` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-SELECT * FROM tb_estoque;
-
-SELECT * FROM tb_frete;
-
-SELECT * FROM tb_item_pedido;
-
-SELECT * FROM tb_pedido;
-
-/*INSERTS*/
-INSERT INTO tb_categoria (descricao) VALUES ('cerveja');
-
-INSERT INTO
-    tb_usuario (email, senha, status, perfil)
-VALUES (
-        'sophia@email.com',
-        '123',
-        '1',
-        'cliente'
-    );
-
-INSERT INTO
-    tb_endereco (
-        rua,
-        numero,
-        bairro,
-        complemento,
-        uf,
-        cep
-    )
-VALUES (
-        'Rua tals',
-        122,
-        'Bairro Exemplo',
-        'Complemento Exemplo',
-        'MG',
-        '01237667'
-    );
-
-INSERT INTO
-    tb_cliente (
-        nome,
-        cpf,
-        data_nascimento,
-        telefone,
-        id_usuario,
-        id_endereco
-    )
-VALUES (
-        'Sophia',
-        '123.452.789-10',
-        '1990-01-01',
-        '(11) 1564-5678',
-        2,
-        2
-    );
-
-INSERT INTO
-    tb_produto (
-        nome,
-        descricao,
-        valor,
-        tam_garrafa,
-        id_imagem,
-        id_categoria
-    )
-VALUES (
-        'Nome do Produto',
-        'Descrição do Produto',
-        10.99,
-        'Tamanho da Garrafa',
-        1,
-        2
-    );
-
-/*Inserts para testar página de HOME, ESTOQUE E DETALHEPEDIDO*/
-
-INSERT INTO
-    tb_produto (
-        nome,
-        descricao,
-        valor,
-        tam_garrafa,
-        estoque_atual,
-        id_imagem,
-        id_categoria
-    )
-VALUES (
-        'Teste Teste Teste',
-        'Descrição do Produto',
-        10.99,
-        'Tamanho da Garrafa',
-        9,
-        1,
-        1
-    );
-
-INSERT INTO
-    tb_produto (
-        nome,
-        descricao,
-        valor,
-        tam_garrafa,
-        estoque_atual,
-        id_imagem,
-        id_categoria
-    )
-VALUES (
-        'Coca Colaaaa',
-        'Descrição do Produto',
-        10.99,
-        'Tamanho da Garrafa',
-        9,
-        1,
-        1
-    );
-
-INSERT INTO
-    tb_produto (
-        nome,
-        descricao,
-        valor,
-        tam_garrafa,
-        estoque_atual,
-        id_imagem,
-        id_categoria
-    )
-VALUES (
-        'Pepsiiiiii',
-        'Descrição do Produto',
-        10.99,
-        'Tamanho da Garrafa',
-        9,
-        1,
-        1
-    );
-
-INSERT INTO
-    tb_produto (
-        nome,
-        descricao,
-        valor,
-        tam_garrafa,
-        estoque_atual,
-        id_imagem,
-        id_categoria
-    )
-VALUES (
-        'Guaranaaa',
-        'Descrição do Produto',
-        10.99,
-        'Tamanho da Garrafa',
-        9,
-        1,
-        1
-    );
-
-INSERT INTO tb_frete VALUES (1, 30, 300);
