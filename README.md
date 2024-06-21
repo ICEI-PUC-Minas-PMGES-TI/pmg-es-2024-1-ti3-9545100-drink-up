@@ -44,5 +44,5 @@ Aprimorar o sistema de gerenciamento é uma prioridade para a Drink Up, visando 
 
 ###### **Uma vez que os passos anteriores foram seguidos e o servidor Node.js foi executado com sucesso, a aplicação encontra-se pronta para uso!**
 
->*** Para melhor experiência, sugerimos o uso através da interface Web. Ao inicializar o servidor com o comando do passo 4, acesse a Home da aplicação digitando o caminho abaixo através de um navegador:
-http://127.0.0.1:5500/Codigo/frontend/views/Home.html***
+> Para melhor experiência, sugerimos o uso através da interface Web. Ao inicializar o servidor com o comando do passo 4, acesse a Home da aplicação digitando o caminho abaixo através de um navegador:
+http://127.0.0.1:5500/Codigo/frontend/views/Home.html
